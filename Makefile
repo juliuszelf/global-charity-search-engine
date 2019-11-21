@@ -1,4 +1,4 @@
-data/canada/canada.json: data/canada/canada.clean.csv scripts/toJson.py
+data/canada/canada.es.json: data/canada/canada.clean.csv scripts/toJson.py
 	cd scripts && python3 ./toJson.py canada chars && cd ../
 
 data/canada/canada.clean.csv: data/canada/canada.rawutf8.csv scripts/canada/cleanCSV.py
