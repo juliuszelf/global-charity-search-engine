@@ -1,0 +1,9 @@
+.idea
+.DS_Store
+
+# Files created by scripts
+
+*.raw.csv
+*.rawutf8.csv
+*.clean.csv
+*.es.json

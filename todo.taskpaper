@@ -1,0 +1,63 @@
+Doel:
+Charitius 2.0
+Een open data set van goede doelen pakken en deze zoekbaar maken.
+Eerst alleen op titel, dan ook 'full-text' indexing.
+
+Als het ok werkt, dan ook op Digital Ocean deployen. 
+Als dat ok werkt, dan steeds meer open data toevoegen.
+Geen webscraping, maar alleen van officiele bronnen.
+
+Github:
+ - Dependency van termcolor er uit halen, kleur anders oplossen
+ - Code naar github
+    - global_charity_search_engine
+    - juliushuijnk.nl project aanmaken "Global charity search engine"
+       - Eventueel ook artikel er bij schrijven over automatiseren doelstellinge, etc
+
+2e land toevoegen:
+  - scripts zoals bij Canada
+     - Waar mogelijk generiek opzetten, make bestand mappen af, etc
+  - ES upload vooralsnog met de hand houden ivm afhankelijkheid docker.
+
+Log:
+   - Moet ook wegschrijven in een .log bestand 
+     Dat bijhoudt waneer welk bestand gemaakt is e.d.
+
+Automatiseren geheel:
+ - SourceURL en SourceDate in een soort config bestand ergens zetten
+   of hard in make bestand zetten die de functies aanroept,
+   zodat makefile set variabelen bovenin heeft die effectief config is.
+   - SourceURL
+   - DateOfSource
+ - Kan make/bash bestand kijken of ES al bestanden heeft van dit land?
+     - Zonee, upload deze dan
+     - Zoja, verwijder dan deze voor dit land eerst, en voeg ze daarna toe
+
+Meer:
+  x Docker voor Elastic search online
+    - puur via kibana doe..
+      - tokenizen
+      - een zoek opdracht over meerdere data
+  - In zelfde network ook Flask
+  - Flask laten praten met Elastic
+  - Data uitlezen met Flask met Flask
+  - Kibana voor monitoring kan ook nuttig zijn
+
+map structuur:
+ - data/<land>/
+    - <land>.raw.csv     zoals gedownload
+    - <land>.clean.csv   klaar voor toJson
+ - scripts/<land>/
+    - cleanCSV.py        maakt van .nonull.csv het .clean.csv bestand
+
+Bronnen:
+
+https://www.youtube.com/watch?v=b7tCjZSvOno
+Video met in beeld voorbeelden van gebruik tokenizer e.d. 
+
+https://dev.to/aligoren/using-elasticsearch-with-python-and-flask-2i0e
+
+https://blog.patricktriest.com/text-search-docker-elasticsearch/
+
+https://github.com/triestpa/guttenberg-search
+
