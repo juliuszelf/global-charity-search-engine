@@ -7,12 +7,11 @@ Als het ok werkt, dan ook op Digital Ocean deployen.
 Als dat ok werkt, dan steeds meer open data toevoegen.
 Geen webscraping, maar alleen van officiele bronnen.
 
-Github:
- - Dependency van termcolor er uit halen, kleur anders oplossen
- - Code naar github
-    - global_charity_search_engine
-    - juliushuijnk.nl project aanmaken "Global charity search engine"
-       - Eventueel ook artikel er bij schrijven over automatiseren doelstellinge, etc
+Generiek makefile:
+  - Country namen als variabelen
+  - Lijst gebruiken in 'chain' vorm
+    - dus dat voor alle stappen die ik heb telkens die country-name ingevuld wordt
+
 
 2e land toevoegen:
   - scripts zoals bij Canada
