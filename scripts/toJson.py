@@ -13,7 +13,7 @@ import sys
 from termcolor import colored
 
 default_country_name = "canada"
-default_output_file = "data.es.json"
+default_output_file = "es.json"
 default_index = "data"
 
 if len(sys.argv[1]) == 0:
@@ -28,8 +28,8 @@ else:
     print("Country name provided: " + country_name)
 
 # Infer output file
-input_file = "./data/" + country_name + "/" + country_name + ".clean.csv"
-output_file = "./data/" + country_name + "/" + country_name + ".es.json"
+input_file = "../data/" + country_name + "/clean.csv"
+output_file = "../data/" + country_name + "/es.json"
 
 if len(sys.argv[2]) == 0:
     # Ask index (elastic search index is the name of the 'table')
