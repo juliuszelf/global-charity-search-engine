@@ -6,17 +6,19 @@ de csv filteren op relevante kolommen
 toevoegen nieuwe kolommen
 """
 
+import sys
 import csv
 import json
 from termcolor import colored
 
-# We assume this script is in folder "scripts/canada" 
-# and assume source file is in folder "data/canada"
+input_file_path = sys.argv[1]
+output_file_path = sys.argv[2]
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
-# Assumes this file is called from root via make
+''' REMOVE OLD INPUT OUPUT IF ARGV WORKS
 input_file_path = "data/canada/rawutf8.csv"
 output_file_path = "data/canada/clean.csv"
+'''
 source_url = "https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49"
 source_date = "2016"
 

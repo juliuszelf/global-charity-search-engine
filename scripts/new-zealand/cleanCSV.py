@@ -6,16 +6,19 @@ de csv filteren op relevante kolommen
 toevoegen nieuwe kolommen
 """
 
+import sys
 import csv
 import json
 from termcolor import colored
 
-# We assume this script is in folder "scripts/canada" 
-# and assume source file is in folder "data/canada"
+input_file_path = sys.argv[1]
+output_file_path = sys.argv[2]
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
+''' REMOVE OLD INPUT OUPUT IF ARGV WORKS
 input_file_path = "data/new-zealand/rawutf8.csv"
 output_file_path = "data/new-zealand/clean.csv"
+'''
 source_url = "http://www.odata.charities.govt.nz/Organisations?$format=csv&$returnall=true&$filter=deregistrationdate%20eq%20null"
 source_date = "2019"  # Not super sure about source date
 
