@@ -8,6 +8,8 @@ Als dat ok werkt, dan steeds meer open data toevoegen.
 Geen webscraping, maar alleen van officiele bronnen.
 
 Generiek makefile:
+ - toJson via externe parameters voor bestandspaden
+   dan gaat pad verwijzing goed ongeacht waar je start.
   - Country namen als variabelen
   - Lijst gebruiken in 'chain' vorm
     - dus dat voor alle stappen die ik heb telkens die country-name ingevuld wordt

@@ -3,7 +3,7 @@
 
 # Files created by scripts
 
-*.raw.csv
-*.rawutf8.csv
-*.clean.csv
-*.es.json
+raw.csv
+rawutf8.csv
+clean.csv
+es.json

@@ -14,14 +14,14 @@ from termcolor import colored
 # and assume source file is in folder "data/canada"
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
-input_file_path = "../../data/new-zealand/new-zealand.rawutf8.csv"
-output_file_path = "../../data/new-zealand/new-zealand.clean.csv"
+input_file_path = "data/new-zealand/rawutf8.csv"
+output_file_path = "data/new-zealand/clean.csv"
 source_url = "http://www.odata.charities.govt.nz/Organisations?$format=csv&$returnall=true&$filter=deregistrationdate%20eq%20null"
 source_date = "2019"  # Not super sure about source date
 
 # we assume it data has heading like this:
 """
-BN,Category,Designation,Legal Name,Account Name,Address Line 1,Address Line 2,City,Province,Postal Code,Country,Public Contact Name,Phone,Email,Website
+OrganisationId,AccountId,Name,CharityRegistrationNumber,WebSiteURL,EMailAddress1,Telephone1,Telephone2,TelephoneDay,Fax,PostalAddress_city,PostalAddress_country,PostalAddress_line1,PostalAddress_line2,PostalAddress_postcode,PostalAddress_suburb,StreetAddress_city,StreetAddress_country,StreetAddress_line1,StreetAddress_line2,StreetAddress_postcode,StreetAddress_suburb,CharityEmailAddress,CompaniesOfficeNumber,DateRegistered,deregistrationdate,Deregistrationreasons,EndOfYearDayofMonth,endofyearmonth,Establishedbyparliamentact,Excemptioncomment,Isincorporated,Maori_trust_brd,maoritrustapproved,Marae_funds,Marae_reservation,Notices,onlandunderTeTureWhenuaMaoriAct,Organisational_type,percentage_spent_overseas,RegistrationStatus,Society_institution,Trustees_trust,Exemptions,AnnualReturnDueDate,annualreturnextensiondate,GroupType,GroupId,MainActivityId,MainBeneficiaryId,MainSectorId,OtherNames,ModifiedOn,NZBNNumber
 """
 # For new file we are going to first rewrite the heading
 # We keep: Legal Name, City, Country, Website
@@ -55,10 +55,10 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         next(input_reader)
 
         for line in input_reader:
-            output_writer.writerow({"Name": line["Legal Name"], 
-                                    "City": line["City"], 
-                                    "Country": line["Country"], 
-                                    "Website": line["Website"], 
+            output_writer.writerow({"Name": line["Name"], 
+                                    "City": line["StreetAddress_city"], 
+                                    "Country": "NZ", 
+                                    "Website": line["WebSiteURL"], 
                                     "SourceURL": source_url, 
                                     "SourceDate": source_date})
 

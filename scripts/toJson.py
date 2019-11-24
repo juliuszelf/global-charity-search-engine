@@ -28,8 +28,9 @@ else:
     print("Country name provided: " + country_name)
 
 # Infer output file
-input_file = "../data/" + country_name + "/clean.csv"
-output_file = "../data/" + country_name + "/es.json"
+# Assumes script called from root by Makefile
+input_file = "data/" + country_name + "/clean.csv"
+output_file = "data/" + country_name + "/es.json"
 
 if len(sys.argv[2]) == 0:
     # Ask index (elastic search index is the name of the 'table')

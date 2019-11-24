@@ -14,8 +14,9 @@ from termcolor import colored
 # and assume source file is in folder "data/canada"
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
-input_file_path = "../../data/canada/canada.rawutf8.csv"
-output_file_path = "../../data/canada/canada.clean.csv"
+# Assumes this file is called from root via make
+input_file_path = "data/canada/rawutf8.csv"
+output_file_path = "data/canada/clean.csv"
 source_url = "https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49"
 source_date = "2016"
 
