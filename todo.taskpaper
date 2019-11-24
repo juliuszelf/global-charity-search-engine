@@ -8,12 +8,10 @@ Als dat ok werkt, dan steeds meer open data toevoegen.
 Geen webscraping, maar alleen van officiele bronnen.
 
 Generiek makefile:
- - paden goed krijgen blijft gedoe
-   Een manier is om absolute paden te gebruiken
-   In begin van makefile absoluut pad van makefile gebruiken?
-   Dan is vanaf dat moment probleem absoluut opgelost?
-  - Of python script vindt eerst pad van zichzelf
-    en lost dan andere paden relatief hiervan op
+ - Opschonen scripts (alles met python argv paden)
+ - Bewaar niet meer tussenstappen, maar wel het raw bestand?
+   Liefst variant met copy met datum stamp
+   Dus dat die backup wel bewaard blijft, maar niet bronbestand
    
  x toJson via externe parameters voor bestandspaden
    dan gaat pad verwijzing goed ongeacht waar je start.
