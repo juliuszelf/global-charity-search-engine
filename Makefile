@@ -1,6 +1,8 @@
 TARGETS := $(shell find . -name source.txt | cut -c 3- | tr '\n' ' ' | sed 's/source.txt/es.json/g')
 # Target holds list like: data/canada/es.json data/new-zealand/es.json
 
+# SECONDARY will ensure the source files are not removed after creation.
+# While developing this makes sense, but perhaps later beter to remove.
 .SECONDARY: 
 
 all: $(TARGETS)
