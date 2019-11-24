@@ -7,29 +7,31 @@ Als het ok werkt, dan ook op Digital Ocean deployen.
 Als dat ok werkt, dan steeds meer open data toevoegen.
 Geen webscraping, maar alleen van officiele bronnen.
 
-Generiek makefile:
- - Opschonen scripts (alles met python argv paden)
- - Bewaar niet meer tussenstappen, maar wel het raw bestand?
-   Liefst variant met copy met datum stamp
-   Dus dat die backup wel bewaard blijft, maar niet bronbestand
-   
- x toJson via externe parameters voor bestandspaden
-   dan gaat pad verwijzing goed ongeacht waar je start.
-  - Country namen als variabelen
-  - Lijst gebruiken in 'chain' vorm
-    - dus dat voor alle stappen die ik heb telkens die country-name ingevuld wordt
+Flask:
+  - Flask in docker-compose laten starten
+  - In zelfde network ook Flask
+  - Eerst met standaardserver van Flask
+  - Basis pagina (van charitius code overnemen)
+  - Flask laten praten met Elastic
+  - Data uitlezen met Flask met Flask
 
-
-2e land toevoegen:
-  - scripts zoals bij Canada
-     - Waar mogelijk generiek opzetten, make bestand mappen af, etc
-  - ES upload vooralsnog met de hand houden ivm afhankelijkheid docker.
+Zoek verbeteren:
+Mogelijke feature van zoekmachine is dat je veel kunt customizen
+Dat je bijv. zelf fuzziness kunt selecteren, etc.
+  - Land filteren
+  - Fuzzy
+  - Misschien tokenizen
+  - Kibana voor monitoring kan ook nuttig zijn
 
 Log:
    - Moet ook wegschrijven in een .log bestand 
      Dat bijhoudt waneer welk bestand gemaakt is e.d.
 
-Automatiseren geheel:
+Betere scripts:
+ - Opschonen scripts (alles met python argv paden)
+ - Bewaar niet meer tussenstappen, maar wel het raw bestand?
+   Liefst variant met copy met datum stamp
+   Dus dat die backup wel bewaard blijft, maar niet bronbestand
  - SourceURL en SourceDate in een soort config bestand ergens zetten
    of hard in make bestand zetten die de functies aanroept,
    zodat makefile set variabelen bovenin heeft die effectief config is.
@@ -39,15 +41,6 @@ Automatiseren geheel:
      - Zonee, upload deze dan
      - Zoja, verwijder dan deze voor dit land eerst, en voeg ze daarna toe
 
-Meer:
-  x Docker voor Elastic search online
-    - puur via kibana doe..
-      - tokenizen
-      - een zoek opdracht over meerdere data
-  - In zelfde network ook Flask
-  - Flask laten praten met Elastic
-  - Data uitlezen met Flask met Flask
-  - Kibana voor monitoring kan ook nuttig zijn
 
 map structuur:
  - data/<land>/
