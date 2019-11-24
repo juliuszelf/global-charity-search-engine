@@ -1,6 +1,8 @@
 TARGETS := $(shell find . -name source.txt | cut -c 3- | tr '\n' ' ' | sed 's/source.txt/es.json/g')
 # Target holds list like: data/canada/es.json data/new-zealand/es.json
 
+.SECONDARY: 
+
 all: $(TARGETS)
 
 # Convert to .json file ready to upload to ES
