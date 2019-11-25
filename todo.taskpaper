@@ -8,9 +8,11 @@ Als dat ok werkt, dan steeds meer open data toevoegen.
 Geen webscraping, maar alleen van officiele bronnen.
 
 Flask:
-  - Flask in docker-compose laten starten
-  - In zelfde network ook Flask
-  - Eerst met standaardserver van Flask
+  x Flask image maken
+  - Flask image opschonen, niet copy . /app want volume mapping
+  - Starten met docker-compose en volume mapping
+      - In zelfde network ook Flask
+      - Eerst met standaardserver van Flask
   - Basis pagina (van charitius code overnemen)
   - Flask laten praten met Elastic
   - Data uitlezen met Flask met Flask
