@@ -7,6 +7,13 @@ Als het ok werkt, dan ook op Digital Ocean deployen.
 Als dat ok werkt, dan steeds meer open data toevoegen.
 Geen webscraping, maar alleen van officiele bronnen.
 
+USA2:
+  - Meer csv bestanden, scripts lijken te werken, maar upload faalt
+    usa/es.json faalt niet, dus iets is anders/fout aan usa2/es.json
+    - TODO: check of uberhaubt juiste kolommen gepakt worden.
+Error is
+ {"error":{"root_cause":[{"type":"illegal_argument_exception","reason":"The bulk request must be terminated by a newline [\\n]"}],"type":"illegal_argument_exception","reason":"The bulk request must be terminated by a newline [\\n]"},"status":400}
+
 Flask:
   x Flask image maken
   - Flask image opschonen, niet copy . /app want volume mapping
