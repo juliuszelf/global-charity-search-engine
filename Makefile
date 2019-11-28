@@ -13,6 +13,9 @@ data/%/es.json : data/%/clean.csv
 	@echo "Convert to .json for country: "$@
 	# The $* should become the % of the target file, for instance 'canada'
 	python3 scripts/toJson.py $* chars 
+	
+	# Create the parts, these ensure files don't get too large to upload to ES
+	bash scripts/split.sh $@
 
 # Only take required columns
 # (Adding script prerequisite for scripts/%/cleanCSV.py breaks it, so leaving out for now)
