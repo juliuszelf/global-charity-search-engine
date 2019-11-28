@@ -1,5 +1,6 @@
 # From: https://www.elastic.co/guide/en/elastic-stack-get-started/7.4/get-started-docker.html
-version: '2.2'
+version: '3.0'
+
 services:
   es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
@@ -21,7 +22,6 @@ services:
     networks:
       - elastic
 
-
   kib01:
     image: docker.elastic.co/kibana/kibana:7.4.2
     container_name: kib01
@@ -32,6 +32,19 @@ services:
       ELASTICSEARCH_HOSTS: http://es01:9200
     networks:
       - elastic
+   
+  flask:
+    build: flask-app/
+    container_name: flask01
+    volumes:
+      - ./flask-app:/app
+    ports:
+      - 5000:5000
+    environment:
+      FLASK_ENV: development
+    networks:
+      - elastic
+
 
 volumes:
   data01:

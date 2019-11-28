@@ -1,32 +1,15 @@
-Doel:
-Charitius 2.0
-Een open data set van goede doelen pakken en deze zoekbaar maken.
-Eerst alleen op titel, dan ook 'full-text' indexing.
-
-Als het ok werkt, dan ook op Digital Ocean deployen. 
-Als dat ok werkt, dan steeds meer open data toevoegen.
-Geen webscraping, maar alleen van officiele bronnen.
-
-USA2:
-	- Makefile aanpassen 
-		- ook die splits doen @done(2019-11-28)
-		- upload met juiste variabele (gaat misschien vanzelf goed)
-			- Bijna goed, maar doet ook es.json zelf
-				- Eenvoudigste fix is 'if' in bash script test op 'es.json'
-	- usa4 zit in andere landen, dat clean bestand moet anders
-	- Meer csv bestanden, scripts lijken te werken, maar upload faalt
-	usa/es.json faalt niet, dus iets is anders/fout aan usa2/es.json
-	- TODO: check of uberhaubt juiste kolommen gepakt worden.
-
 Flask:
-  x Flask image maken
-  - Flask image opschonen, niet copy . /app want volume mapping
-  - Starten met docker-compose en volume mapping
-      - In zelfde network ook Flask
-      - Eerst met standaardserver van Flask
-  - Basis pagina (van charitius code overnemen)
-  - Flask laten praten met Elastic
-  - Data uitlezen met Flask met Flask
+	- Vanuit docker-compose Flask container starten @done(2019-11-28)
+		- Curl vanuit Flask container ES 
+	- Starten met docker-compose en volume mapping
+		- In zelfde network ook Flask
+		- Eerst met standaardserver van Flask
+	- Basis pagina (van charitius code overnemen)
+	- Flask laten praten met Elastic
+	- Data uitlezen met Flask met Flask
+
+Volume mapping voor ES:
+	- content van db in volume houden voor geval container down gaat
 
 Zoek verbeteren:
 Mogelijke feature van zoekmachine is dat je veel kunt customizen
@@ -39,6 +22,9 @@ Dat je bijv. zelf fuzziness kunt selecteren, etc.
 Log:
    - Moet ook wegschrijven in een .log bestand 
      Dat bijhoudt waneer welk bestand gemaakt is e.d.
+
+USA4:
+	- usa4 zit in andere landen, dat clean bestand moet anders
 
 Betere scripts:
  - Opschonen scripts (alles met python argv paden)
@@ -75,3 +61,12 @@ https://github.com/triestpa/guttenberg-search
 
 Requirements.txt & conda:
 https://medium.com/@boscacci/why-and-how-to-make-a-requirements-txt-f329c685181e
+
+Doel:
+Charitius 2.0
+Een open data set van goede doelen pakken en deze zoekbaar maken.
+Eerst alleen op titel, dan ook 'full-text' indexing.
+
+Als het ok werkt, dan ook op Digital Ocean deployen. 
+Als dat ok werkt, dan steeds meer open data toevoegen.
+Geen webscraping, maar alleen van officiele bronnen.
