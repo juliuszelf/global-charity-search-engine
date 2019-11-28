@@ -8,6 +8,14 @@ Als dat ok werkt, dan steeds meer open data toevoegen.
 Geen webscraping, maar alleen van officiele bronnen.
 
 USA2:
+  - Aanname is nu dat het es.json bestand gewoon te groot was
+    x Test met 10 regels toont dat deze upload werkt
+    x Test met 100.000 regels toont dat uploaden werkt
+    x Script voor split in telkens 100.000 regels
+    x Upload script aanpassen om split gegenereerde bestanden te gebruiken
+    - Makefile aanpassen 
+      - ook die splits doen
+      - upload met juiste variabele (gaat misschien vanzelf goed)
   - Meer csv bestanden, scripts lijken te werken, maar upload faalt
     usa/es.json faalt niet, dus iets is anders/fout aan usa2/es.json
     - TODO: check of uberhaubt juiste kolommen gepakt worden.
