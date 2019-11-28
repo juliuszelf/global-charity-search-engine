@@ -12,6 +12,7 @@ es = Elasticsearch('http://es01:9200')
 @app.route("/")
 def home():
     return """
+    Search bar not yet working, go to http://localhost:5601 to search via Kibana. Learn more at README.md file on Github.com/juliuszelf/.<br><br>
     <form>
       <label for="site-search">Global charity search:</label>
       <input type="search" id="site-search" name="q" aria-label="Search charities">
