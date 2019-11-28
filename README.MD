@@ -15,11 +15,11 @@ A global charity search engine.
 ## Prerequisites
 
 - Docker installed
-- Python3 installed
+- Python 3.6 installed
 
 ## Installation
 
-- Install python libraries using `requirements.txt`. You can install globally with `pip install -r requirements.txt`.
+- Install python libraries using `requirements.txt`. You can install globally with `python3.6 -m pip install -r requirements.txt`.
 - `make`. It will download source files and process to .json file.
 - `docker-compose up -d` to start Elastic Search (ES).
 - Once ES is fully started, `bash scripts/upload.sh` to upload json file(s) to elastic search.
