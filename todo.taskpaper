@@ -1,9 +1,3 @@
-Pagina opschonen:
-  - Template gebruiken
-    - header
-    - footer
-  - bootstrap css gebruiken
-
 Volume mapping voor ES:
 	- content van db in volume houden voor geval container down gaat
 

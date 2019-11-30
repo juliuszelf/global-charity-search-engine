@@ -4,27 +4,28 @@
 <title>{{ title }}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1 class="text-info">{{ title }}</h1>
-<br />
-{% include 'search.html' %}
-<br />
-<div class="p-3 mb-2 text-white bg-info">
-  {{ nr_results }} results for <b><i>{{ searched_for }}</i></b><br />
-</div>
-<br />
-{% for result in results %}
-  <b>{{ result.name }}</b><br />
-  {{ result.city }}, {{ result.country }}<br />
-  {% if result.website %}
-    <a href="{{ result.website }}" target="_blank">
-       {{ result.website }}
-    </a><br />
-  {% endif %}
-  <hr>
-{% endfor %}
-{{ content | safe }}
+{% include 'header.html' %}
+<main>
+ {% include 'search.html' %}
+ <div class="text-muted" style="margin-top: 5px">
+   {{ nr_results }} results for <b><i>{{ searched_for }}</i></b><br />
+ </div>
+ <br />
+ {% for result in results %}
+   <b>{{ result.name }}</b><br />
+   {{ result.city }}, {{ result.country }}<br />
+   {% if result.website %}
+     <a href="{{ result.website }}" target="_blank">
+        {{ result.website }}
+     </a><br />
+   {% endif %}
+   <hr>
+ {% endfor %}
+ {{ content | safe }}
+</main>
 {% include 'footer.html' %}
 </body>
 </html>
