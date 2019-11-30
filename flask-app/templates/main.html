@@ -6,9 +6,24 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 </head>
 <body>
-<h1>{{ title }}</h1>
+<h1 class="text-info">{{ title }}</h1>
+<br />
 {% include 'search.html' %}
-    <hr>
+<br />
+<div class="p-3 mb-2 text-white bg-info">
+  {{ nr_results }} results for <b><i>{{ searched_for }}</i></b><br />
+</div>
+<br />
+{% for result in results %}
+  <b>{{ result.name }}</b><br />
+  {{ result.city }}, {{ result.country }}<br />
+  {% if result.website %}
+    <a href="{{ result.website }}" target="_blank">
+       {{ result.website }}
+    </a><br />
+  {% endif %}
+  <hr>
+{% endfor %}
 {{ content | safe }}
 </body>
 </html>

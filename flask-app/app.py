@@ -16,22 +16,23 @@ def home():
         nr_results_shown = res['hits']['total']['value']
         results = res['hits']['hits']
         results_text = ""
+        found_charities = []
         for result in results:
             result_content = result['_source']
             result_name = result_content['Name']
             result_city = result_content['City']
             result_country = result_content['Country']
             result_website = result_content['Website']
-            result_text = "<b>" + result_name + "</b><br />"
-            result_text += result_city + "," + result_country + "<br />"
-            result_text += result_website + "<br />"
+         
+            found_charities.append({ 
+                "name": result_name, 
+                "city": result_city,
+                "country": result_country,
+                "website": result_website 
+            })
 
-            results_text += result_text + "<hr><br>"
-
-        content = "Searched for: " + search_value + "<br>" \
-                + "Results (" + str(nr_results_shown) + ")<br>" \
-                + "<hr>" + str(results_text)
-        return render_template("main.html", title=title, content=content)
+        # result1 = { "name": "charityX", "city": "cityX"}
+        return render_template("main.html", title=title, nr_results=nr_results_shown, results=found_charities, searched_for=search_value)
     except KeyError:
         print("no search")
 
