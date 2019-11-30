@@ -1,12 +1,8 @@
-Flask:
-	- Vanuit docker-compose Flask container starten @done(2019-11-28)
-		- Curl vanuit Flask container ES 
-	- Starten met docker-compose en volume mapping
-		- In zelfde network ook Flask
-		- Eerst met standaardserver van Flask
-	- Basis pagina (van charitius code overnemen)
-	- Flask laten praten met Elastic
-	- Data uitlezen met Flask met Flask
+Pagina opschonen:
+  - Template gebruiken
+    - header
+    - footer
+  - bootstrap css gebruiken
 
 Volume mapping voor ES:
 	- content van db in volume houden voor geval container down gaat
