@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<title>{{ title }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+{% include 'header.html' %}
+<main>
+ {% include 'search.html' %}
+ <div class="text-muted" style="margin-top: 5px">
+   {{ nr_results }} results for <b><i>{{ searched_for }}</i></b><br />
+ </div>
+ <br />
+ {% for result in results %}
+   <b>{{ result.name }}</b><br />
+   {{ result.city }}, {{ result.country }}<br />
+   {% if result.website %}
+     <a href="{{ result.website }}" target="_blank">
+        {{ result.website }}
+     </a><br />
+   {% endif %}
+   <hr>
+ {% endfor %}
+ {{ content | safe }}
+</main>
+{% include 'footer.html' %}
+</body>
+</html>

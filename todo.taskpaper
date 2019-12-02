@@ -17,8 +17,6 @@ Digital ocean setup:
       sysctl -w vm.max_map_count=262144
       stond hier: https://github.com/maxyermayank/docker-compose-elasticsearch-kibana/issues/10
 
-
-
 Flask:
 	- Vanuit docker-compose Flask container starten @done(2019-11-28)
 		- Curl vanuit Flask container ES 

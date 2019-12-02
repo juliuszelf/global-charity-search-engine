@@ -19,14 +19,42 @@ A global charity search engine.
 
 ## Installation
 
-- Install python libraries using `requirements.txt`. You can install globally with `python3.6 -m pip install -r requirements.txt`.
-- `make`. It will download source files and process to .json file, and split it into parts that are uploadable to ES.
-- `docker-compose up -d` to start Elastic Search (ES), Kibana (interface to play with ES) and Flask.
+### Install Python libraries
+
+The scripts that manipulate the CSV files, use python libraries.
+
+- You can install the required python libraries globally with `python3.6 -m pip install -r requirements.txt`.
+
+### Create data to search
+
+- Type `make` in the root folder. It will download source files, process to .json file, and split it into parts that are uploadable to ES.
+
+### Create docker-compose.override.yml file
+
+#### During development
+
+During development we want to make use of a Kibana container, but in production we don't want to make that available, since it costs RAM memory to run, but is not used. Therefore the production docker-compose file is different from production (live) version.
+
+- We extend the `docker-compose.yml` file with the `docker-compose.override.yml`. During development let the override yml file hold the content of `docker-compose.dev.yml` by creating a symlink: `ln -s docker-compose.dev.yml docker-compose.override.yml`
+
+#### For production (live)
+
+- Make symlink connecting the prod file: `ln -s docker-compose.prod.yml docker-compose.override.yml`
+
+### Start containers
+
+- Type `docker-compose up -d`, it will take a minute or two for Elastic Search to fully start.
+- Veriry container are running with `docker ps`, it should show `es01` and `flask`. During development also `kib01`.
+
+### Upload charity data
+
 - Once ES is fully started, assuming it's still empty, do `bash scripts/upload.sh` to upload file(s) to elastic search. 
+- Verify the expected number of records ('documents') using: `curl -X GET "localhost:9200/_cat/count/chars?pretty"`
+- Verify the expected structure of data using: `curl -X GET "localhost:9200/chars/?pretty"`
 
 # Usage
 
-## Play around with search
+## Play around with search 
 
 Go to `http://localhost:5601` for Kibana interface where you can search using the console. 
 
@@ -36,16 +64,16 @@ https://www.elastic.co/guide/en/kibana/7.4/console-kibana.html
 
 ## Search page
 
-Go to `http://localhost:5000` for the website where the search bar can be used once built.
+For development the website is available via `http://localhost:5000`, it contains the search bar.
+
+For production (live) the website is on port 80 (default port).
 
 # Roadmap
 
-## 1.0 A working search engine
+## 1.0 A working search engine [ DONE ]
 
-- Scripts to automate getting sourcefile and converting it to .json ready to upload to ES. [DONE]
-- Dataset for single country (Canada), with minimal data [DONE]:
-    - Name, City, Country, Website, sourceURL, sourceDate.
-- Flask serving a page with working search bar. [TODO]
+Most basic working search engine.
+- Name, City, Country, Website, sourceURL, sourceDate.
 
 ## Beyond 1.0
 

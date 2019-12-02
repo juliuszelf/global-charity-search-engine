@@ -1,11 +1,15 @@
 .idea
 .DS_Store
 
-# Files created by scripts
+flask-app/__pycache__/
 
+# On server override must be created from either docker-compose.dev.yml or docker-compose.prod.yml
+docker-compose.override.yml
+
+# Files created by scripts
 raw.csv
 rawutf8.csv
 clean.csv
 es.json
 es.json*
-flask-app/__pycache__/
+
