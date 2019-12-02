@@ -1,3 +1,24 @@
+Digital ocean setup:
+	- alle stappen in README.md zetten
+	- apt-get install tree
+	- apt-get install python3-pip (ofzoiets)
+	- apt-get install make (ofzoiets)
+	- symlink override docker-compose.override.yml maken (?)
+		- We hebben in ieder geval geen Kibana nodig (scheelt ook ram)
+	- omdat te weinig ram is voor elasticsearch, swap file bepalen
+	   sudo fallocate -l 1G /swapfile
+	- eable swap file
+	  https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04
+      sudo chmod 600 /swapfile
+
+	  Verify the permissions change by typing
+      ls -lh /swapfile	
+	- Poging met 2Gb droplet en volgende commando was succes
+      sysctl -w vm.max_map_count=262144
+      stond hier: https://github.com/maxyermayank/docker-compose-elasticsearch-kibana/issues/10
+
+
+
 Flask:
 	- Vanuit docker-compose Flask container starten @done(2019-11-28)
 		- Curl vanuit Flask container ES 
