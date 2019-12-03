@@ -1,5 +1,5 @@
 <form>
-  <input type="search" id="site-search" name="search" aria-label="Search charities">
+	<input type="search" id="site-search" name="search" aria-label="Search charities" value="{{ searched_for }}">
   <div>
 	  <input type="checkbox" name="country" value="USA" {% if "USA" in countries %}checked{% endif %}> USA<br />
 	  <input type="checkbox" name="country" value="CA" {% if "CA" in countries %}checked{% endif %}> CANADA<br />
