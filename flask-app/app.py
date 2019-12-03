@@ -99,7 +99,7 @@ def home():
         }
         #{'query':{ 'match': {'Name': search_value}}}
         # res=es.search(index='chars', body={'query':{ 'match': {'Name': search_value}}})
-        res=es.search(index='chartest', body=body)
+        res=es.search(index='chars', body=body)
         nr_results_shown = res['hits']['total']['value']
         results = res['hits']['hits']
         results_text = ""
@@ -135,8 +135,5 @@ def home():
 
 
 if __name__ == "__main__":
-    # TODO remove when cache is needed
-    app.config["CACHE_TYPE"] = "null"
-
     app.run(debug=True, host="0.0.0.0")
 
