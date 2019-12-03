@@ -4,6 +4,10 @@ A global charity search engine.
 - All data from official open data sources.
 - Scripts to fully automate processing source files.
 
+Test it out at: http://charitysearch.juliuszelf.nl
+
+Background info on the concept at: http://juliushuijnk.nl/project/charitius/
+
 ## Built With
 
 - Scripts to process source files (Python3, Bash, Make)
