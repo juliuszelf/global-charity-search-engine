@@ -1,9 +1,9 @@
 <form>
   <input type="search" id="site-search" name="search" aria-label="Search charities">
   <div>
-	  <input type="checkbox" name="country" value="USA"> USA<br />
-	  <input type="checkbox" name="country" value="CA"> CANADA<br />
-	  <input type="checkbox" name="country" value="NZ"> NZ<br />
+	  <input type="checkbox" name="country" value="USA" {% if "USA" in countries %}checked{% endif %}> USA<br />
+	  <input type="checkbox" name="country" value="CA" {% if "CA" in countries %}checked{% endif %}> CANADA<br />
+	  <input type="checkbox" name="country" value="NZ" {% if "NZ" in countries %}checked{% endif %}> NZ<br />
   </div>
   <button>Search</button>
 </form>

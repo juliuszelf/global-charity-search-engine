@@ -1,22 +1,12 @@
 Keyword fields:
 Om filteren op land mogelijk te maken moet dit veld 'keyword' zijn, niet text.
 Getest via 're-index', maar de index moet automatisch goed gemaakt worden.
-	- Experiment: Kan ik ook uploaden met alleen op 1e regel _index zetten.
-	- Nette variant lijkt 3 (mapping als stap 1)
-		- Geeft direct duidelijke plek van configuratie (=documentatie)
-		- Variant 1
-		Dit heb ik met de hand gedaan en werkt
-			- Eerst via uploaden maken
-			- Dan juiste mapping
-			- Dan re-index
-		- Variant 2
-			- Eerst index aanmaken met juiste mapping
-			- Dan upload bronbestanden maken
-		- Variant 3
-			- Via upload index aanmaken, maar json zo maken dat veld 'keyword' ook goed gaat.
-	- Dus moet het upload-all.sh script aangepast worden door eerst mapping te uploaden
-		- create-index-with-mapping.sh @done(2019-12-03)
-		- Vermoedelijk kunnen bronbestanden dan gelijk blijven.
+	- Opschonen code landen filter
+	- Research risico van dergelijke oplossing, kan je nu ES leegmaken met juiste HTML call?
+		- Want ik pak waarde checkbox en voer het indirect aan Elasticsearch..
+	- Nice to have:
+		- Zet checkboxes nogmaals op basis van waardes die meekwamen
+		- Ajax call voor search result
 
 filters:
 	- Vermoedelijk is 'Country' verkeerde field type. Textfield,

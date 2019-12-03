@@ -100,6 +100,7 @@ def home():
         nr_results_shown = res['hits']['total']['value']
         results = res['hits']['hits']
         results_text = ""
+
         found_charities = []
         for result in results:
             result_content = result['_source']
@@ -115,13 +116,13 @@ def home():
                 "website": result_website 
             })
 
-        # result1 = { "name": "charityX", "city": "cityX"}
         return render_template("main.html", 
                 title=title, 
                 nr_results=nr_results_shown, 
                 results=found_charities, 
                 searched_for=search_value, 
                 content=content,
+                countries=countries,
                 page_nr=page_nr)
     except KeyError:
         print("no search")
