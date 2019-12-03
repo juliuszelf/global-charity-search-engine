@@ -24,11 +24,8 @@ def home():
     try:
         values_dict = request.args.to_dict()
         search_value = values_dict['search']
-        # countries = values_dict['country']
-        # countries = request.form.getlist('country')
         if not search_value:
             return render_template("main.html", title=title, content="Please fill in a search word")
-
 
         # for testing..
         content = ""
@@ -37,46 +34,6 @@ def home():
         page_nr = 1
         countries = request.args.getlist('country')
 
-        '''
-        // If the country is set as field type 'keyword' (not text)
-        // this query works.:
-        GET chartest/_search
-        {
-            "query": {
-                "bool": {
-                    "must": {
-                        "multi_match": {
-                            "query": "Monica",
-                            "fields": [
-                                "Name",
-                                "City"
-                            ]
-                        }
-                    },
-                    "filter": {
-                        "bool" : {
-                        "should" : [
-                            {"term" : { "Country" : "CA" } },
-                            {"term" : { "Country" : "NZ" } }
-
-                        ]
-                    }
-                    }
-                }
-            }
-        }
-        '''
-        # We pass along what fields we want to check for
-        '''
-        body = {
-            "query": {
-                "multi_match": {
-                    "query": search_value,
-                    "fields": ["Name", "City", "Country", "Website"]
-                }
-            }
-        }
-        '''
         body = {
             "query": {
                 "bool": {
