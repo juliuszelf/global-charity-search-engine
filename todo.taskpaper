@@ -1,11 +1,6 @@
 Keyword fields:
 Om filteren op land mogelijk te maken moet dit veld 'keyword' zijn, niet text.
 Getest via 're-index', maar de index moet automatisch goed gemaakt worden.
-	- Data
-		- Makefile & scripts zodat juiste index gemaakt wordt met keywords
-		- Plan A > probeer bestaande json te hergebruiken
-			- Upload-all script upload eerst de index
-		- Pas README.md aan na fix data upload e.d.
 	- Ingevoerde waarde opnieuw in invoerveld
 	- Opschonen code 
 	- UI opschonen

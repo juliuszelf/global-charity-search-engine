@@ -68,6 +68,16 @@ For development the website is available via `http://localhost:5000`, it contain
 
 For production (live) the website is on port 80 (default port).
 
+# Replace data
+
+On live server you might need to re-upload the data to ES, since the mapping of the fields has changed. In this case you can:
+
+- Remove all data with: `curl -X DELETE "localhost:9200/chars?pretty"`
+- You might als need to recreate all json file with: `rm data/*/*json*`
+- (And perhaps remove even more files)
+- Use `make` to create new json files to upload if required.
+- Upload to ES via `bash scripts/upload-all.sh`
+
 # Roadmap
 
 ## 1.0 A working search engine [ DONE ]
