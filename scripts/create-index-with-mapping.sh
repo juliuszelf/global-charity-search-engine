@@ -2,12 +2,12 @@
 # We create index before uploading, so we have field of right type, like Country as a Keyword.
 
 # Create the index
-curl -X PUT "localhost:9200/chars2"
+curl -X PUT "localhost:9200/chars"
 
 echo "Index created"
 
 # Update both mappings
-curl -X PUT "localhost:9200/chars2/_mapping?pretty" -H 'Content-Type: application/json' -d'
+curl -X PUT "localhost:9200/chars/_mapping?pretty" -H 'Content-Type: application/json' -d'
 {
   "properties": {
     "Name": {

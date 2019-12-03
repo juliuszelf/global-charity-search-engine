@@ -26,9 +26,12 @@ def home():
         search_value = values_dict['search']
         # countries = values_dict['country']
         # countries = request.form.getlist('country')
+        if not search_value:
+            return render_template("main.html", title=title, content="Please fill in a search word")
+
 
         # for testing..
-        content = "args: " + str(request.args.getlist('country'))
+        content = ""
         
         # page_nr = values_dict['page']
         page_nr = 1
