@@ -1,11 +1,46 @@
 Keyword fields:
 Om filteren op land mogelijk te maken moet dit veld 'keyword' zijn, niet text.
 Getest via 're-index', maar de index moet automatisch goed gemaakt worden.
-	- Ingevoerde waarde opnieuw in invoerveld
 	- Opschonen code 
 	- UI opschonen
 	- Paginering stukje (wat niet werkt nog) weghalen
 	- Nice to have: Ajax call voor search result
+
+Australia:
+	- .xlsx > .csv script testen
+	- Makefile aanpassen zodat .xlsx naar json gaat
+		- Ik probeer eerst optie D
+			- A. binnen #Download een if statement
+				- dan conversie script daar ook binnen
+				- zodat dan uiteindelijk ook een raw.csv ontstaat
+				- Maar is lelijk dat het 2 dingen doet
+			- B. Download via een python script
+				- Die gebruikt standaard curl
+				- Maar kan per land eventueel extra stappen doen
+				- Maar alsnog lelijk dat het 2 dingen doet
+				- En als je dan toch python script hebt..
+					- Dan kun je net zo goed meteen door naar .json conversie
+			- C. Elke data folder heeft eigen Makefile
+				- Root makefile roept make van folder aan
+				- De data folder make roept bijna altijd generieke make file aan
+				- Maar voor 'alternatieve' bouw dan uniek makefile.
+				- Lelijk is hier complexiteit
+			- D. Downloaden .xlsx onterecht als raw.csv
+				- bij rawutf8.csv doen we niets (copy)
+				- bij cleanCSV.py doen we conversie van xlsx naar json
+				- Elegant is dat makefile gelijk blijft
+				- Lelijk is dat er .csv bestanden komen die niet csv zijn
+					- Maar kan toegelicht worden in source.md
+					- Kan ook comment bij Makefile gemaakt worden
+					- En bronbestanden zijn tussenproduct voor debugging niet eindgebruiker
+
+				
+		- Als sourcefile .xlsx bestand is, dan ook convert script aanroepen
+	- .xlsx > .csv script toevoegen
+	- cleanCSV.py voor Australia maken
+	- Requirements.txt voor deployment het xlsx2csv script toevoegen
+	- Lokaal testen totaal
+	- Live deployment
 
 filters:
 	- Vermoedelijk is 'Country' verkeerde field type. Textfield,

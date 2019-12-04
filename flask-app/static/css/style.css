@@ -2,17 +2,32 @@ body {
 }
 
 header {
- background-color: #eee;
- padding: 20px;
+	background-color: #eee;
+	padding: 20px;
 }
 
 main {
-  padding: 20px;
+	padding: 20px;
 }
 
 footer {
- text-align: center;
- padding: 10px;
- background-color: #eee;
+	text-align: center;
+	padding: 10px;
+	background-color: #eee;
+}
+
+.filters {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 5px;
+	background-color: #eee;
+}
+
+.country-checkboxes {
+	display: flex;
+}
+
+.country-checkbox {
+	margin-right: 10px;
 }
 

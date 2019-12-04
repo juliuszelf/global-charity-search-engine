@@ -17,8 +17,8 @@ data/%/es.json : data/%/clean.csv
 	# Create the parts, these ensure files don't get too large to upload to ES
 	bash scripts/split.sh $@
 
-	@echo "If all files are created correctly, now run `docker-compose up -d`"
-	@echo "Once the ES container had time to fully start run `bash scripts/upload-all.sh` from root"
+	@echo "If all files are created correctly, now run 'docker-compose up -d'"
+	@echo "Once the ES container had time to fully start run 'bash scripts/upload-all.sh' from root"
 
 # Only take required columns
 # (Adding script prerequisite for scripts/%/cleanCSV.py breaks it, so leaving out for now)
