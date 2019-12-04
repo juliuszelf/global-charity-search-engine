@@ -83,9 +83,9 @@ print(colored("Removing temp file: " + xlsx_file_path, 'grey') )
 os.remove(xlsx_file_path)
 print(colored("Removed " + xlsx_file_path, 'yellow') )
 
-print(colored("Removing temp file: " + temp_file_path 'grey') )
+print(colored("Removing temp file: " + temp_file_path, 'grey') )
 os.remove(temp_file_path)
-print(colored("Removed " + temp_file_path 'yellow') )
+print(colored("Removed " + temp_file_path, 'yellow') )
 
 print(colored("Ended cleaning CSV file", "green")) 
 
