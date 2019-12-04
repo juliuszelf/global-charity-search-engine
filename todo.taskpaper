@@ -42,6 +42,14 @@ Australia:
 	- Lokaal testen totaal
 	- Live deployment
 
+Mogelijke landen:
+	- Met source.md
+		- UK  
+		- Scotland
+		- North-Ireland
+	- Norway
+		- https://data.ssb.no/api/v0/dataset/?lang=en
+
 filters:
 	- Vermoedelijk is 'Country' verkeerde field type. Textfield,
 	  maar moet een 'keyword' datatype zijn oid.
