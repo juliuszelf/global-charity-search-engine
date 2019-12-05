@@ -40,6 +40,56 @@ How the charity works,
 # We add: Source URL, Source date
 end_part = source_url + "," + source_date + "\n" 
 
+
+counties = [
+        'Antrim',
+        'Armagh',
+        'Down',
+        'Fermanagh',
+        'Londonderry',
+        'Tyrone'
+        ]
+
+def get_values_from_address(address):
+
+    # There is a single field "Address" in the CSV, this holds values like:
+    '''
+    "Ballygasey Road, 	Loughgall, 	Armagh, 	BT61 8HY"
+    "29 Main Street, 	Clough, 	Downpatrick, 	Co.Down, N.Ireland, BT30 8RA"
+    "34B Barra Drive, 	Ballymena, 	BT42 4AH"
+    "50 Granemore Park, Keady, 		Armagh, 	BT60 2GP"
+    "6 Harmony Mews, 	Lisburn, 	BT27 4EG"
+    "70 Prince Andrew Way, 	Carrickfergus, 	BT38 7TB"
+    "Young Enterprise N I, 	Grove House, 	145-149 Donegall Pass, Belfast, BT7 1DT"
+    '''
+    # The trouble is that there is no fixed format
+    # To get the county (will go to field 'state', we'll check against this list:
+    # The next challenge is that it often, but not always includes the word 'county'.
+    # The rule I'm going with is '
+    parts = address.split(",")
+    city = ""
+    state = ""  # County
+
+    found_state = False
+    # we 'reverse' parts, because we expect our values
+    # to be within last 3 items.
+    for part in reversed(parts):
+        if not found_state:
+            for county in counties:
+                if county in part:
+                    state = county.strip() 
+                    found_state = True
+            
+        else:
+          city = part.strip()
+          return city, state
+    # couldn't find county, lets assume city is before last
+    # We assume the city is the value before the state
+    # Or the value maching any of the top 10 cities
+    # Or if the value before the last.
+    city = address.split(",")[-2].strip()
+    return city, state
+
 def fix_nulls(s):
     for line in s:
         yield line.replace('\0', ' ')
@@ -69,8 +119,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         for line in input_reader:
             # Adress is of form: "Supporting Communities Ni, 34-36 Henry Street, Ballymena, Co  Antrim, BT42 3AH"
             address = line["Public address"] 
-            city = address.split(",")[-3]  # Takes "Ballymena" from example.
-            state = address.split(",")[-2] 
+            city, state = get_values_from_address(address)
 
             output_writer.writerow({"Name": line["Charity name"], 
                                     "City": city, 
