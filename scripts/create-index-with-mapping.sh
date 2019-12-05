@@ -16,6 +16,9 @@ curl -X PUT "localhost:9200/chars/_mapping?pretty" -H 'Content-Type: application
     "City": {
       "type": "text"
     },
+    "State": {
+      "type": "keyword"
+    },
     "Country": {
       "type": "keyword"
     },

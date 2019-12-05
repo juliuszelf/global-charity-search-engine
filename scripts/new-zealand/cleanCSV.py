@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-TODO: inlezen csv als standard in stream
-de csv filteren op relevante kolommen
-toevoegen nieuwe kolommen
-"""
-
 import sys
 import csv
 import json
@@ -15,19 +9,29 @@ input_file_path = sys.argv[1]
 output_file_path = sys.argv[2]
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
-''' REMOVE OLD INPUT OUPUT IF ARGV WORKS
-input_file_path = "data/new-zealand/rawutf8.csv"
-output_file_path = "data/new-zealand/clean.csv"
-'''
 source_url = "http://www.odata.charities.govt.nz/Organisations?$format=csv&$returnall=true&$filter=deregistrationdate%20eq%20null"
 source_date = "2019"  # Not super sure about source date
 
 # we assume it data has heading like this:
 """
-OrganisationId,AccountId,Name,CharityRegistrationNumber,WebSiteURL,EMailAddress1,Telephone1,Telephone2,TelephoneDay,Fax,PostalAddress_city,PostalAddress_country,PostalAddress_line1,PostalAddress_line2,PostalAddress_postcode,PostalAddress_suburb,StreetAddress_city,StreetAddress_country,StreetAddress_line1,StreetAddress_line2,StreetAddress_postcode,StreetAddress_suburb,CharityEmailAddress,CompaniesOfficeNumber,DateRegistered,deregistrationdate,Deregistrationreasons,EndOfYearDayofMonth,endofyearmonth,Establishedbyparliamentact,Excemptioncomment,Isincorporated,Maori_trust_brd,maoritrustapproved,Marae_funds,Marae_reservation,Notices,onlandunderTeTureWhenuaMaoriAct,Organisational_type,percentage_spent_overseas,RegistrationStatus,Society_institution,Trustees_trust,Exemptions,AnnualReturnDueDate,annualreturnextensiondate,GroupType,GroupId,MainActivityId,MainBeneficiaryId,MainSectorId,OtherNames,ModifiedOn,NZBNNumber
+OrganisationId,AccountId,Name,CharityRegistrationNumber,WebSiteURL,
+EMailAddress1,Telephone1,Telephone2,TelephoneDay,Fax,
+PostalAddress_city,PostalAddress_country,
+PostalAddress_line1,PostalAddress_line2,PostalAddress_postcode,PostalAddress_suburb,
+StreetAddress_city,StreetAddress_country,StreetAddress_line1,StreetAddress_line2,
+StreetAddress_postcode,StreetAddress_suburb,CharityEmailAddress,
+CompaniesOfficeNumber,DateRegistered,deregistrationdate,
+Deregistrationreasons,EndOfYearDayofMonth,endofyearmonth,
+Establishedbyparliamentact,Excemptioncomment,Isincorporated,
+Maori_trust_brd,maoritrustapproved,Marae_funds,Marae_reservation,
+Notices,onlandunderTeTureWhenuaMaoriAct,Organisational_type,
+percentage_spent_overseas,RegistrationStatus,Society_institution,
+Trustees_trust,Exemptions,AnnualReturnDueDate,annualreturnextensiondate,
+GroupType,GroupId,MainActivityId,MainBeneficiaryId,MainSectorId,
+OtherNames,ModifiedOn,NZBNNumber
 """
 # For new file we are going to first rewrite the heading
-# We keep: Legal Name, City, Country, Website
+# We keep: Legal Name, City, State, Country, Website
 # We add: Source URL, Source date
 end_part = source_url + "," + source_date + "\n" 
 
@@ -39,7 +43,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["Name", "City", "Country", "Website", "SourceURL", "SourceDate"]
+    fieldnames = ["Name", "City", "State", "Country", "Website", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -60,6 +64,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         for line in input_reader:
             output_writer.writerow({"Name": line["Name"], 
                                     "City": line["StreetAddress_city"], 
+                                    "State": "", 
                                     "Country": "NZ", 
                                     "Website": line["WebSiteURL"], 
                                     "SourceURL": source_url, 

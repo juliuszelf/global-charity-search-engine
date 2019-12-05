@@ -20,21 +20,37 @@ Xlsx2csv(xlsx_file_path, outputencoding="utf-8").convert(temp_file_path)
 # after the conversion the temp file will be the imputfile for creating json
 input_file_path = temp_file_path
 
-"""
-TODO: inlezen csv als standard in stream
-de csv filteren op relevante kolommen
-toevoegen nieuwe kolommen
-"""
-
 source_url = "https://data.gov.au/dataset/ds-dga-b050b242-4487-4306-abf5-07ca073e5594/details?q=acnc"
 source_date =  "01/12/2019"  # Better would be to dynamically get this 
 
 # we assume it data has heading like this:
 """
-ABN,CABN,Charity_Legal_Name,Other_Organisation_Names,Operating_Countries,Address_Type,Address_Line_1,Address_Line_2,Address_Line_3,Town_City,State,Postcode,Country,Charity_Website,Registration_Date,Date_Organisation_Established,Charity_Size,Number_of_Responsible_Persons,Financial_Year_End,Operates_in_ACT,Operates_in_NSW,Operates_in_NT,Operates_in_QLD,Operates_in_SA,Operates_in_TAS,Operates_in_VIC,Operates_in_WA,PBI,HPC,Preventing_or_relieving_suffering_of_animals,Advancing_Culture,Advancing_Education,Advancing_Health,Promote_or_oppose_a_change_to_law__government_poll_or_prac,Advancing_natual_environment,Promoting_or_protecting_human_rights,Purposes_beneficial_to_ther_general_public_and_other_analogous,Promoting_reconciliation__mutual_respect_and_tolerance,Advancing_Religion,Advancing_social_or_public_welfare,Advancing_security_or_safety_of_Australia_or_Australian_public,Another_purpose_beneficial_to_the_community,Aboriginal_or_TSI,Aged_Persons,Children,Communities_Overseas,Ethnic_Groups,Gay_Lesbian_Bisexual,General_Community_in_Australia,Men,Migrants_Refugees_or_Asylum_Seekers,Pre_Post_Release_Offenders,People_with_Chronic_Illness,People_with_Disabilities,People_at_risk_of_homelessness,Unemployed_Person,Veterans_or_their_families,Victims_of_crime,Victims_of_Disasters,Women,Youthharity_Legal_Name,Other_Organisation_Names,Operating_Countries,Address_Type,Address_Line_1,Address_Line_2,Address_Line_3,Town_City,State,Postcode,Country,Charity_Website,Registration_Date,Date_Organisation_Established,Charity_Size,Number_of_Responsible_Persons,Financial_Year_End,Operates_in_ACT,Operates_in_NSW,Operates_in_NT,Operates_in_QLD,Operates_in_SA,Operates_in_TAS,Operates_in_VIC,Operates_in_WA,PBI,HPC,Preventing_or_relieving_suffering_of_animals,Advancing_Culture,Advancing_Education,Advancing_Health,Promote_or_oppose_a_change_to_law__government_poll_or_prac,Advancing_natual_environment,Promoting_or_protecting_human_rights,Purposes_beneficial_to_ther_general_public_and_other_analogous,Promoting_reconciliation__mutual_respect_and_tolerance,Advancing_Religion,Advancing_social_or_public_welfare,Advancing_security_or_safety_of_Australia_or_Australian_public,Another_purpose_beneficial_to_the_community,Aboriginal_or_TSI,Aged_Persons,Children,Communities_Overseas,Ethnic_Groups,Gay_Lesbian_Bisexual,General_Community_in_Australia,Men,Migrants_Refugees_or_Asylum_Seekers,Pre_Post_Release_Offenders,People_with_Chronic_Illness,People_with_Disabilities,People_at_risk_of_homelessness,Unemployed_Person,Veterans_or_their_families,Victims_of_crime,Victims_of_Disasters,Women,Youth
+ABN,CABN,Charity_Legal_Name,Other_Organisation_Names,Operating_Countries,
+Address_Type,Address_Line_1,Address_Line_2,Address_Line_3,Town_City,
+State,Postcode,Country,Charity_Website,
+Registration_Date,Date_Organisation_Established,Charity_Size,
+Number_of_Responsible_Persons,Financial_Year_End,Operates_in_ACT,
+Operates_in_NSW,Operates_in_NT,Operates_in_QLD,Operates_in_SA,
+Operates_in_TAS,Operates_in_VIC,Operates_in_WA,PBI,HPC,
+Preventing_or_relieving_suffering_of_animals,Advancing_Culture,
+Advancing_Education,Advancing_Health,
+Promote_or_oppose_a_change_to_law__government_poll_or_prac,
+Advancing_natual_environment,Promoting_or_protecting_human_rights,
+Purposes_beneficial_to_ther_general_public_and_other_analogous,
+Promoting_reconciliation__mutual_respect_and_tolerance,
+Advancing_Religion,Advancing_social_or_public_welfare,
+Advancing_security_or_safety_of_Australia_or_Australian_public,
+Another_purpose_beneficial_to_the_community,Aboriginal_or_TSI,
+Aged_Persons,Children,Communities_Overseas,Ethnic_Groups,
+Gay_Lesbian_Bisexual,General_Community_in_Australia,Men,
+Migrants_Refugees_or_Asylum_Seekers,Pre_Post_Release_Offenders,
+People_with_Chronic_Illness,People_with_Disabilities,
+People_at_risk_of_homelessness,Unemployed_Person,
+Veterans_or_their_families,Victims_of_crime,Victims_of_Disasters,
+Women,Youth
 """
 # For new file we are going to first rewrite the heading
-# We keep: Legal Name, City, Country, Website
+# We keep: Legal Name, City, State, Country, Website
 # We add: Source URL, Source date
 end_part = source_url + "," + source_date + "\n" 
 
@@ -46,7 +62,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["Name", "City", "Country", "Website", "SourceURL", "SourceDate"]
+    fieldnames = ["Name", "City", "State", "Country", "Website", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -67,6 +83,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         for line in input_reader:
             output_writer.writerow({"Name": line["Charity_Legal_Name"], 
                                     "City": line["Town_City"], 
+                                    "State": line["State"], 
                                     "Country": "AU", 
                                     "Website": line["Charity_Website"], 
                                     "SourceURL": source_url, 

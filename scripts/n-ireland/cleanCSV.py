@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-TODO: inlezen csv als standard in stream
-de csv filteren op relevante kolommen
-toevoegen nieuwe kolommen
-"""
-
 import sys
 import csv
 import json
@@ -15,11 +9,6 @@ input_file_path = sys.argv[1]
 output_file_path = sys.argv[2]
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
-''' REMOVE OLD INPUT OUPUT IF ARGV WORKS
-input_file_path = "data/new-zealand/rawutf8.csv"
-output_file_path = "data/new-zealand/clean.csv"
-'''
-
 source_url = "https://www.charitycommissionni.org.uk/charity-search/"
 source_date = "2019"  # Not super sure about source date
 
@@ -47,7 +36,7 @@ How the charity works,
 """
 
 # For new file we are going to first rewrite the heading
-# We keep: Legal Name, City, Country, Website
+# We keep: Legal Name, City, State, Country, Website
 # We add: Source URL, Source date
 end_part = source_url + "," + source_date + "\n" 
 
@@ -59,7 +48,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["Name", "City", "Country", "Website", "SourceURL", "SourceDate"]
+    fieldnames = ["Name", "City", "State", "Country", "Website", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -81,9 +70,11 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
             # Adress is of form: "Supporting Communities Ni, 34-36 Henry Street, Ballymena, Co  Antrim, BT42 3AH"
             address = line["Public address"] 
             city = address.split(",")[-3]  # Takes "Ballymena" from example.
+            state = address.split(",")[-2] 
 
             output_writer.writerow({"Name": line["Charity name"], 
                                     "City": city, 
+                                    "State": state, 
                                     "Country": "GB-NIR", 
                                     "Website": line["Website"], 
                                     "SourceURL": source_url, 

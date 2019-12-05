@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-TODO: inlezen csv als standard in stream
-de csv filteren op relevante kolommen
-toevoegen nieuwe kolommen
-"""
-
 import sys
 import csv
 import json
@@ -15,19 +9,18 @@ input_file_path = sys.argv[1]
 output_file_path = sys.argv[2]
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
-''' REMOVE OLD INPUT OUPUT IF ARGV WORKS
-input_file_path = "data/canada/rawutf8.csv"
-output_file_path = "data/canada/clean.csv"
-'''
 source_url = "https://www.irs.gov/charities-non-profits/exempt-organizations-business-master-file-extract-eo-bmf"
 source_date = "11-nov-2019"
 
 # we assume it data has heading like this:
 """
-EIN,NAME,ICO,STREET,CITY,STATE,ZIP,GROUP,SUBSECTION,AFFILIATION,CLASSIFICATION,RULING,DEDUCTIBILITY,FOUNDATION,ACTIVITY,ORGANIZATION,STATUS,TAX_PERIOD,ASSET_CD,INCOME_CD,FILING_REQ_CD,PF_FILING_REQ_CD,ACCT_PD,ASSET_AMT,INCOME_AMT,REVENUE_AMT,NTEE_CD,SORT_NAME
+EIN,NAME,ICO,STREET,CITY,STATE,ZIP,GROUP,SUBSECTION,AFFILIATION,CLASSIFICATION,
+RULING,DEDUCTIBILITY,FOUNDATION,ACTIVITY,ORGANIZATION,STATUS,TAX_PERIOD,ASSET_CD,
+INCOME_CD,FILING_REQ_CD,PF_FILING_REQ_CD,ACCT_PD,ASSET_AMT,INCOME_AMT,REVENUE_AMT,
+NTEE_CD,SORT_NAME
 """
 # For new file we are going to first rewrite the heading
-# We keep: Legal Name, City, Country, Website
+# We keep: Legal Name, City, State, Country, Website
 # We add: Source URL, Source date
 end_part = source_url + "," + source_date + "\n" 
 
@@ -39,7 +32,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["Name", "City", "Country", "Website", "SourceURL", "SourceDate"]
+    fieldnames = ["Name", "City", "State", "Country", "Website", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -60,6 +53,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         for line in input_reader:
             output_writer.writerow({"Name": line["NAME"], 
                                     "City": line["CITY"], 
+                                    "State": line["STATE"], 
                                     "Country": "USA", 
                                     "Website": "",  # Not part of the source
                                     "SourceURL": source_url, 

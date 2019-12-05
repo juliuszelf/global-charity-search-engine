@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-TODO: inlezen csv als standard in stream
-de csv filteren op relevante kolommen
-toevoegen nieuwe kolommen
-"""
-
 import sys
 import csv
 import json
@@ -15,10 +9,6 @@ input_file_path = sys.argv[1]
 output_file_path = sys.argv[2]
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
-''' REMOVE OLD INPUT OUPUT IF ARGV WORKS
-input_file_path = "data/canada/rawutf8.csv"
-output_file_path = "data/canada/clean.csv"
-'''
 source_url = "https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49"
 source_date = "2016"
 
@@ -27,7 +17,7 @@ source_date = "2016"
 BN,Category,Designation,Legal Name,Account Name,Address Line 1,Address Line 2,City,Province,Postal Code,Country,Public Contact Name,Phone,Email,Website
 """
 # For new file we are going to first rewrite the heading
-# We keep: Legal Name, City, Country, Website
+# We keep: Legal Name, City, State, Country, Website
 # We add: Source URL, Source date
 end_part = source_url + "," + source_date + "\n" 
 
@@ -39,7 +29,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["Name", "City", "Country", "Website", "SourceURL", "SourceDate"]
+    fieldnames = ["Name", "City", "State", "Country", "Website", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -60,6 +50,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         for line in input_reader:
             output_writer.writerow({"Name": line["Legal Name"], 
                                     "City": line["City"], 
+                                    "State": line["Province"], 
                                     "Country": line["Country"], 
                                     "Website": line["Website"], 
                                     "SourceURL": source_url, 

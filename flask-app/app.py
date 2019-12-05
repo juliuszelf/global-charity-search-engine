@@ -66,12 +66,14 @@ def home():
             result_content = result['_source']
             result_name = result_content['Name']
             result_city = result_content['City']
+            result_state = result_content['State'] # State / Province
             result_country = result_content['Country']
             result_website = result_content['Website']
          
             found_charities.append({ 
                 "name": result_name, 
                 "city": result_city,
+                "state": result_state,
                 "country": result_country,
                 "website": result_website 
             })
