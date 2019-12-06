@@ -9,26 +9,45 @@ input_file_path = sys.argv[1]
 output_file_path = sys.argv[2]
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
-source_url = "http://www.odata.charities.govt.nz/Organisations?$format=csv&$returnall=true&$filter=deregistrationdate%20eq%20null"
-source_date = "2019"  # Not super sure about source date
+source_url = "https://www.oscr.org.uk/about-charities/search-the-register/charity-register-download"
+source_date = "2019"  
 
 # we assume it data has heading like this:
 """
-OrganisationId,AccountId,Name,CharityRegistrationNumber,WebSiteURL,
-EMailAddress1,Telephone1,Telephone2,TelephoneDay,Fax,
-PostalAddress_city,PostalAddress_country,
-PostalAddress_line1,PostalAddress_line2,PostalAddress_postcode,PostalAddress_suburb,
-StreetAddress_city,StreetAddress_country,StreetAddress_line1,StreetAddress_line2,
-StreetAddress_postcode,StreetAddress_suburb,CharityEmailAddress,
-CompaniesOfficeNumber,DateRegistered,deregistrationdate,
-Deregistrationreasons,EndOfYearDayofMonth,endofyearmonth,
-Establishedbyparliamentact,Excemptioncomment,Isincorporated,
-Maori_trust_brd,maoritrustapproved,Marae_funds,Marae_reservation,
-Notices,onlandunderTeTureWhenuaMaoriAct,Organisational_type,
-percentage_spent_overseas,RegistrationStatus,Society_institution,
-Trustees_trust,Exemptions,AnnualReturnDueDate,annualreturnextensiondate,
-GroupType,GroupId,MainActivityId,MainBeneficiaryId,MainSectorId,
-OtherNames,ModifiedOn,NZBNNumber
+Charity Number,
+Charity Name,
+Registered Date,
+Known As,
+Charity Status,
+Notes,
+Postcode,
+Constitutional Form,
+Previous Constitutional Form 1,
+Geographical Spread,
+Main Operating Location,
+Purposes,
+Beneficiaries,
+Activities,
+Objectives,
+Principal Office/Trustees Address,
+Website,
+Most recent year income,
+Most recent year expenditure,
+Mailing cycle,
+Year End,
+Donations and legacies income,
+Charitable activities income,
+Other trading activities income,
+Investments income,
+Other income,
+Raising funds spending,
+Charitable activities spending,
+Other spending,
+Parent charity name,
+Parent charity number,
+Parent charity country of registration,
+Designated religious body,
+Regulatory Type
 """
 # For new file we are going to first rewrite the heading
 # We keep: Legal Name, City, State, Country, Website
@@ -62,11 +81,11 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         next(input_reader)
 
         for line in input_reader:
-            output_writer.writerow({"Name": line["Name"], 
+            output_writer.writerow({"Name": line["Charity Name"], 
                                     "City": line["StreetAddress_city"], 
                                     "State": "", 
-                                    "Country": "NZ", 
-                                    "Website": line["WebSiteURL"], 
+                                    "Country": "SC", 
+                                    "Website": line["Website"], 
                                     "SourceURL": source_url, 
                                     "SourceDate": source_date})
 
