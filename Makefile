@@ -29,13 +29,14 @@ data/%/clean.csv: data/%/rawutf8.csv
 
 # Convert to utf8
 # (Adding script prerequisite for scripts/%/toUTF8.sh breaks it, so leaving out for now)
-data/%/rawutf8.csv: data/%/raw.csv 
-	@echo "Convert to utf8 (if required) for country: "$@
+data/%/rawutf8.csv: data/%/download.file 
+	@echo "Convert to utf8 csv (if required) for country: "$@
 	# For 'canada' turns into: bash scripts/canada/toUTF8.sh data/canada/raw.csv data/canada/rawutf8.csv
 	bash scripts/$*/toUTF8.sh $^ $@
 
 # Download
-data/%/raw.csv: data/%/source.txt
+# Could be a .csv, but also a .zip
+data/%/download.file: data/%/source.txt
 	@echo "Downloading source file for: "$@
 	curl -K $^ -o $@
 	@echo "Downloading done for: "$@

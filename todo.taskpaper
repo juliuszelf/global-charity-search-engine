@@ -1,5 +1,6 @@
 Scotland:
 	- Komt binnen als .zip die een .csv bevat
+	- Voeg aan README.md de requirement 'unzip' installeren toe.
 	- Wat is beste wijze?
 		- Ik ga voor B
 		- A. download_unzip.sh script maken
