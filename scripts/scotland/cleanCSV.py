@@ -54,6 +54,98 @@ Regulatory Type
 # We add: Source URL, Source date
 end_part = source_url + "," + source_date + "\n" 
 
+# some of these are aliasses of other names also in the list
+# Names from: https://www.geni.com/projects/Counties-of-Scotland-United-Kingdom/14402
+counties = [
+        "Aberdeenshire",
+        "Angus",
+        "Argyllshire",
+        "Ayrshire",
+        "Banffshire",
+        "Moray council",
+        "Aberdeenshire council",
+        "Berwickshire",
+        "Buteshire",
+        "Caithness",
+        "Clackmannanshire",
+        "Dumfriesshire",
+        "Dumfries",
+        "Galloway)",
+        "Dunbartonshire",
+        "Lothian-Main-Page",
+        "East Lothian",
+        "Haddingtonshire",
+        "Midlothian",
+        "Fife/Fifeshire",
+        "Inverness-shire",
+        "Kincardineshire",
+        "Kinross-shire",
+        "Perth",
+        "Kinross",
+        "Kirkcudbrightshire",
+        "Lanarkshire",
+        "Linlithgowshire",
+        "West Lothian",
+        "Midlothian",
+        "Edinburghshire",
+        "Moray",
+        "Morayshire",
+        "Elginshire",
+        "Nairnshire-Main-Page",
+        "Nairn",
+        "Nairnshire",
+        "Highland",
+        "Orkney",
+        "Peebles-shire",
+        "Borders",
+        "Perthshire",
+        "Perth",
+        "Kinross",
+        "Stirling",
+        "Renfrewshire",
+        "Ross and Cromarty",
+        "Roxburghshire",
+        "Selkirkshire",
+        "Shetland",
+        "Stirlingshire",
+        "Sutherland",
+        "West Lothian",
+        "Linlithgowshire",
+        "Wigtownshire"
+    ]
+
+def get_values_from_address(address):
+    '''
+    "Sports Pavilion, Pentcaitland, East Lothian"
+    "The Old Garage, Mill Hills Farm, Crieff, Perthshire"
+    "29A Westburn Drive, Aberdeen"
+    "60 Brookfield Place, Alva, Clackmannanshire"
+    "21 Church Street, Brechin, Angus"
+    "Keppochan Farmhouse, Cladich, Dalmally"
+    "Meeks Road Surgery, 10 Meeks Road, Falkirk"
+    "24 Lanark Road, Edinburgh"
+    "6 annerley court, cuparhead, coatbridge, lanarkshire"
+    '''
+    city = ""
+    state = ""  # County / Shire
+    parts = address.split(",")
+    found_state = False
+    # we 'reverse' parts, because we expect our values
+    # to be within last 3 items.
+    for part in reversed(parts):
+        if not found_state:
+            for county in counties:
+                if part.strip() in county:
+                    state = county.strip() 
+                    found_state = True
+        else:
+            city = part.strip()
+            return city, state
+
+    # couldn't find county, lets assume city is last
+    city = address.split(",")[-1].strip()
+    return city, state
+
 def fix_nulls(s):
     for line in s:
         yield line.replace('\0', ' ')
@@ -81,9 +173,10 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         next(input_reader)
 
         for line in input_reader:
+            city, state = get_values_from_address(line["Principal Office/Trustees Address"])
             output_writer.writerow({"Name": line["Charity Name"], 
-                                    "City": line["StreetAddress_city"], 
-                                    "State": "", 
+                                    "City": city,
+                                    "State": state, 
                                     "Country": "SC", 
                                     "Website": line["Website"], 
                                     "SourceURL": source_url, 

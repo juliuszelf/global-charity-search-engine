@@ -4,6 +4,7 @@ Scotland:
 		- Getest
 	- Juiste kolommen via cleanCSV.py
 		- Check wat inhoud echt van CSV zit, of city & state ergens staat.
+			- Principal Office/Trustees Address,
 		- Vergt postcode opzoeklijst
 			- research..
 	- Voeg aan README.md de requirement 'unzip' installeren toe.
@@ -22,7 +23,17 @@ Backup:
 Categorien:
 	- Invetariseren
 		- wat levert bronbestanden?
+			- Australia
+				- Lijst van 
+			- Scotland
+				- Purpose
+				- Objectives
+				- Activities
+			- 
 		- Technische uitdagingen?
+
+Code/NR:
+	- Nut om juist die unieke code te hebben, voor wie daar op wil zoeken?
 
 Land van opereren:
 	- Invetariseren
