@@ -1,6 +1,7 @@
 Scotland:
 	- Komt binnen als .zip die een .csv bevat
 	- Wat is beste wijze?
+		- Ik ga voor B
 		- A. download_unzip.sh script maken
 			- Roep je aan vanuit make
 			- Zit in map van land
@@ -8,17 +9,33 @@ Scotland:
 			- Lelijk is 2 stappen in 1 script
 			- Voordeel is dat rest van makefile en scripts gelijk blijft
 		- B. Aparte Makefile stap
-			- download in generiek 'download.file' 
-			- dan een script voor 'file_to_csv.py' oid.
-			- die laat je in meeste gevallen alleen het hernoeme van bestand doen
-			- Lelijk is onnodig werk voor meeste gevallen
+			- download in generiek 'downloaded.file' 
+			- dan een script voor 'file_to_raw_csv.py' oid.
+				- Doet sowieso ook utf8 fix
+			- Bij .zip dus een unzip ook
 		- C. Houden Makefile zoals het is
 			- De raw.csv is dan eigenlijk dus een zip
 			- Bij cleanCSV.py gebeurt het eigenlijk unzippen e.d.
-	- Herzien wat er gebeurt
-		- Er is een download
-		- Deze moet omgezet worden tot de correcte json
-		- Dit kan in theorie allemaal in 1 python script gebeuren.
+
+Backup:
+	- Een backup stap in makefile
+	- Dus die downloaded.file pakt en in (gitignored) backup map plaatst
+	- format: <folder>_<date>.backup
+	- In zelfde map ook een log > welk bestand weggeschreven en wat bron url was.
+	- Checked eerst of gedownloade bestand andere grootte heeft dan laatste backup
+		- Bij gelijke grootte aanname zelfde bestand, dus geen extra backup nodig.
+	- In README toelichten hoe je backup kan terugzetten.
+		- Eventueel script maken die dit voor je doet.
+
+Categorien:
+	- Invetariseren
+		- wat levert bronbestanden?
+		- Technische uitdagingen?
+
+Land van opereren:
+	- Invetariseren
+		- wat levert bronbestanden?
+		- Technische uitdagingen?
 
 Mogelijke landen:
 	- Met source.md
@@ -27,6 +44,8 @@ Mogelijke landen:
 		- North-Ireland
 	- Norway
 		- https://data.ssb.no/api/v0/dataset/?lang=en
+	- USA4 
+		- zit in andere landen, dat clean bestand moet anders
 	- Rusland
 		- https://data.gov.ru/taxonomy/term/71/datasets
 			- Niet duidelijk of daar iets nuttig is
@@ -46,52 +65,48 @@ Safety:
 
 Digital ocean setup:
 	- alle stappen in README.md zetten
-	- apt-get install tree
-	- apt-get install python3-pip (ofzoiets)
-	- apt-get install make (ofzoiets)
-	- symlink override docker-compose.override.yml maken (?)
-		- We hebben in ieder geval geen Kibana nodig (scheelt ook ram)
-	- omdat te weinig ram is voor elasticsearch, swap file bepalen
-	   sudo fallocate -l 1G /swapfile
-	- eable swap file
-	  https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04
-      sudo chmod 600 /swapfile
+	- Dit zou in een script kunnen:
+		- setup-server.sh
+			- Comment dat Digital Ocean afgestemd is
+			- apt-get install tree
+			- apt-get install python3-pip (ofzoiets)
+			- apt-get install make (ofzoiets)
+			- symlink override docker-compose.override.yml maken (?)
+				- We hebben in ieder geval geen Kibana nodig (scheelt ook ram)
+			- omdat te weinig ram is voor elasticsearch, swap file bepalen
+			sudo fallocate -l 1G /swapfile
+			- eable swap file
+			https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04
+			sudo chmod 600 /swapfile
 
-	  Verify the permissions change by typing
-      ls -lh /swapfile	
-	- Poging met 2Gb droplet en volgende commando was succes
-      sysctl -w vm.max_map_count=262144
-      stond hier: https://github.com/maxyermayank/docker-compose-elasticsearch-kibana/issues/10
-
-Volume mapping voor ES:
-	- content van db in volume houden voor geval container down gaat
+			Verify the permissions change by typing
+			ls -lh /swapfile	
+			- Poging met 2Gb droplet en volgende commando was succes
+			sysctl -w vm.max_map_count=262144
+			stond hier: https://github.com/maxyermayank/docker-compose-elasticsearch-kibana/issues/10
 
 Zoek verbeteren:
 Mogelijke feature van zoekmachine is dat je veel kunt customizen
 Dat je bijv. zelf fuzziness kunt selecteren, etc.
-	- Land filteren
+	- Land filteren @done(2019-12-06)
+	- Toon bronbestand & bron datum
 	- Fuzzy
-	- Misschien tokenizen
-	- Kibana voor monitoring kan ook nuttig zijn
 	- AJAX
+	- Analytics
+	- Kibana voor monitoring kan ook nuttig zijn
 
 Log:
-	- Moet ook wegschrijven in een .log bestand 
-     Dat bijhoudt waneer welk bestand gemaakt is e.d.
+Moet ook wegschrijven in een .log bestand 
+	- Dat bijhoudt waneer welk bestand gemaakt is e.d.
+	- Schrijf templog van elke stap
+	- Als alles succesvol delete temp log & schrijf 'make success' met datum
+	- Bij falen zet hele temp log in het echte log
 
-USA4:
-	- usa4 zit in andere landen, dat clean bestand moet anders
-
-Betere scripts:
-	- Opschonen scripts (alles met python argv paden)
-	- Bewaar niet meer tussenstappen, maar wel het raw bestand?
-	Liefst variant met copy met datum stamp
-	Dus dat die backup wel bewaard blijft, maar niet bronbestand
+Scripts verbeteren:
 	- SourceURL en SourceDate in een soort config bestand ergens zetten
 	of hard in make bestand zetten die de functies aanroept,
 	zodat makefile set variabelen bovenin heeft die effectief config is.
-	- SourceURL
-	- DateOfSource
+	- Een 'update script' die checkt wat er al is, etc.
 	- Kan make/bash bestand kijken of ES al bestanden heeft van dit land?
 		- Zonee, upload deze dan
 		- Zoja, verwijder dan deze voor dit land eerst, en voeg ze daarna toe
