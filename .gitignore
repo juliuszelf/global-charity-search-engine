@@ -8,7 +8,9 @@ docker-compose.override.yml
 
 # Files created by scripts
 raw.csv
+download.file
 rawutf8.csv
+rawutf8.csv.raw
 clean.csv
 es.json
 es.json*
