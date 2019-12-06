@@ -1,22 +1,13 @@
 Scotland:
-	- Komt binnen als .zip die een .csv bevat
+	- toUTF8.sh doet nu ook unzip
+		- Code gemaakt @done(2019-12-06)
+		- Getest
+	- Juiste kolommen via cleanCSV.py
+		- Check wat inhoud echt van CSV zit, of city & state ergens staat.
+		- Vergt postcode opzoeklijst
+			- research..
 	- Voeg aan README.md de requirement 'unzip' installeren toe.
-	- Wat is beste wijze?
-		- Ik ga voor B
-		- A. download_unzip.sh script maken
-			- Roep je aan vanuit make
-			- Zit in map van land
-			- Doet niet altijd een unzip, alleen als ergens op slaat
-			- Lelijk is 2 stappen in 1 script
-			- Voordeel is dat rest van makefile en scripts gelijk blijft
-		- B. Aparte Makefile stap
-			- download in generiek 'downloaded.file' 
-			- dan een script voor 'file_to_raw_csv.py' oid.
-				- Doet sowieso ook utf8 fix
-			- Bij .zip dus een unzip ook
-		- C. Houden Makefile zoals het is
-			- De raw.csv is dan eigenlijk dus een zip
-			- Bij cleanCSV.py gebeurt het eigenlijk unzippen e.d.
+	- Misschien willen we filteren op 'regulatory type', uitzoeken..
 
 Backup:
 	- Een backup stap in makefile

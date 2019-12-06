@@ -43,3 +43,7 @@ Parent charity country of registration,
 Designated religious body,
 Regulatory Type
 
+Either "Principal Office/Trustees Address", or use the postcode.
+We could in theory infer city & state based on postcode.
+We can add sourcefile to this folder, with URL and date on where it was found.
+
