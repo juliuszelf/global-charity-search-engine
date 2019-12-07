@@ -25,55 +25,59 @@ Categorien:
 		- wat levert bronbestanden?
 			- Australia
 				- Kolom per categorie, een 'Y' als het klopt:
-	Operating_Countries	
-	Preventing_or_relieving_suffering_of_animals
-	Advancing_Culture
-	Advancing_Education
-	Advancing_Health
-	Promote_or_oppose_a_change_to_law__government_poll_or_prac	
-	Advancing_natual_environment	
-	Promoting_or_protecting_human_rights	
-	Purposes_beneficial_to_ther_general_public_and_other_analogous	
-	Promoting_reconciliation__mutual_respect_and_tolerance	
-	Advancing_Religion	
-	Advancing_social_or_public_welfare	
-	Advancing_security_or_safety_of_Australia_or_Australian_public	
-	Another_purpose_beneficial_to_the_community	
-	Aboriginal_or_TSI	
-	Aged_Persons	
-	Children	
-	Communities_Overseas	
-	Ethnic_Groups	
-	Gay_Lesbian_Bisexual	
-	General_Community_in_Australia	
-	Men	
-	Migrants_Refugees_or_Asylum_Seekers	
-	Pre_Post_Release_Offenders	
-	People_with_Chronic_Illness	
-	People_with_Disabilities	
-	People_at_risk_of_homelessness	
-	Unemployed_Person	
-	Veterans_or_their_families	
-	Victims_of_crime	
-	Victims_of_Disasters	
-	Women	
-	Youth
+			Operating_Countries	
+			Preventing_or_relieving_suffering_of_animals
+			Advancing_Culture
+			Advancing_Education
+			Advancing_Health
+			Promote_or_oppose_a_change_to_law__government_poll_or_prac	
+			Advancing_natual_environment	
+			Promoting_or_protecting_human_rights	
+			Purposes_beneficial_to_ther_general_public_and_other_analogous	
+			Promoting_reconciliation__mutual_respect_and_tolerance	
+			Advancing_Religion	
+			Advancing_social_or_public_welfare	
+			Advancing_security_or_safety_of_Australia_or_Australian_public	
+			Another_purpose_beneficial_to_the_community	
+			Aboriginal_or_TSI	
+			Aged_Persons	
+			Children	
+			Communities_Overseas	
+			Ethnic_Groups	
+			Gay_Lesbian_Bisexual	
+			General_Community_in_Australia	
+			Men	
+			Migrants_Refugees_or_Asylum_Seekers	
+			Pre_Post_Release_Offenders	
+			People_with_Chronic_Illness	
+			People_with_Disabilities	
+			People_at_risk_of_homelessness	
+			Unemployed_Person	
+			Veterans_or_their_families	
+			Victims_of_crime	
+			Victims_of_Disasters	
+			Women	
+			Youth
 
-			- Scotland
-Field: Purposes
-	'The advancement of education'
-Field: Objectives
-	The objects of the Association are:- (a) To advance education and to provide, 
-	or assist in the provision of, facilities for recreation or other leisure-time occupation
-	, where such provision or assistance in provision -  (i) is in the interests of Social, 
-	Welfare; and (ii) is made with the object of improving
-	the conditions of life of the members of the community in the area of benefit;  
-	and for those purposes to associate with the Lothian Regional Council
-	(hereinafter referred to as 'the Council', voluntary organisations and inhabitants in the
-	area of benefit. (b) To co-operate with the Council and its successors in office in 
-	establishing, maintaining and managing any Community Centre situate in the area of benefit
-	which is provided or grant-aided by the Council in so far as it is established,
-	maintained and managed for the attainment or object (a) of the Association."
+		- Canada
+			- Er zijn meerdere CSV bestanden te downloaden
+			- Vergt research om uit te zoeken welk bestand juiste info bevat
+			- Dan moet ik vermoedelijk op basis van een charity ID data koppelen
+		- Scotland
+			Field: Purposes
+				'The advancement of education'
+			Field: Objectives
+				The objects of the Association are:- (a) To advance education and to provide, 
+				or assist in the provision of, facilities for recreation or other leisure-time occupation
+				, where such provision or assistance in provision -  (i) is in the interests of Social, 
+				Welfare; and (ii) is made with the object of improving
+				the conditions of life of the members of the community in the area of benefit;  
+				and for those purposes to associate with the Lothian Regional Council
+				(hereinafter referred to as 'the Council', voluntary organisations and inhabitants in the
+				area of benefit. (b) To co-operate with the Council and its successors in office in 
+				establishing, maintaining and managing any Community Centre situate in the area of benefit
+				which is provided or grant-aided by the Council in so far as it is established,
+				maintained and managed for the attainment or object (a) of the Association."
 			-  Vooalsnog lijkt 'Purpose' juiste veld.
 				-  Van website deze lijst (checkboxes)
 	The prevention or relief of poverty
@@ -95,8 +99,104 @@ Field: Objectives
 	- N-Ireland
 	- Velden
 		- "What the charity does"
+		  "The advancement of education,The advancement of health or the saving of lives,The relief of those in need by reason of youth, age, ill-health, disability, financial hardship or other disadvantage"
+		  "Adult training,Asylum seekers/refugees,Community safety/crime prevention,Ethnic minorities,General public,Homelessness,Language community,Learning disabilities,Men,Mental health,Older people,Parents,Specific areas of deprivation,Travellers,Unemployed/low income,Victim support,Voluntary and community sector,Volunteers,Women,Youth (14-25 year olds)"
+			- Mogelijke waardes
+		     	The advancement of education
+				The advancement of citizenship or community development
+				The advancement of religion
+				The relief of those in need by reason of youth, age, ill-health, disability, financial hardship or other disadvantage
+				The advancement of health or the saving of lives
+				The prevention or relief of poverty
+				The advancement of the arts, culture, heritage or science
+				The advancement of human rights, conflict resolution or reconciliation or the promotion of religious or racial harmony or equality and diversity
+				Other charitable purposes
+				The advancement of amateur sport
+				The advancement of environmental protection or improvement
+				The advancement of animal welfare
 		- "Who the charity helps"
+		  "Carers,General public,Mental health,Physical disabilities,Voluntary and community sector"
+			- Mogelijke waardes
+				General public
+				Children (5-13 year olds)
+				Youth (14-25 year olds)
+				Volunteers
+				Women
+				Older people
+				Voluntary and community sector
+				Parents
+				Preschool (0-5 year olds)
+				Adult training
+				Men
+				Unemployed/low income
+				Mental health
+				Physical disabilities
+				Learning disabilities
+				Specific areas of deprivation
+				Ethnic minorities
+				Carers
+				Community safety/crime prevention
+				Interface communities
+				Addictions (drug/solvent/alcohol abuse)
+				Sensory disabilities
+				Overseas/developing countries
+				Homelessness
+				Ex-offenders and prisoners
+				Victim support
+				Tenants
+				Language community
+				Travellers
+				Asylum seekers/refugees
+				Sexual orientation
+				Hiv/aids
+		    
 		- "How the charity works"
+		   "Advice/advocacy/information,Counselling/support,Education/training,Medical/health/sickness",
+			- Mogelijke waardes
+				Education/training
+				Community development
+				Youth development
+				Volunteer development
+				Religious activities
+				Sport/recreation
+				Advice/advocacy/information
+				Cultural
+				Cross-border/cross-community
+				Relief of poverty
+				General charitable purposes
+				Gender
+				Counselling/support
+				Disability
+				Arts
+				Playgroup/after schools
+				Medical/health/sickness
+				Heritage/historical
+				Grant making
+				Rural development
+				Human rights/equality
+				Research/evaluation
+				Environment/sustainable development/conservation
+				Welfare/benevolent
+				Community enterprise
+				Accommodation/housing
+				Economic development
+				Overseas aid/famine relief
+				Urban development
+				Community transport
+				Criminal justice
+				Animal welfare
+				Search and rescue
+		- New-Zealand
+			-  Uit raw.csv wordt niet direct duidelijk, nr staat voor categorie ergens?
+			-  Mogelijk is er een betere API call te maken, waarbij de category ('activity'?) meekomt.
+			-  Deze search engine toont wel wat ze hebben:
+			   https://www.register.charities.govt.nz/CharitiesRegister/Search
+				- Sector
+				- Activities
+				- Benificiaries
+				- Area of operation
+			- Is wat extra werk om uit te zoeken..
+				- Mogelijk eerst uitstellen alles onder 'overige' plaatsen eerst
 		- Technische uitdagingen?
 			- Per land een category-mapping.txt oid maken
 
