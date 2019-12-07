@@ -11,3 +11,6 @@ So it would require a script to add string those files together,
 or perhaps use seperate folders for each region.
 
 As a test, I'm first going to add the eo1.csv file
+
+Field info, probably required reading to get categories:
+https://www.irs.gov/pub/irs-soi/eo_info.pdf

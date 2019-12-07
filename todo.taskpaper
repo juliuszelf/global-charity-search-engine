@@ -197,6 +197,12 @@ Categorien:
 				- Area of operation
 			- Is wat extra werk om uit te zoeken..
 				- Mogelijk eerst uitstellen alles onder 'overige' plaatsen eerst
+		- USA
+			- Fields uitleg hier:
+			- https://www.irs.gov/pub/irs-soi/eo_info.pdf
+			- Ik kan die codes ook gebruiken om 'tax excempt'
+			  te filteren op alleen iets van non-profit, en niet 'credit union' e.d.
+
 		- Technische uitdagingen?
 			- Per land een category-mapping.txt oid maken
 
