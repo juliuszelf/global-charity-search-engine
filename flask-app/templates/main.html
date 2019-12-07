@@ -16,7 +16,7 @@
  <br />
  {% for result in results %}
    <b>{{ result.name }}</b><br />
-   {{ result.city }}, {{ result.state }}, {{ result.country }}<br />
+   {{ result.city }}{% if result.state %}, {{ result.state }}{% endif %}, {{ result.country }}<br />
    {% if result.website %}
      <a href="{{ result.website }}" target="_blank">
         {{ result.website }}

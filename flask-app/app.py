@@ -11,7 +11,7 @@ def set_country_filters(countries):
     terms = []
     if not countries:
         # nothing checked, means no filter required
-        countries = ["USA", "CA", "NZ", "AU", "GB-NIR"]
+        countries = ["USA", "CA", "NZ", "AU", "GB-NIR", "SC"]
 
     for country in countries:
         terms.append({"term" : { "Country" : country }})
