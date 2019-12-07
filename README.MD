@@ -20,6 +20,7 @@ Background info on the concept at: http://juliushuijnk.nl/project/charitius/
 
 - Docker installed
 - Python 3.6 installed
+- Unzip, Git
 
 ## Installation
 
