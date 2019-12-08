@@ -49,6 +49,61 @@ People_at_risk_of_homelessness,Unemployed_Person,
 Veterans_or_their_families,Victims_of_crime,Victims_of_Disasters,
 Women,Youth
 """
+
+
+human_category_list = [
+        "Advancing_Culture",
+        "Advancing_Education",
+        "Advancing_Health",
+        "Promote_or_oppose_a_change_to_law__government_poll_or_prac",
+        "Promoting_or_protecting_human_rights",
+        "Purposes_beneficial_to_ther_general_public_and_other_analogous",
+        "Promoting_reconciliation__mutual_respect_and_tolerance",
+        "Advancing_Religion",
+        "Advancing_social_or_public_welfare",
+        "Advancing_security_or_safety_of_Australia_or_Australian_public",
+        "Another_purpose_beneficial_to_the_community"	,
+        "Aboriginal_or_TSI"	,
+        "Aged_Persons",
+        "Children",
+        "Communities_Overseas",
+        "Ethnic_Groups",
+        "Gay_Lesbian_Bisexual",
+        "General_Community_in_Australia",
+        "Men",
+        "Migrants_Refugees_or_Asylum_Seekers",
+        "Pre_Post_Release_Offenders",
+        "People_with_Chronic_Illness",
+        "People_with_Disabilities",
+        "People_at_risk_of_homelessness",
+        "Unemployed_Person",
+        "Veterans_or_their_families",
+        "Victims_of_crime",
+        "Victims_of_Disasters",
+        "Women",
+        "Youth",
+        ]
+nature_category_list = [
+        "Preventing_or_relieving_suffering_of_animals",
+        "Advancing_natual_environment"
+        ]
+
+def get_category_values(line):
+    # Using 0 as false, 1 as true
+    # Because more compact in search engine (would otherwise write "True")
+    human = 0 
+    nature = 0 
+    for h_item in human_category_list:
+        if line[h_item].strip() == "Y":
+            human = 1
+            break
+    for n_item in nature_category_list:
+        if line[n_item].strip() == "Y":
+            nature = 1
+            break
+    
+    return human, nature
+
 # For new file we are going to first rewrite the heading
 # We keep: Legal Name, City, State, Country, Website
 # We add: Source URL, Source date
@@ -62,7 +117,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["Name", "City", "State", "Country", "Website", "SourceURL", "SourceDate"]
+    fieldnames = ["Name", "City", "State", "Country", "Website", "HUM", "NAT", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -81,11 +136,16 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         next(input_reader)
 
         for line in input_reader:
+            # Set boolean for our two categories
+            human, nature = get_category_values(line)
+
             output_writer.writerow({"Name": line["Charity_Legal_Name"], 
                                     "City": line["Town_City"], 
                                     "State": line["State"], 
                                     "Country": "AU", 
                                     "Website": line["Charity_Website"], 
+                                    "HUM": human,
+                                    "NAT": nature,
                                     "SourceURL": source_url, 
                                     "SourceDate": source_date})
 

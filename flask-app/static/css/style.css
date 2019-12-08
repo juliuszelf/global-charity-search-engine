@@ -23,11 +23,20 @@ footer {
 	background-color: #eee;
 }
 
-.country-checkboxes {
+.checkboxes {
+	margin-top: 5px;
 	display: flex;
 }
 
-.country-checkbox {
-	margin-right: 10px;
+.check {
+	margin-right: 20px;
 }
 
+.filter-title {
+	font-weight: bold;
+}
+
+.filter-info {
+	font-size: 0.8rem;
+	color: #666666;
+}

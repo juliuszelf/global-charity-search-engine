@@ -295,6 +295,11 @@ map structuur:
 - scripts/<land>/
 	- cleanCSV.py        maakt van .nonull.csv het .clean.csv bestand
 
+
+FORUM:
+	- https://forum.opendata.ch
+	  Ik heb account 'Julius', gesprek Oleg
+
 Bronnen:
 
 https://www.youtube.com/watch?v=b7tCjZSvOno

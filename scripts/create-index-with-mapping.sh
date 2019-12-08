@@ -25,7 +25,10 @@ curl -X PUT "localhost:9200/chars/_mapping?pretty" -H 'Content-Type: application
     "Website": {
       "type": "keyword"
     },
-    "SourceURL": {
+    "HUM": {
+      "type": "keyword"
+    },
+    "NAT": {
       "type": "keyword"
     },
     "SourceDate": {
