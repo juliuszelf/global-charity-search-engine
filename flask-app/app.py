@@ -3,15 +3,26 @@
 import json
 from flask import Flask, request, jsonify, render_template
 from elasticsearch import Elasticsearch
+from elasticsearch_dsl import Search
 
 app = Flask(__name__)
-es = Elasticsearch('http://es01:9200')
+es_client = Elasticsearch('http://es01:9200')
 
-def set_category_human_filter(category_human):
-    return {"terms" : { "HUM" : category_human }}
+def set_category_human_filter(categories):
+    # If no categories are checked, all should be true ("1")
+    if "HUM" in categories or len(categories) == 0:
+        return {"term" : { "HUM" : "1" }}
+    else:
+        return {"term" : { "HUM" : "0" }}
 
-def set_category_nature_filter(category_human):
-    return {"terms" : { "NAT" : category_human }}
+
+
+def set_category_nature_filter(categories):
+    # If no categories are checked, all should be true ("1")
+    if "NAT" in categories or len(categories) == 0:
+        return {"terms" : { "NAT" : "1" }}
+    else:
+        return {"terms" : { "NAT" : "0" }}
 
 
 def set_country_filters(countries):
@@ -41,14 +52,21 @@ def home():
         page_nr = 1
         countries = request.args.getlist('country')
 
-        category_human = request.args.getlist('HUM')
-        category_nature = request.args.getlist('NAT')
+        # For debugging
+        cats = request.args.getlist('category')
 
-        # If both are not checked, then both are '1' (True) to be ok.
-        if category_human == "0" and category_nature == "0":
-            category_nature = "1"
-            category_human = "1"
+        # TODO in function
+        cat_hum = "0"
+        cat_nat = "0"
+        if "HUM" in cats:
+            cat_hum = "1"
+        if "NAST" in cats:
+            cat_nat = "1"
+        if len(cats) == 0:
+            cat_hum = "1"
+            cat_nat = "1"
 
+        '''
         body = {
             "query": {
                 "bool": {
@@ -64,18 +82,41 @@ def home():
                     "filter": {
                         "bool" : {
                             "should" : set_country_filters(countries),
-                            "should" : set_category_human_filter(category_human),
-                            "should" : set_category_nature_filter(category_nature)
+                            "should" : set_category_human_filter(cats),
+                            "should" : set_category_nature_filter(cats)
                             }
                     }
                 }
             }
         }
+        '''
+
+        # TODO: Category should be of type field Facet or something in ES
+        '''
+        s = Search(using=es_client, index="chars") \
+            .query("match", Name=search_value)   \
+            .filter("terms", Country=countries) \
+            .filter("term", HUM=cat_hum) \
+            .filter("term", NAT=cat_nat) \
+            '''
+
+        s = Search(using=es_client, index="chars") \
+            .query("match", Name=search_value)   \
+            .filter("terms", Country=countries) \
+            .filter("term", HUM=cat_hum) \
+            .filter("term", NAT=cat_nat) \
+
+
+        #s.aggs.bucket('per_tag', 'terms', field='tags') \
+        #    .metric('max_lines', 'max', field='lines')
+
+        response = s.execute()
+
         #{'query':{ 'match': {'Name': search_value}}}
         # res=es.search(index='chars', body={'query':{ 'match': {'Name': search_value}}})
-        res=es.search(index='chars', body=body)
-        nr_results_shown = res['hits']['total']['value']
-        results = res['hits']['hits']
+        # res=es_client.search(index='chars', body=body)
+        nr_results_shown = response['hits']['total']['value']
+        results = response['hits']['hits']
         results_text = ""
 
         found_charities = []
@@ -102,6 +143,7 @@ def home():
                 searched_for=search_value, 
                 content=content,
                 countries=countries,
+                categories=cats,
                 page_nr=page_nr)
     except KeyError:
         print("no search")
