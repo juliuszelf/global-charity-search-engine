@@ -15,7 +15,9 @@ def set_category_values(cats):
         cat_hum = "1"
     if "NAST" in cats:
         cat_nat = "1"
+
     if len(cats) == 0:
+        # No categories provided
         cat_hum = "1"
         cat_nat = "1"
     return cat_hum, cat_nat
@@ -32,9 +34,10 @@ def home():
             return render_template("main.html", title=title, message="Please fill in a search word")
         
         countries = request.args.getlist('country')
+
+
         cats = request.args.getlist('category')
 
-        # TODO in function
         cat_hum, cat_nat = set_category_values(cats)
 
         # For now only Australia has categories
@@ -42,20 +45,34 @@ def home():
             if len(countries) > 1:
                 message = "Only Australia is categorized for now."
 
-            s = Search(using=es_client, index="chars") \
-                .query("multi_match", query=search_value, fields=['Name', 'City'])   \
-                .filter("terms", Country=countries) \
-                .filter("term", HUM=cat_hum) \
-                .filter("term", NAT=cat_nat)
+            # Not super scalable, but working solution
+            # For dealing with 'no checkbox set means all are ok'.
+            if len(countries) == 0:
+                s = Search(using=es_client, index="chars") \
+                    .query("multi_match", query=search_value, fields=['Name', 'City'])   \
+                    .filter("term", HUM=cat_hum) \
+                    .filter("term", NAT=cat_nat)
+            else:
+                s = Search(using=es_client, index="chars") \
+                    .query("multi_match", query=search_value, fields=['Name', 'City'])   \
+                    .filter("terms", Country=countries) \
+                    .filter("term", HUM=cat_hum) \
+                    .filter("term", NAT=cat_nat)
         else:
             # Don't filter on categories, because it will show no results otherwise
             if len(cats) > 0:
                 # User has selected categories
                 message = "Only Australia is categorized for now, so ignoring category filter."
 
-            s = Search(using=es_client, index="chars") \
-                .query("multi_match", query=search_value, fields=['Name', 'City'])   \
-                .filter("terms", Country=countries)
+            # Not super scalable, but working solution
+            # For dealing with 'no checkbox set means all are ok'.
+            if len(countries) == 0:
+                s = Search(using=es_client, index="chars") \
+                    .query("multi_match", query=search_value, fields=['Name', 'City'])
+            else:
+                s = Search(using=es_client, index="chars") \
+                    .query("multi_match", query=search_value, fields=['Name', 'City'])   \
+                    .filter("terms", Country=countries)
 
         #s.aggs.bucket('per_tag', 'terms', field='tags') \
         #    .metric('max_lines', 'max', field='lines')
