@@ -138,19 +138,24 @@ nature_category_list = [
         ]
 
 # Same function as for Australia
-def get_category_values(line):
+def get_category_values(purposes):
     # Using 0 as false, 1 as true
     # Because more compact in search engine (would otherwise write "True")
     human = 0 
     nature = 0 
-    for h_item in human_category_list:
-        if line[h_item].strip() == "Y":
-            human = 1
-            break
-    for n_item in nature_category_list:
-        if line[n_item].strip() == "Y":
-            nature = 1
-            break
+
+    # clean purpose from quotes
+    pur = purposes.strip().replace("'", "")
+
+    # Assumption is that purpose field is mutually explusive,
+    # so charity can only have sigle purpose
+    # TODO: check from raw data if this is correct,
+    # the fact that it's multiple purposeS is suspect.
+    if pur in human_category_list:
+        human = 1
+
+    if pur in nature_category_list:
+        nature = 1
     
     return human, nature
 
@@ -214,7 +219,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
 
         for line in input_reader:
             city, state = get_values_from_address(line["Principal Office/Trustees Address"])
-            human, nature = get_category_values(line)
+            human, nature = get_category_values(line["Purposes"])
             output_writer.writerow({"Name": line["Charity Name"], 
                                     "City": city,
                                     "State": state, 

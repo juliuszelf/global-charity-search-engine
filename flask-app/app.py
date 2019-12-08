@@ -23,7 +23,7 @@ else:
 
 # For now we track this by hand, 
 # so filters don't try to filter on countries that are not categorized yet.
-countries_with_categories = ["AU"]
+countries_with_categories = ["AU", "SC"]
 
 def set_category_values(cats):
     cat_hum = "0"
