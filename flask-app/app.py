@@ -98,14 +98,25 @@ def home():
             .filter("terms", Country=countries) \
             .filter("term", HUM=cat_hum) \
             .filter("term", NAT=cat_nat) \
-            '''
-
         s = Search(using=es_client, index="chars") \
             .query("match", Name=search_value)   \
             .filter("terms", Country=countries) \
             .filter("term", HUM=cat_hum) \
             .filter("term", NAT=cat_nat) \
+            '''
 
+        # For now only Australia has categories
+        if "AU" in countries:
+            s = Search(using=es_client, index="chars") \
+                .query("multi_match", query=search_value, fields=['Name', 'City'])   \
+                .filter("terms", Country=countries) \
+                .filter("term", HUM=cat_hum) \
+                .filter("term", NAT=cat_nat)
+        else:
+            # Don't filter on categories, because it will show no results otherwise
+            s = Search(using=es_client, index="chars") \
+                .query("multi_match", query=search_value, fields=['Name', 'City'])   \
+                .filter("terms", Country=countries)
 
         #s.aggs.bucket('per_tag', 'terms', field='tags') \
         #    .metric('max_lines', 'max', field='lines')

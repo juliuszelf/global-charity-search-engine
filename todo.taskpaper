@@ -21,6 +21,8 @@ Backup:
 		- Eventueel script maken die dit voor je doet.
 
 Categorien:
+	- Status veld om terug te geven aan zoekresultaat
+		- Bijv. results for countries you are searching in have not been categorized yet
 	- Invetariseren
 		- wat levert bronbestanden?
 			- Australia
