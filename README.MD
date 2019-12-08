@@ -90,6 +90,18 @@ If you made changes to for instance required python libraries you need to rebuil
 Then find correct image via `docker images`, and remove that image via `docker image rm <name image>`.
 Then you can do `docker-compose up -d` again, and it will build the new image and start containers.
 
+# Debugging with Flask outside container
+
+To (more easily) set breakpoints and debug Flask, you can run it outside the docker 
+container on your local developer computer. 
+
+Install the dependencies, if you do this globally type 
+`python3 -m pip install -r requirements.txt` inside the flask-app folder. 
+
+Then you start it with `python3 app.py outside` from the flask-app folder.
+The 'outside' part makes flask look for Elastic Search via 0.0.0.0 and not the 
+address from inside the docker network. 
+
 # Roadmap
 
 ## 1.0 A working search engine [ DONE ]
@@ -106,7 +118,7 @@ Iterate:
 
 I use the [todo.taskpaper](todo.taskpaper) file to keep track of my TODO's. 
 
-You may read the `todo.taskpaper` file, but it's probably (partly) in Dutch and could be outdated. This README.md file should make sense and be up te date.
+You may read the `todo.taskpaper` file, but it's probably (mostly) in Dutch and could be outdated. This README.md file should make sense and be up te date.
  
 # Contributing
 
