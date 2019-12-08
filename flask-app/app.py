@@ -7,6 +7,13 @@ from elasticsearch import Elasticsearch
 app = Flask(__name__)
 es = Elasticsearch('http://es01:9200')
 
+def set_category_human_filter(category_human):
+    return {"terms" : { "HUM" : category_human }}
+
+def set_category_nature_filter(category_human):
+    return {"terms" : { "NAT" : category_human }}
+
+
 def set_country_filters(countries):
     terms = []
     if not countries:
@@ -34,6 +41,14 @@ def home():
         page_nr = 1
         countries = request.args.getlist('country')
 
+        category_human = request.args.getlist('HUM')
+        category_nature = request.args.getlist('NAT')
+
+        # If both are not checked, then both are '1' (True) to be ok.
+        if category_human == "0" and category_nature == "0":
+            category_nature = "1"
+            category_human = "1"
+
         body = {
             "query": {
                 "bool": {
@@ -48,8 +63,10 @@ def home():
                     },
                     "filter": {
                         "bool" : {
-                        "should" : set_country_filters(countries)
-                    }
+                            "should" : set_country_filters(countries),
+                            "should" : set_category_human_filter(category_human),
+                            "should" : set_category_nature_filter(category_nature)
+                            }
                     }
                 }
             }
