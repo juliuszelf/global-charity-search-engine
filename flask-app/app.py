@@ -5,15 +5,29 @@ from flask import Flask, request, jsonify, render_template
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 
+# For debugging it can be nice to run outside docker container (not on live server!).
+# First the container must be stopped via `docker stop flask01`.
+# This requires a different path to connect to elasticsearch
+# When we pass 'outside' we signal we want to use this outside path to ES.
+import sys
+firstarg=sys.argv[1]
+
 app = Flask(__name__)
-es_client = Elasticsearch('http://es01:9200')
+
+if firstarg == "outside":
+    es_client = Elasticsearch('http://0.0.0.0:9200')
+    print("connecting ES from the 'outside' to 0.0.0:9200")
+else:
+    es_client = Elasticsearch('http://es01:9200')
+
+countries_with_categories = ["AU"]
 
 def set_category_values(cats):
     cat_hum = "0"
     cat_nat = "0"
     if "HUM" in cats:
         cat_hum = "1"
-    if "NAST" in cats:
+    if "NAT" in cats:
         cat_nat = "1"
 
     if len(cats) == 0:
@@ -21,6 +35,42 @@ def set_category_values(cats):
         cat_hum = "1"
         cat_nat = "1"
     return cat_hum, cat_nat
+
+def set_use_categories(selected_categories, selected_countries, countries_with_categories, message):
+    # Decide use of category filters
+
+    use = False
+    also_non_categorized_countries = False
+    categorized_in_selected = []
+
+    if len(selected_categories) > 0:
+        
+
+        if len(selected_countries) == 0:
+            # Assume no country selected, means all. And at least one has category
+            use = True
+
+            # Assuming not all countries have been categorized
+            message += "Showing only results for categorized countries (" + ", ".join(countries_with_categories) + ")."
+        else:
+            # Check if values match
+            # (I think list comprehensions are ugly and hard to read, so I prefer for loop)
+            for c in selected_countries:
+                if c in countries_with_categories:
+                    # user selected a country with categories
+                    use = True
+                    categorized_in_selected.append(c)
+                else:
+                    also_non_categorized_countries = True
+            if not use:
+                # We have countries, but none have categories
+                message += "None of the selected countries has been categorized, so ignoring category filter."
+
+        if use and also_non_categorized_countries:
+            message += "Showing only results for categorized countries (" + ", ".join(categorized_in_selected) + ")."
+
+    return use, message
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -33,55 +83,24 @@ def home():
         if not search_value:
             return render_template("main.html", title=title, message="Please fill in a search word")
         
-        countries = request.args.getlist('country')
+        s = Search(using=es_client, index="chars") \
+            .query("multi_match", query=search_value, fields=['Name', 'City'])   \
+            
+        selected_countries = request.args.getlist('country')
+        selected_categories = request.args.getlist('category')
 
+        use_categories, message = set_use_categories(selected_categories, selected_countries, countries_with_categories, message)
 
-        cats = request.args.getlist('category')
+        if use_categories:
+            cat_hum, cat_nat = set_category_values(selected_categories)
+            s = s.filter("term", HUM=cat_hum)
+            s = s.filter("term", NAT=cat_nat)
 
-        cat_hum, cat_nat = set_category_values(cats)
-
-        # For now only Australia has categories
-        if "AU" in countries:
-            if len(countries) > 1:
-                message = "Only Australia is categorized for now."
-
-            # Not super scalable, but working solution
-            # For dealing with 'no checkbox set means all are ok'.
-            if len(countries) == 0:
-                s = Search(using=es_client, index="chars") \
-                    .query("multi_match", query=search_value, fields=['Name', 'City'])   \
-                    .filter("term", HUM=cat_hum) \
-                    .filter("term", NAT=cat_nat)
-            else:
-                s = Search(using=es_client, index="chars") \
-                    .query("multi_match", query=search_value, fields=['Name', 'City'])   \
-                    .filter("terms", Country=countries) \
-                    .filter("term", HUM=cat_hum) \
-                    .filter("term", NAT=cat_nat)
-        else:
-            # Don't filter on categories, because it will show no results otherwise
-            if len(cats) > 0:
-                # User has selected categories
-                message = "Only Australia is categorized for now, so ignoring category filter."
-
-            # Not super scalable, but working solution
-            # For dealing with 'no checkbox set means all are ok'.
-            if len(countries) == 0:
-                s = Search(using=es_client, index="chars") \
-                    .query("multi_match", query=search_value, fields=['Name', 'City'])
-            else:
-                s = Search(using=es_client, index="chars") \
-                    .query("multi_match", query=search_value, fields=['Name', 'City'])   \
-                    .filter("terms", Country=countries)
-
-        #s.aggs.bucket('per_tag', 'terms', field='tags') \
-        #    .metric('max_lines', 'max', field='lines')
+        if len(selected_countries) > 0:
+            s = s.filter("terms", Country=selected_countries)
 
         response = s.execute()
 
-        #{'query':{ 'match': {'Name': search_value}}}
-        # res=es.search(index='chars', body={'query':{ 'match': {'Name': search_value}}})
-        # res=es_client.search(index='chars', body=body)
         nr_results_shown = response['hits']['total']['value']
         results = response['hits']['hits']
         results_text = ""
@@ -109,8 +128,8 @@ def home():
                 results=found_charities, 
                 searched_for=search_value, 
                 message=message,
-                countries=countries,
-                categories=cats
+                countries=selected_countries,
+                categories=selected_categories
                 )
     except KeyError:
         print("no search")
