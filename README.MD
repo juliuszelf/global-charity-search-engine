@@ -86,6 +86,10 @@ On live server you might need to re-upload the data to ES, since the mapping of 
 After you did a `git pull` or otherwise updated the Flask code, 
 you might need to do `docker restart flask01` in order to let the changes go into effect.
 
+If you made changes to for instance required python libraries you need to rebuild your docker image. First remove and stop the flask01 container via `docker stop flask01` and `docker rm flask01`. 
+Then find correct image via `docker images`, and remove that image via `docker image rm <name image>`.
+Then you can do `docker-compose up -d` again, and it will build the new image and start containers.
+
 # Roadmap
 
 ## 1.0 A working search engine [ DONE ]
