@@ -5,10 +5,11 @@ from flask import Flask, request, jsonify, render_template
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 
-# For debugging it can be nice to run outside docker container (not on live server!).
+# For debugging with breakpoints it can be nice to run outside docker container.
 # First the container must be stopped via `docker stop flask01`.
-# This requires a different path to connect to elasticsearch
-# When we pass 'outside' we signal we want to use this outside path to ES.
+# The app.py can't use same Elastic Search (ES) address as from inside docker network.
+# To signal starting app.py outside docker containers, you add 'outside' like this:
+# `python3 app.py outside` 
 import sys
 firstarg=sys.argv[1]
 
@@ -20,6 +21,8 @@ if firstarg == "outside":
 else:
     es_client = Elasticsearch('http://es01:9200')
 
+# For now we track this by hand, 
+# so filters don't try to filter on countries that are not categorized yet.
 countries_with_categories = ["AU"]
 
 def set_category_values(cats):
@@ -135,7 +138,6 @@ def home():
         print("no search")
 
     return render_template("main.html", title=title, content="no search..")
-    # return search_page
 
 
 if __name__ == "__main__":
