@@ -114,6 +114,46 @@ counties = [
         "Wigtownshire"
     ]
 
+# Categories from the 'purpose' field that have these values 
+# will be placed in the generic category 'human'.
+human_category_list = [
+        "The prevention or relief of poverty",
+        "The advancement of education",
+        "The advancement of religion",
+        "The advancement of health",
+        "The saving of lives",
+        "The advancement of citizenship or community development",
+        "The advancement of the arts, heritage, culture or science",
+        "The advancement of public participation in sport",
+        "The provision of recreational facilities, or the organisation of recreational activities, with the object of improving the conditions of life for the persons for whom the facilities or activities are primarily intended",
+        "The advancement of human rights, conflict resolution or reconciliation",
+        "The promotion of religious or racial harmony",
+        "The promotion of equality and diversity",
+        "The relief of those in need by reason of age, ill health, disability, financial hardship or other disadvantage",
+        ]
+
+nature_category_list = [
+	"The advancement of animal welfare",
+	"The advancement of environmental protection or improvement",
+        ]
+
+# Same function as for Australia
+def get_category_values(line):
+    # Using 0 as false, 1 as true
+    # Because more compact in search engine (would otherwise write "True")
+    human = 0 
+    nature = 0 
+    for h_item in human_category_list:
+        if line[h_item].strip() == "Y":
+            human = 1
+            break
+    for n_item in nature_category_list:
+        if line[n_item].strip() == "Y":
+            nature = 1
+            break
+    
+    return human, nature
+
 def get_values_from_address(address):
     '''
     "Sports Pavilion, Pentcaitland, East Lothian"
@@ -174,13 +214,14 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
 
         for line in input_reader:
             city, state = get_values_from_address(line["Principal Office/Trustees Address"])
+            human, nature = get_category_values(line)
             output_writer.writerow({"Name": line["Charity Name"], 
                                     "City": city,
                                     "State": state, 
                                     "Country": "SC", 
                                     "Website": line["Website"], 
-                                    "HUM": "", 
-                                    "NAT": "", 
+                                    "HUM": human, 
+                                    "NAT": nature, 
                                     "SourceURL": source_url, 
                                     "SourceDate": source_date})
 

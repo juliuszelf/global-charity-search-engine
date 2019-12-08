@@ -10,6 +10,12 @@ Scotland:
 	- Voeg aan README.md de requirement 'unzip' installeren toe.
 	- Misschien willen we filteren op 'regulatory type', uitzoeken..
 
+Startup query:
+	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
+		- Zoals totaal aantal documenten per land / categorie
+		- Deze kan ik dan globaal onthouden (lijkt mij..) 
+		- En tonen op de pagina
+
 Backup:
 	- Een backup stap in makefile
 	- Dus die downloaded.file pakt en in (gitignored) backup map plaatst
