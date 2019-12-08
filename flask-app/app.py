@@ -8,105 +8,40 @@ from elasticsearch_dsl import Search
 app = Flask(__name__)
 es_client = Elasticsearch('http://es01:9200')
 
-def set_category_human_filter(categories):
-    # If no categories are checked, all should be true ("1")
-    if "HUM" in categories or len(categories) == 0:
-        return {"term" : { "HUM" : "1" }}
-    else:
-        return {"term" : { "HUM" : "0" }}
-
-
-
-def set_category_nature_filter(categories):
-    # If no categories are checked, all should be true ("1")
-    if "NAT" in categories or len(categories) == 0:
-        return {"terms" : { "NAT" : "1" }}
-    else:
-        return {"terms" : { "NAT" : "0" }}
-
-
-def set_country_filters(countries):
-    terms = []
-    if not countries:
-        # nothing checked, means no filter required
-        countries = ["USA", "CA", "NZ", "AU", "GB-NIR", "SC"]
-
-    for country in countries:
-        terms.append({"term" : { "Country" : country }})
-    return terms
+def set_category_values(cats):
+    cat_hum = "0"
+    cat_nat = "0"
+    if "HUM" in cats:
+        cat_hum = "1"
+    if "NAST" in cats:
+        cat_nat = "1"
+    if len(cats) == 0:
+        cat_hum = "1"
+        cat_nat = "1"
+    return cat_hum, cat_nat
 
 @app.route("/", methods=["GET", "POST"])
 def home():
     title = "Global charity search engine"
+    message = ""
     print("on home()")
     try:
         values_dict = request.args.to_dict()
         search_value = values_dict['search']
         if not search_value:
-            return render_template("main.html", title=title, content="Please fill in a search word")
-
-        # for testing..
-        content = ""
+            return render_template("main.html", title=title, message="Please fill in a search word")
         
-        # page_nr = values_dict['page']
-        page_nr = 1
         countries = request.args.getlist('country')
-
-        # For debugging
         cats = request.args.getlist('category')
 
         # TODO in function
-        cat_hum = "0"
-        cat_nat = "0"
-        if "HUM" in cats:
-            cat_hum = "1"
-        if "NAST" in cats:
-            cat_nat = "1"
-        if len(cats) == 0:
-            cat_hum = "1"
-            cat_nat = "1"
-
-        '''
-        body = {
-            "query": {
-                "bool": {
-                    "must": {
-                        "multi_match": {
-                            "query": search_value,
-                            "fields": [
-                                "Name",
-                                "City",
-                            ]
-                        }
-                    },
-                    "filter": {
-                        "bool" : {
-                            "should" : set_country_filters(countries),
-                            "should" : set_category_human_filter(cats),
-                            "should" : set_category_nature_filter(cats)
-                            }
-                    }
-                }
-            }
-        }
-        '''
-
-        # TODO: Category should be of type field Facet or something in ES
-        '''
-        s = Search(using=es_client, index="chars") \
-            .query("match", Name=search_value)   \
-            .filter("terms", Country=countries) \
-            .filter("term", HUM=cat_hum) \
-            .filter("term", NAT=cat_nat) \
-        s = Search(using=es_client, index="chars") \
-            .query("match", Name=search_value)   \
-            .filter("terms", Country=countries) \
-            .filter("term", HUM=cat_hum) \
-            .filter("term", NAT=cat_nat) \
-            '''
+        cat_hum, cat_nat = set_category_values(cats)
 
         # For now only Australia has categories
         if "AU" in countries:
+            if len(countries) > 1:
+                message = "Only Australia is categorized for now."
+
             s = Search(using=es_client, index="chars") \
                 .query("multi_match", query=search_value, fields=['Name', 'City'])   \
                 .filter("terms", Country=countries) \
@@ -114,6 +49,10 @@ def home():
                 .filter("term", NAT=cat_nat)
         else:
             # Don't filter on categories, because it will show no results otherwise
+            if len(cats) > 0:
+                # User has selected categories
+                message = "Only Australia is categorized for now, so ignoring category filter."
+
             s = Search(using=es_client, index="chars") \
                 .query("multi_match", query=search_value, fields=['Name', 'City'])   \
                 .filter("terms", Country=countries)
@@ -152,10 +91,10 @@ def home():
                 nr_results=nr_results_shown, 
                 results=found_charities, 
                 searched_for=search_value, 
-                content=content,
+                message=message,
                 countries=countries,
-                categories=cats,
-                page_nr=page_nr)
+                categories=cats
+                )
     except KeyError:
         print("no search")
 

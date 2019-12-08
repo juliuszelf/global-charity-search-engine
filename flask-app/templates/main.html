@@ -10,9 +10,15 @@
 {% include 'header.html' %}
 <main>
  {% include 'search.html' %}
- <div class="text-muted" style="margin-top: 5px">
-   {{ nr_results }} results for <b><i>{{ searched_for }}</i></b><br />
- </div>
+   {% if message %}
+	<div class="message">{{ message }}</div>
+   {% endif %}
+
+   {% if nr_results %}
+		<div class="text-muted" style="margin-top: 5px">
+		{{ nr_results }} results for <b><i>{{ searched_for }}</i></b><br />
+		</div>
+   {% endif %}
  <br />
  {% for result in results %}
    <b>{{ result.name }}</b><br />
@@ -24,7 +30,6 @@
    {% endif %}
    <hr>
  {% endfor %}
- {{ content | safe }}
 </main>
 {% include 'footer.html' %}
 </body>

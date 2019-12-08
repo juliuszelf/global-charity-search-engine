@@ -23,6 +23,7 @@ Backup:
 Categorien:
 	- Status veld om terug te geven aan zoekresultaat
 		- Bijv. results for countries you are searching in have not been categorized yet
+		- Category mogelijk efficienter als 'facet field' of iets dergelijks
 	- Invetariseren
 		- wat levert bronbestanden?
 			- Australia

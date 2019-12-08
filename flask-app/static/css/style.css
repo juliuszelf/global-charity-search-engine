@@ -16,6 +16,13 @@ footer {
 	background-color: #eee;
 }
 
+.message {
+	background-color: #ffffed;
+	padding: 3px;
+	border-radius: 2px;
+	color: #333333;
+}
+
 .filters {
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -40,3 +47,4 @@ footer {
 	font-size: 0.8rem;
 	color: #666666;
 }
+
