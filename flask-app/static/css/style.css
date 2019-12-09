@@ -52,7 +52,14 @@ footer {
 input[type=search]{
 	border: 1px solid #999;
 	padding: 5px;
-	min-width: 400px;
+	max-width: 400px;
+	width: 400px;
+}
+@media only screen and (max-width: 600px) {
+	input[type=search]{
+		width: 100%;
+		margin-bottom: 10px;
+	}
 }
 
 button {
