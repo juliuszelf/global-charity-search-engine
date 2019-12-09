@@ -128,6 +128,8 @@ def home():
                 "source_url": result_source_url,
                 "source_date": result_source_date 
             })
+        if len(results) == 0: 
+            message += "No charities found for <i>" + search_value + "</i>"
 
         return render_template("main.html", 
                 title=title, 

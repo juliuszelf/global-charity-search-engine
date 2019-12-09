@@ -46,6 +46,7 @@ footer {
 	padding: 10px;
 	background-color: #eee;
 	flex-shrink: 0;
+	color: #666;
 }
 
 .message {

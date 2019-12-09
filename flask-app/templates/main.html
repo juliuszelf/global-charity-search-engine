@@ -11,7 +11,7 @@
 <main>
  {% include 'search.html' %}
    {% if message %}
-	<div class="message">{{ message }}</div>
+	<div class="message">{{ message | safe }}</div>
    {% endif %}
 
    {% if nr_results %}
