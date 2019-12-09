@@ -1,15 +1,3 @@
-Scotland:
-	- toUTF8.sh doet nu ook unzip
-		- Code gemaakt @done(2019-12-06)
-		- Getest
-	- Juiste kolommen via cleanCSV.py
-		- Check wat inhoud echt van CSV zit, of city & state ergens staat.
-			- Principal Office/Trustees Address,
-		- Vergt postcode opzoeklijst
-			- research..
-	- Voeg aan README.md de requirement 'unzip' installeren toe.
-	- Misschien willen we filteren op 'regulatory type', uitzoeken..
-
 Startup query:
 	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
 		- Zoals totaal aantal documenten per land / categorie
@@ -290,6 +278,10 @@ Scripts verbeteren:
 	of hard in make bestand zetten die de functies aanroept,
 	zodat makefile set variabelen bovenin heeft die effectief config is.
 	- Een 'update script' die checkt wat er al is, etc.
+		- Eerst HTTP query vinden voor alleen voor 1 land DELETE te doen
+		- Dat in combi met uploaden voor 1 land, scheelt al tijd.
+		- Mooier zou zijn om een script te maken die beide doet
+			- replace.sh oid met `replace.sh scotland`
 	- Kan make/bash bestand kijken of ES al bestanden heeft van dit land?
 		- Zonee, upload deze dan
 		- Zoja, verwijder dan deze voor dit land eerst, en voeg ze daarna toe
