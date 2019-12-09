@@ -40,6 +40,47 @@ How the charity works,
 # We add: Source URL, Source date
 end_part = source_url + "," + source_date + "\n" 
 
+# Categories from the 'what charity does' field that have these values 
+# will be placed in the generic category 'human'.
+human_category_list = [
+        "The advancement of education",
+        "The advancement of religion",
+        "The advancement of health or the saving of lives",
+        "The advancement of citizenship or community development",
+        "The relief of those in need by reason of youth, age, ill-health, disability, financial hardship or other disadvantage",
+        "The prevention or relief of poverty",
+        "The advancement of the arts, culture, heritage or science",
+        "The advancement of human rights, conflict resolution or reconciliation or the promotion of religious or racial harmony or equality and diversity",
+        "Other charitable purposes",
+        "The advancement of amateur sport"
+        ]
+
+nature_category_list = [
+        "The advancement of environmental protection or improvement",
+        "The advancement of animal welfare"
+        ]
+
+# Same function as for Scotland
+def get_category_values(purposes):
+    # Using 0 as false, 1 as true
+    # Because more compact in search engine (would otherwise write "True")
+    human = 0 
+    nature = 0 
+
+    # clean purpose from quotes
+    pur = purposes.strip().replace("'", "")
+
+    # Assumption is that purpose field is mutually exclusive,
+    # so charity can only have sigle purpose
+    # TODO: check from raw data if this is correct,
+    # the fact that it's multiple purposeS is suspect.
+    if pur in human_category_list:
+        human = 1
+
+    if pur in nature_category_list:
+        nature = 1
+    
+    return human, nature
 
 counties = [
         'Antrim',
@@ -120,14 +161,15 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
             # Adress is of form: "Supporting Communities Ni, 34-36 Henry Street, Ballymena, Co  Antrim, BT42 3AH"
             address = line["Public address"] 
             city, state = get_values_from_address(address)
+            human, nature = get_category_values(line["What the charity does"])
 
             output_writer.writerow({"Name": line["Charity name"], 
                                     "City": city, 
                                     "State": state, 
                                     "Country": "GB-NIR", 
                                     "Website": line["Website"], 
-                                    "HUM": "", 
-                                    "NAT": "", 
+                                    "HUM": human, 
+                                    "NAT": nature, 
                                     "SourceURL": source_url, 
                                     "SourceDate": source_date})
 
