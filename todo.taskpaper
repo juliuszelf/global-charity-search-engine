@@ -1,3 +1,7 @@
+Quick:
+	- no results message
+	- footer reference to twitter account
+
 Startup query:
 	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
 		- Zoals totaal aantal documenten per land / categorie

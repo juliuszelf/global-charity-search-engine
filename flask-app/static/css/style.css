@@ -14,6 +14,23 @@ header {
 	padding: 20px;
 	max-width: 960px;
 	margin: auto;
+	display: flex;
+}
+
+.header-content h1 {
+	margin-top: auto;
+	margin-bottom: auto;
+	font-size: 1.8rem;
+}
+
+.logo {
+	margin-right: 20px;
+}
+
+.logo img {
+	height: 60px; 
+	border-radius: 50%;
+	border: 7px solid white;
 }
 
 main {
@@ -41,8 +58,10 @@ footer {
 .filters {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	padding: 5px;
-	background-color: #eee;
+	padding: 10px;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+
 }
 
 .checkboxes {
@@ -52,6 +71,7 @@ footer {
 
 .check {
 	margin-right: 20px;
+	font-size: 0.9rem;
 }
 
 .filter-title {
@@ -73,3 +93,4 @@ footer {
 	color: #999;
 	text-decoration: underline;
 }
+
