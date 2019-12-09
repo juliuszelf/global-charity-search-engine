@@ -116,13 +116,17 @@ def home():
             result_state = result_content['State'] # State / Province
             result_country = result_content['Country']
             result_website = result_content['Website']
+            result_source_url = result_content['SourceURL']
+            result_source_date = result_content['SourceDate']
          
             found_charities.append({ 
                 "name": result_name, 
                 "city": result_city,
                 "state": result_state,
                 "country": result_country,
-                "website": result_website 
+                "website": result_website,
+                "source_url": result_source_url,
+                "source_date": result_source_date 
             })
 
         return render_template("main.html", 

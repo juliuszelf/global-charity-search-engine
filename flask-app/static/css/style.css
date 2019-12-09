@@ -48,3 +48,13 @@ footer {
 	color: #666666;
 }
 
+.result_source {
+	font-size: 0.8rem;
+	color: #999;
+}
+
+.result_source a {
+	font-size: 0.8rem;
+	color: #999;
+	text-decoration: underline;
+}
