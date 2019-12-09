@@ -49,6 +49,19 @@ footer {
 	color: #666;
 }
 
+input[type=search]{
+	border: 1px solid #999;
+	padding: 5px;
+	min-width: 400px;
+}
+
+button {
+	border: 1px solid #999;
+	padding: 3px;
+	position: relative;
+	top: -2px;
+}
+
 .message {
 	background-color: #ffffed;
 	padding: 3px;
@@ -70,6 +83,13 @@ footer {
 .checkboxes {
 	margin-top: 5px;
 	display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+	.checkboxes {
+		flex-direction: column;
+		margin-top: 5px;
+	}
 }
 
 .check {
