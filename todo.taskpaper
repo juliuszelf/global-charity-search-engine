@@ -20,7 +20,7 @@ Backup:
 
 Categorien-inhoud:
 	- Die lijsten categorien enzo bij source.md plaatsen
-	- Invetariseren
+	- Inventariseren
 		- wat levert bronbestanden?
 		- Canada
 			- Er zijn meerdere CSV bestanden te downloaden
@@ -142,6 +142,9 @@ map structuur:
 FORUM:
 	- https://forum.opendata.ch
 	  Ik heb account 'Julius', gesprek Oleg
+
+Bronnen taxonomy:
+	- https://taxonomy.candid.org/
 
 Bronnen:
 

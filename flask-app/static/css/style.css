@@ -122,14 +122,20 @@ button {
 	color: #666666;
 }
 
-.result_source {
+.result-source {
 	font-size: 0.8rem;
 	color: #999;
 }
 
-.result_source a {
+.result-source a {
 	font-size: 0.8rem;
 	color: #999;
+	text-decoration: underline;
+}
+
+.platform-link a {
+	font-size: 0.8rem;
+	color: #009;
 	text-decoration: underline;
 }
 

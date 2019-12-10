@@ -28,7 +28,12 @@
         {{ result.website }}
      </a><br />
    {% endif %}
-   <div class="result_source"><a href="{{ result.source_url }}">Source</a> {{ result.source_date }}
+   {% if result.country == "USA" %}
+   <div class="platform-link">
+	   <a href="https://www.guidestar.org/search?q={{ result.name }}" target="_blank">Search on GuideStar</a><br />
+   </div>
+   {% endif %}
+   <div class="result-source"><a href="{{ result.source_url }}" target="_blank">Source</a> {{ result.source_date }}
    </div>
    <hr>
  {% endfor %}
