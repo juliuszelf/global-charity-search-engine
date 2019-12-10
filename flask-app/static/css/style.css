@@ -81,8 +81,8 @@ button {
 	margin-bottom: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	border-bottom: 2px dashed #aaa;
-	border-top: 2px dashed #aaa;
+	border-bottom: 2px dashed #66f;
+	border-top: 2px dashed #66f;
 	border-radius: 5px;
 
 }
@@ -102,6 +102,15 @@ button {
 .check {
 	margin-right: 20px;
 	font-size: 0.9rem;
+	width: 120px;
+}
+
+.filter-group {
+	display: flex;
+}
+
+.filter-group-label {
+	width: 300px;
 }
 
 .filter-title {

@@ -1,22 +1,38 @@
-<form>
+<form id="searchform">
 	<input class="form-conrol" type="search" id="site-search" name="search" aria-label="Search charities" value="{{ searched_for }}">
-  <button type="button"  class="btn btn-dark">Search</button>
+  <button type="submit" class="btn btn-dark" form="searchform">Search</button>
   <div class="filters">
-	  <div class="filter-title">Filter by base country</div>
-	  <div class="checkboxes">
-		  <div class="check"><label><input type="checkbox" name="country" value="AU" {% if "AU" in countries %}checked{% endif %}> Australia</label></div>
-		  <div class="check"><label><input type="checkbox" name="country" value="CA" {% if "CA" in countries %}checked{% endif %}> Canada</label></div>
-		  <div class="check"><label><input type="checkbox" name="country" value="GB-NIR" {% if "GB-NIR" in countries %}checked{% endif %}> N-Ireland</label></div>
-		  <div class="check"><label><input type="checkbox" name="country" value="NZ" {% if "NZ" in countries %}checked{% endif %}> New-Zealand</label></div>
-		  <div class="check"><label><input type="checkbox" name="country" value="SC" {% if "SC" in countries %}checked{% endif %}> Scotland</label></div>
-		  <div class="check"><label><input type="checkbox" name="country" value="USA" {% if "USA" in countries %}checked{% endif %}> USA</label></div>
+	  <div class="filter-group">
+		  <div class="filter-title filter-group-label">Filter by base country</div>
+		  <div class="checkboxes">
+			  <div>
+				  <div class="check"><label><input type="checkbox" name="country" value="AU" {% if "AU" in countries %}checked{% endif %}> Australia</label></div>
+				  <div class="check"><label><input type="checkbox" name="country" value="CA" {% if "CA" in countries %}checked{% endif %}> Canada</label></div>
+			  </div>
+			  <div>
+				  <div class="check"><label><input type="checkbox" name="country" value="GB-NIR" {% if "GB-NIR" in countries %}checked{% endif %}> N-Ireland</label></div>
+				  <div class="check"><label><input type="checkbox" name="country" value="NZ" {% if "NZ" in countries %}checked{% endif %}> New-Zealand</label></div>
+			  </div>
+			  <div>
+				  <div class="check"><label><input type="checkbox" name="country" value="SC" {% if "SC" in countries %}checked{% endif %}> Scotland</label></div>
+				  <div class="check"><label><input type="checkbox" name="country" value="USA" {% if "USA" in countries %}checked{% endif %}> USA</label></div>
+			  </div>
+		  </div>
 	  </div>
-	  <br />
-	  <div class="filter-title">Filter by category</div>
-	  <div class="filter-info">Not all countries have been categorized.</div>
-	  <div class="checkboxes">
-		  <div class="check"><label><input type="checkbox" name="category" value="HUM" {% if "HUM" in categories %}checked{% endif %}> Human</label></div>
-		  <div class="check"><label><input type="checkbox" name="category" value="NAT" {% if "NAT" in categories %}checked{% endif %}> Nature (Animals, Plants, etc)</label></div>
+	  <hr>
+	  <div class="filter-group">
+		  <div class="filter-group-label">
+		  <div class="filter-title">Filter by category</div>
+		  <div class="filter-info">Not all countries have been categorized.</div>
+		  </div>
+		  <div class="checkboxes">
+			  <div>
+				  <div class="check"><label><input type="checkbox" name="category" value="HUM" {% if "HUM" in categories %}checked{% endif %}> Human</label></div>
+			  </div>
+			  <div>
+				  <div class="check"><label><input type="checkbox" name="category" value="NAT" {% if "NAT" in categories %}checked{% endif %}> Nature</label></div>
+			  </div>
+		  </div>
 	  </div>
   </div>
 </form>

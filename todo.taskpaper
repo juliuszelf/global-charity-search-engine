@@ -1,3 +1,7 @@
+Quick:
+	- search button werkt niet
+	- Padding boven eerste resultaat iets groter
+
 Startup query:
 	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
 		- Zoals totaal aantal documenten per land / categorie
