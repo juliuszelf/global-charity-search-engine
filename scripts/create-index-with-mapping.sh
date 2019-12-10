@@ -33,6 +33,9 @@ curl -X PUT "localhost:9200/chars/_mapping?pretty" -H 'Content-Type: application
     },
     "SourceDate": {
       "type": "keyword"
+    },
+    "OfficialID": {
+      "type": "keyword"
     }
   }
 }

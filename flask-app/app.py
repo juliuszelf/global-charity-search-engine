@@ -111,6 +111,7 @@ def home():
         found_charities = []
         for result in results:
             result_content = result['_source']
+            result_official_id = result_content['OfficialID']
             result_name = result_content['Name']
             result_city = result_content['City']
             result_state = result_content['State'] # State / Province
@@ -118,8 +119,14 @@ def home():
             result_website = result_content['Website']
             result_source_url = result_content['SourceURL']
             result_source_date = result_content['SourceDate']
+
+            if result_country == "USA" and len(result_official_id) > 2:
+                # Guidestar url requires we turn an ID like: "811996576"
+                # into "81-1996576"
+                result_official_id = result_official_id[0:2] + "-" + result_official_id[2:]
          
             found_charities.append({ 
+                "official_id": result_official_id, 
                 "name": result_name, 
                 "city": result_city,
                 "state": result_state,

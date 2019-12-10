@@ -199,7 +199,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["Name", "City", "State", "Country", "Website", "HUM", "NAT", "SourceURL", "SourceDate"]
+    fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website", "HUM", "NAT", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -220,7 +220,8 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         for line in input_reader:
             city, state = get_values_from_address(line["Principal Office/Trustees Address"])
             human, nature = get_category_values(line["Purposes"])
-            output_writer.writerow({"Name": line["Charity Name"], 
+            output_writer.writerow({"OfficialID": line["Charity Number"], 
+                                    "Name": line["Charity Name"], 
                                     "City": city,
                                     "State": state, 
                                     "Country": "SC", 
