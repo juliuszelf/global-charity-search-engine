@@ -52,6 +52,12 @@
 		</div>
       {% endif %}
    {% endif %}
+   {% if result.country == "CA" %}
+	<div class="platform-link">
+		<a href="https://apps.cra-arc.gc.ca/ebci/hacc/srch/pub/dsplyRprtngPrd?q.srchNm=steps&q.stts=0007&selectedCharityBn={{ result.official_id }}&dsrdPg=1" target="_blank">Official Canadese Government profile</a> 
+	</div>
+	
+   {% endif %}
    {% if result.country == "AU" %}
 	<div class="platform-link">
 		<a href="https://www.acnc.gov.au/charity?name_abn[0]={{ result.official_id}}" target="_blank">Page on acnc.gov.au</a> 
