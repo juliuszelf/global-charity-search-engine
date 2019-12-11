@@ -1,6 +1,6 @@
 Quick:
-	- search button werkt niet
 	- Padding boven eerste resultaat iets groter
+	- i-frame profile pages, of inline bij search results?
 
 Startup query:
 	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
@@ -44,9 +44,6 @@ Categorien-inhoud:
 			te filteren op alleen iets van non-profit, en niet 'credit union' e.d.
 	- Technische uitdagingen?
 		- Per land een category-mapping.txt oid maken
-
-Code/NR:
-	- Nut om juist die unieke code te hebben, voor wie daar op wil zoeken?
 
 Land van opereren:
 	- Invetariseren
