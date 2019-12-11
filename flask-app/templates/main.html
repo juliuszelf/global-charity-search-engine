@@ -31,8 +31,12 @@
    {% if result.country == "USA" %}
    <div class="platform-link">
 	   <a href="https://www.guidestar.org/profile/{{ result.official_id }}" target="_blank">Profile on GuideStar</a><br />
-	   
 	   <a href="https://990finder.foundationcenter.org/990results.aspx?990_type=&fn={{ result.name }}&st={{ result.state }}" target="_blank">Search on 990 finder (submitted forms)</a><br />
+   </div>
+   {% endif %}
+   {% if result.country == "SC" %}
+   <div class="platform-link">
+	   <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number={{ result.official_id }}" target="_blank">Profile on OSCR</a><br />
    </div>
    {% endif %}
    <div class="result-source"><a href="{{ result.source_url }}" target="_blank">Source</a> {{ result.source_date }}
