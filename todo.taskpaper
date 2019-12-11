@@ -1,3 +1,11 @@
+Platform links:
+	- USA:
+		- https://charitycheck101.org/report/?id=411917226
+		- <a href="https://apps.irs.gov/app/eos/displayAll.do?dispatchMethod=displayAllInfo&ein=11917220" target="_blank">Search on 990 finder (submitted forms)</a><br />
+	- New Zealand
+		- Ander veld voor ID nodig, het NZBN nummer, is laatste veld met label:NZBNNumber 
+		- Dan url https://register.charities.govt.nz/CharitiesRegister/Search
+		  Helaas is profielpagina zelf met eigen ID's
 Quick:
 	- Padding boven eerste resultaat iets groter
 	- i-frame profile pages, of inline bij search results?
@@ -44,6 +52,9 @@ Categorien-inhoud:
 			te filteren op alleen iets van non-profit, en niet 'credit union' e.d.
 	- Technische uitdagingen?
 		- Per land een category-mapping.txt oid maken
+
+Code/NR:
+	- Nut om juist die unieke code te hebben, voor wie daar op wil zoeken?
 
 Land van opereren:
 	- Invetariseren

@@ -30,6 +30,9 @@
    {% endif %}
    {% if result.country == "USA" %}
 	<div class="platform-link">
+		<a href="https://apps.irs.gov/app/eos/allSearch.do?ein1={{ result.official_id }}&dispatchMethod=searchAll" target"_blank">
+			Official data on IRS.gov (tap first result)
+		</a><br />
 		<a href="https://www.guidestar.org/profile/{{ result.official_id }}" target="_blank">Profile on GuideStar</a><br />
 		<a href="https://990finder.foundationcenter.org/990results.aspx?990_type=&fn={{ result.name }}&st={{ result.state }}" target="_blank">Search on 990 finder (submitted forms)</a><br />
 	</div>
