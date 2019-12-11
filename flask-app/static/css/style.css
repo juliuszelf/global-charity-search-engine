@@ -133,8 +133,12 @@ button {
 	text-decoration: underline;
 }
 
-.platform-link a {
+.platform-link {
 	font-size: 0.8rem;
+	color: #999;
+}
+
+.platform-link a {
 	color: #009;
 	text-decoration: underline;
 }

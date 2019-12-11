@@ -45,6 +45,11 @@
 		<a href="https://www.charitycommissionni.org.uk/charity-details/?regId={{ result.official_id}}" target="_blank">Profile on CharitycCommissionNI</a><br />
 	</div>
    {% endif %}
+   {% if result.country == "NZ" %}
+	<div class="platform-link">
+		<a href="https://register.charities.govt.nz/CharitiesRegister/Search" target="_blank">Search register.charities.govt.nz</a> Put {{ result.official_id }} in 'NZBN Number' field.<br />
+	</div>
+   {% endif %}
    {% if result.country == "AU" %}
 	<div class="platform-link">
 		<a href="https://www.acnc.gov.au/charity?name_abn[0]={{ result.official_id}}" target="_blank">Page on acnc.gov.au</a> 

@@ -62,7 +62,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         next(input_reader)
 
         for line in input_reader:
-            output_writer.writerow({"OfficialID": line["OrganisationId"], 
+            output_writer.writerow({"OfficialID": line["NZBNNumber"], 
                                     "Name": line["Name"], 
                                     "City": line["StreetAddress_city"], 
                                     "State": "", 
