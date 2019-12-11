@@ -39,6 +39,13 @@
 	   <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number={{ result.official_id }}" target="_blank">Profile on OSCR</a><br />
    </div>
    {% endif %}
+   {% if result.country == "GB-NIR" %}
+   <div class="platform-link">
+	   <a href="https://www.charitycommissionni.org.uk/charity-details/?regId={{ result.official_id}}" target="_blank">Profile on CharitycCommissionNI</a><br />
+   
+   </div>
+   {% endif %}
+
    <div class="result-source"><a href="{{ result.source_url }}" target="_blank">Source</a> {{ result.source_date }}
    </div>
    <hr>
