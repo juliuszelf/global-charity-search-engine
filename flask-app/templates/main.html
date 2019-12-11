@@ -46,9 +46,11 @@
 	</div>
    {% endif %}
    {% if result.country == "NZ" %}
-	<div class="platform-link">
-		<a href="https://register.charities.govt.nz/CharitiesRegister/Search" target="_blank">Search register.charities.govt.nz</a> Put {{ result.official_id }} in 'NZBN Number' field.<br />
-	</div>
+     {% if result.official_id %}
+		<div class="platform-link">
+			<a href="https://register.charities.govt.nz/CharitiesRegister/Search" target="_blank">Search register.charities.govt.nz</a> Put {{ result.official_id }} in 'NZBN Number' field.<br />
+		</div>
+      {% endif %}
    {% endif %}
    {% if result.country == "AU" %}
 	<div class="platform-link">
@@ -56,7 +58,9 @@
 		| <a href="https://abr.business.gov.au/ABN/View/{{ result.official_id}}" target="_blank">direct to ABN</a><br />
 	</div>
    {% endif %}
-   <div class="result-source">Official ID: {{ result.official_id }}</div>
+   {% if result.official_id %}
+	  <div class="result-source">Official ID: {{ result.official_id }}</div>
+   {% endif %}
    <div class="result-source"><a href="{{ result.source_url }}" target="_blank">Source</a> {{ result.source_date }}</div>
    <hr>
  {% endfor %}
