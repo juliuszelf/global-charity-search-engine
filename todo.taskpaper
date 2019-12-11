@@ -1,7 +1,7 @@
 Platform links:
 	- USA:
 		- https://charitycheck101.org/report/?id=411917226
-		- <a href="https://apps.irs.gov/app/eos/displayAll.do?dispatchMethod=displayAllInfo&ein=11917220" target="_blank">Search on 990 finder (submitted forms)</a><br />
+		- Nu gelinkt naar search result van IRS, want we hebben niet interne ID
 	- New Zealand
 		- Ander veld voor ID nodig, het NZBN nummer, is laatste veld met label:NZBNNumber 
 		- Dan url https://register.charities.govt.nz/CharitiesRegister/Search
