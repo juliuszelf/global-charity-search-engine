@@ -37,11 +37,13 @@ services:
       - elastic
 
   ngnix:
-    build: ./nginx
+    build: nginx/
     container_name: ngnix01
     restart: always
     ports:
-      - 80:80
+      - "80:80"
+    networks:
+      - elastic
 
 volumes:
   data01:
