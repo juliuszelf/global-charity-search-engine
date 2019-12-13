@@ -4,6 +4,7 @@ from flask import Flask, request, render_template
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 import os
+import logging
 
 # For debugging with breakpoints it can be nice to run outside docker container.
 # First the container must be stopped via `docker stop flask01`.
@@ -15,6 +16,8 @@ import sys
 firstarg = sys.argv[1]
 
 app = Flask(__name__)
+
+app.logger.setLevel(logging.INFO)
 
 # get analytics id
 try:
