@@ -48,8 +48,9 @@ During development we want to make use of a Kibana container, but in production 
 
 ### Start containers
 
+- If you want to track with google analytics, add environmental variable via `export ANALYTICS=UA-XXXXXXX-X`, where you replace the UA part with your google analytics id.
 - Type `docker-compose up -d`, it will take a minute or two for Elastic Search to fully start.
-- Veriry container are running with `docker ps`, it should show `es01` and `flask`. During development also `kib01`.
+- Verify container are running with `docker ps`, it should show `es01` and `flask`. During development also `kib01`.
 
 ### Upload charity data
 

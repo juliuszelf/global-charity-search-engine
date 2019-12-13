@@ -4,6 +4,8 @@ Wat maakt versie 1.0:
 	- Paginering
 	- Analytics @done(2019-12-13)
 	- Toch NGNIX ofzo, want spam traffic moet geblokt worden
+	- Page speed
+		- research HTML 'keep alive', mogelijk default flask server traagheid
 	- Nice to have:
 		- Meer categoriën
 		- Dan eigen website updaten er over, evt Medium artikel
@@ -12,9 +14,6 @@ Wat maakt versie 1.0:
 Quick:
 	- Typo footer 'charitus' > 'charitius' @done(2019-12-13)
 	- Favicon @done(2019-12-13)
-	- README voor analytics maken, environmental variable, mag ook leeglaten
-		- export ANALYTICS=XX-XXXXXXXX
-		- Maar dus van binnen de container!
 	- Padding boven eerste resultaat iets groter
 
 Startup query:

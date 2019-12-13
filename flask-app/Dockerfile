@@ -7,7 +7,7 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 RUN apk add --no-cache curl
 COPY . .
-CMD ["flask", "run"]
+RUN ["uwsgi", "app.ini"]
 
 # Alpine has no bash, but 'sh', so get into container using:
 # docker exec -it <name> sh
