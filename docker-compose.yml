@@ -29,7 +29,7 @@ services:
     volumes:
       - ./flask-app:/app
     expose:
-      - 8080
+      - 5000 
     restart: always
     environment:
       FLASK_ENV: development

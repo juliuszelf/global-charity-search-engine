@@ -13,7 +13,11 @@ import logging
 # `python3 app.py outside` 
 import sys
 
-firstarg = sys.argv[1]
+firstarg = ""
+try:
+    firstarg = sys.argv[1]
+except:
+    print("no arguments passed to app.py")
 
 app = Flask(__name__)
 
