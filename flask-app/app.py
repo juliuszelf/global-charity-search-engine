@@ -21,6 +21,7 @@ try:
     analytics_id = os.environ['ANALYTICS']
     print("analytics set")
 except:
+    analytics_id = ""
     print("no analytics set")
 
 if firstarg == "outside":

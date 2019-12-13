@@ -3,6 +3,7 @@ Wat maakt versie 1.0:
 	- Toelichting pagina
 	- Paginering
 	- Analytics @done(2019-12-13)
+	- Toch NGNIX ofzo, want spam traffic moet geblokt worden
 	- Nice to have:
 		- Meer categoriën
 		- Dan eigen website updaten er over, evt Medium artikel
