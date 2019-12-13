@@ -19,6 +19,7 @@ app = Flask(__name__)
 # get analytics id
 try:
     analytics_id = os.environ['ANALYTICS']
+    print("analytics set")
 except:
     print("no analytics set")
 
