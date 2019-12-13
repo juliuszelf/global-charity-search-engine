@@ -19,10 +19,10 @@ app = Flask(__name__)
 # get analytics id
 try:
     analytics_id = os.environ['ANALYTICS']
-    print("analytics set")
+    app.logger.info('analytics set')
 except:
     analytics_id = ""
-    print("no analytics set")
+    app.logger.info('analytics not set')
 
 if firstarg == "outside":
     es_client = Elasticsearch('http://0.0.0.0:9200')
