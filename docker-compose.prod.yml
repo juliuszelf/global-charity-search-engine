@@ -6,4 +6,5 @@ services:
     ports:
       - 80:5000
     environment:
-      FLASK_ENV: production
+      - ANALYTICS
+      - FLASK_ENV: production
