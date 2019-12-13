@@ -2,7 +2,7 @@ Wat maakt versie 1.0:
 	- Eigen URL
 	- Toelichting pagina
 	- Paginering
-	- Analytics
+	- Analytics @done(2019-12-13)
 	- Nice to have:
 		- Meer categoriën
 		- Dan eigen website updaten er over, evt Medium artikel
@@ -10,8 +10,9 @@ Wat maakt versie 1.0:
 
 Quick:
 	- Typo footer 'charitus' > 'charitius' @done(2019-12-13)
+	- Favicon @done(2019-12-13)
+	- README voor analytics maken, environmental variable, mag ook leeglaten
 	- Padding boven eerste resultaat iets groter
-	- Favicon
 
 Startup query:
 	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
