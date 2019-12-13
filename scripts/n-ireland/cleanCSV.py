@@ -59,6 +59,11 @@ nature_category_list = [
         "The advancement of environmental protection or improvement",
         "The advancement of animal welfare"
         ]
+''' TODO:
+animal_category_list = [
+        "The advancement of animal welfare"
+        ]
+'''
 
 # Same function as for Scotland
 def get_category_values(purposes):

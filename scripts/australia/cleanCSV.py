@@ -83,10 +83,20 @@ human_category_list = [
         "Women",
         "Youth",
         ]
+
+# The typo 'natual' is in source data
 nature_category_list = [
-        "Preventing_or_relieving_suffering_of_animals",
-        "Advancing_natual_environment"
+        "preventing_or_relieving_suffering_of_animals",
+        "advancing_natual_environment"
         ]
+
+''' TODO:
+animal_category_list = [
+        "preventing_or_relieving_suffering_of_animals",
+        ]
+'''
+
+
 
 def get_category_values(line):
     # Using 0 as false, 1 as true
