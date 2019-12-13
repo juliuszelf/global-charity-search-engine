@@ -94,7 +94,11 @@ def home():
         values_dict = request.args.to_dict()
         search_value = values_dict['search']
         if not search_value:
-            return render_template("main.html", title=title, message="Please fill in a search word")
+            return render_template("main.html",
+                                   title=title,
+                                   message="Please fill in a search word",
+                                   analytics=analytics_id
+                                   )
 
         s = Search(using=es_client, index="chars") \
             .query("multi_match", query=search_value, fields=['Name', 'City'])
@@ -164,7 +168,11 @@ def home():
     except KeyError:
         print("no search")
 
-    return render_template("main.html", title=title, content="no search..")
+    return render_template("main.html",
+                           title=title,
+                           content="no search..",
+                           analytics=analytics_id
+                           )
 
 
 if __name__ == "__main__":
