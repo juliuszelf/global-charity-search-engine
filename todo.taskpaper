@@ -1,14 +1,17 @@
-Platform links:
-	- USA:
-		- https://charitycheck101.org/report/?id=411917226
-		- Nu gelinkt naar search result van IRS, want we hebben niet interne ID
-	- New Zealand
-		- Ander veld voor ID nodig, het NZBN nummer, is laatste veld met label:NZBNNumber 
-		- Dan url https://register.charities.govt.nz/CharitiesRegister/Search
-		  Helaas is profielpagina zelf met eigen ID's
+Wat maakt versie 1.0:
+	- Eigen URL
+	- Toelichting pagina
+	- Paginering
+	- Analytics
+	- Nice to have:
+		- Meer categoriën
+		- Dan eigen website updaten er over, evt Medium artikel
+		- Dan door met MyPictureBooks online hosting
+
 Quick:
+	- Typo footer 'charitus' > 'charitius' @done(2019-12-13)
 	- Padding boven eerste resultaat iets groter
-	- i-frame profile pages, of inline bij search results?
+	- Favicon
 
 Startup query:
 	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
@@ -109,6 +112,9 @@ Digital ocean setup:
 			sysctl -w vm.max_map_count=262144
 			stond hier: https://github.com/maxyermayank/docker-compose-elasticsearch-kibana/issues/10
 
+Feature ideeen:
+- i-frame profile pages, of inline bij search results?
+
 Zoek verbeteren:
 Mogelijke feature van zoekmachine is dat je veel kunt customizen
 Dat je bijv. zelf fuzziness kunt selecteren, etc.
@@ -155,15 +161,22 @@ Bronnen taxonomy:
 	- https://taxonomy.candid.org/
 
 Bronnen:
-
-https://www.youtube.com/watch?v=b7tCjZSvOno
-Video met in beeld voorbeelden van gebruik tokenizer e.d. 
-
-https://dev.to/aligoren/using-elasticsearch-with-python-and-flask-2i0e
-
-https://blog.patricktriest.com/text-search-docker-elasticsearch/
-
-https://github.com/triestpa/guttenberg-search
+- Data global non profits
+	- https://m.wikidata.org/wiki/Q6418598
+	- https://blog.opencorporates.com/2016/08/08/charity-registers-and-corporate-data-the-missing-link/
+	  OpenCorprates contacted via mail
+- ES
+	- https://www.youtube.com/watch?v=b7tCjZSvOno
+	Video met in beeld voorbeelden van gebruik tokenizer e.d. 
+	- https://dev.to/aligoren/using-elasticsearch-with-python-and-flask-2i0e
+	- https://blog.patricktriest.com/text-search-docker-elasticsearch/
+	- https://github.com/triestpa/guttenberg-search
+- Inspiration:
+	- https://www.sqs.ch/en/certified-organisations?title=&nid=47776&field_sqs_postal_code_value=&field_sqs_city_value=&field_sqs_country_target_id=All&field_sqs_cantons_target_id=All&field_sqs_department_target_id=All&field_sqs_region_italy_target_id=All&field_sqs_certificate_id_value=&sort_by=field_sqs_organisation_value_1#block-custom-theme-views-block-certificate-search-block-1
+	- https://www.gdrc.org/ngo/ngo-for-ngos.html (accept non-certificate risks)
+	- https://forum.opendata.ch/t/smart-use-a-new-project-for-urbanists/561
+	  Olegs 'smart use' project, for urban development open data sharing
+		- https://smartuse.ch/
 
 Requirements.txt & conda:
 https://medium.com/@boscacci/why-and-how-to-make-a-requirements-txt-f329c685181e
