@@ -1,18 +1,23 @@
+NGNIX confg:
+	- expires header beter
+	- gzip > in git (nu alleen op productie)
+	- bootstrap file kleiner
+	- flickering er uit op een of andere manier
+	- zoek via ajax call
+
 Wat maakt versie 1.0:
 	- Eigen URL
 	- Toelichting pagina
 	- Paginering
 	- Analytics @done(2019-12-13)
 	- Toch NGNIX ofzo, want spam traffic moet geblokt worden @done(2019-12-14)
-	- Page speed
-		- ngnix serve static
-		- research HTML 'keep alive', mogelijk default flask server traagheid
 	- Nice to have:
 		- Meer categoriën
 		- Dan eigen website updaten er over, evt Medium artikel
 		- Dan door met MyPictureBooks online hosting
 
 Quick:
+	- ngnix config file niet hard in copy, maar via volume mapping
 	- Andere favicon in development dan production
 	- Toelichten readme > environmental variable via bashrc zodat sessie overleeft
 	- Padding boven eerste resultaat iets groter
