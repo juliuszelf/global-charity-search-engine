@@ -53,6 +53,33 @@ header {
 	width: 72px;
 }
 
+@media only screen and (max-width: 600px) {
+	.header-content {
+		padding: 6px;
+		padding-top: 10px;
+	}
+
+	.header-content h1 {
+		font-size: 1.4rem;
+	}
+
+	.header-content h2 {
+		font-size: 0.9rem;
+	}
+
+	.logo {
+		margin-top: 8px;
+		margin-right: 20px;
+		margin-left: 10px;
+	}
+
+	.logo img {
+		height: 29px; 
+		width: 60px;
+	}
+}
+
+
 main {
 	padding: 20px;
 	max-width: 960px;
