@@ -94,7 +94,6 @@ def set_use_categories(selected_categories, selected_countries, countries_with_c
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    title = "Global charity search engine"
     message = ""
     print("on home()")
     try:
@@ -163,7 +162,6 @@ def home():
             message += "No charities found for <i>" + search_value + "</i>"
 
         return render_template("main.html",
-                               title=title,
                                nr_results=nr_results_shown,
                                results=found_charities,
                                searched_for=search_value,
@@ -176,7 +174,6 @@ def home():
         print("no search")
 
     return render_template("main.html",
-                           title=title,
                            content="no search..",
                            analytics=analytics_id
                            )

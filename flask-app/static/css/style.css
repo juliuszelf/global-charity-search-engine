@@ -1,3 +1,14 @@
+:root {
+    --green : #69a74d;
+    --red   : #ca383b;
+    --orange: #db9847;
+    --purple: #9a06fb;
+    --pink  : #c30b84;
+    --blue  : #3878d8;
+    --grey  : #bbb;
+}
+
+
 html, body {
 	height: 100%;
 }
@@ -7,28 +18,39 @@ body {
 }
 
 header {
-	border-bottom: 4px solid #eee;
+	border-bottom: 1px solid var(--grey);
 }
 
 .header-content {
-	padding: 20px;
+	padding: 10px;
+	padding-top: 16px;
 	max-width: 960px;
 	margin: auto;
 	display: flex;
 }
 
-.header-content h1 {
+.header-title-block {
 	margin-top: auto;
 	margin-bottom: auto;
+}
+.header-content h1 {
 	font-size: 1.8rem;
+	margin-bottom: 0;
+}
+
+.header-content h2 {
+	font-size: 1rem;
+	color: #666;
 }
 
 .logo {
+	margin-top: 10px;
 	margin-right: 30px;
 }
 
 .logo img {
 	height: 34px; 
+	width: 72px;
 }
 
 main {
@@ -47,24 +69,30 @@ footer {
 	color: #666;
 }
 
+.search-bar-button {
+	display: flex;
+}
+
 input[type=search]{
 	border: 1px solid #999;
-	padding: 5px;
-	max-width: 400px;
-	width: 400px;
 }
+
+input[type=search]::placeholder {
+  color: var(--grey);
+}
+
 @media only screen and (max-width: 600px) {
 	input[type=search]{
 		width: 100%;
-		margin-bottom: 10px;
 	}
 }
 
-button {
-	border: 1px solid #999;
-	padding: 3px;
-	position: relative;
-	top: -2px;
+.rotate-45 {
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	font-size: 1.4rem;
 }
 
 .message {
@@ -75,14 +103,11 @@ button {
 }
 
 .filters {
-	margin-top: 20px;
-	margin-bottom: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border-bottom: 2px dashed #66f;
-	border-top: 2px dashed #66f;
+	margin-top: 24px;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 2px dashed var(--blue);
 	border-radius: 5px;
-
 }
 
 .checkboxes {
@@ -138,6 +163,6 @@ button {
 
 .platform-link a {
 	color: #009;
-	text-decoration: underline;
+	text-decoration: none;
 }
 

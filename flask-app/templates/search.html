@@ -1,6 +1,21 @@
 <form id="searchform">
-	<input class="form-conrol" type="search" id="site-search" name="search" aria-label="Search charities" value="{{ searched_for }}">
-  <button type="submit" class="btn btn-dark" form="searchform">Search</button>
+	<div class="search-bar-button form-group">
+
+		<div class="input-group col-md-8" style="padding-left: 0; padding-right: 0">
+			<input class="form-control form-control-lg" 
+				type="search" 
+				id="site-search" 
+				name="search" 
+				aria-label="Search charities" 
+				value="{{ searched_for }}" 
+				placeholder="Search for a charity">
+			<span class="input-group-append">
+				<button type="submit" class="btn btn-primary" form="searchform"> 
+					<div class="rotate-45">&#9906;</div>
+				</button>
+			</span>
+		</div>
+	</div>
   <div class="filters">
 	  <div class="filter-group">
 		  <div class="filter-title filter-group-label">Filter by base country</div>
