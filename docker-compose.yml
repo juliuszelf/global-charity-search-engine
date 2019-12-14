@@ -20,6 +20,7 @@ services:
       - data01:/usr/share/elasticsearch/data
     ports:
         - 0.0.0.0:9200:9200
+        - 127.0.0.1:9200:9200
     expose:
         - 9200
     networks:
