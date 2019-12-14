@@ -4,7 +4,6 @@ NGNIX confg:
 		- https://github.com/purifycss/purifycss
 		  is een optie, maar wel extra stap telkens om te nemen, e.d.
 		  Sass?
-	- logo via svg
 	- zoek via ajax call
 
 Wat maakt versie 1.0:
@@ -19,6 +18,7 @@ Wat maakt versie 1.0:
 		- Dan door met MyPictureBooks online hosting
 
 Quick:
+	- Favicon op basis van favicon
 	- ngnix config file niet hard in copy, maar via volume mapping
 	- Andere favicon in development dan production
 	- Toelichten readme > environmental variable via bashrc zodat sessie overleeft
