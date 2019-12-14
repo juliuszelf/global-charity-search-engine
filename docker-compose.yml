@@ -46,6 +46,8 @@ services:
       - "80:80"
     networks:
       - elastic
+    volumes:
+      - ./flask-app/static:/static
 
 volumes:
   data01:

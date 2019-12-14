@@ -3,8 +3,9 @@ Wat maakt versie 1.0:
 	- Toelichting pagina
 	- Paginering
 	- Analytics @done(2019-12-13)
-	- Toch NGNIX ofzo, want spam traffic moet geblokt worden
+	- Toch NGNIX ofzo, want spam traffic moet geblokt worden @done(2019-12-14)
 	- Page speed
+		- ngnix serve static
 		- research HTML 'keep alive', mogelijk default flask server traagheid
 	- Nice to have:
 		- Meer categoriën
@@ -12,8 +13,7 @@ Wat maakt versie 1.0:
 		- Dan door met MyPictureBooks online hosting
 
 Quick:
-	- Typo footer 'charitus' > 'charitius' @done(2019-12-13)
-	- Favicon @done(2019-12-13)
+	- Andere favicon in development dan production
 	- Toelichten readme > environmental variable via bashrc zodat sessie overleeft
 	- Padding boven eerste resultaat iets groter
 
