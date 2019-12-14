@@ -14,6 +14,7 @@ Wat maakt versie 1.0:
 Quick:
 	- Typo footer 'charitus' > 'charitius' @done(2019-12-13)
 	- Favicon @done(2019-12-13)
+	- Toelichten readme > environmental variable via bashrc zodat sessie overleeft
 	- Padding boven eerste resultaat iets groter
 
 Startup query:
