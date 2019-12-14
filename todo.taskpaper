@@ -1,17 +1,10 @@
 NGNIX confg:
-	- expires header beter
-	- gzip > in git (nu alleen op productie)
 	- bootstrap file kleiner
-		- leren hoe bootstrap 'less' file werkt.
+		- Of gewoon geen bootstrap, Bijna alleen buttons gebruik ik er voor.
 		- https://github.com/purifycss/purifycss
 		  is een optie, maar wel extra stap telkens om te nemen, e.d.
-		- gebruikt
-			- text-muted
-			- buttons
-				- btn btn-dark
-			- form-control
-			-
-	- flickering er uit op een of andere manier
+		  Sass?
+	- logo via svg
 	- zoek via ajax call
 
 Wat maakt versie 1.0:
