@@ -1,3 +1,10 @@
+Pagination:
+	- query toont result 11-20
+	- url variabele bepaald pagination
+	- knoppen
+		- knop 'toon 11-20' 
+	- Limiet om server te beschermen?
+
 Wat maakt versie 1.0:
 	- Toelichting pagina
 	- Paginering

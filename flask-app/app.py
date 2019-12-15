@@ -101,7 +101,6 @@ def home():
         search_value = values_dict['search']
         if not search_value:
             return render_template("main.html",
-                                   title=title,
                                    message="Please fill in a search word",
                                    analytics=analytics_id
                                    )
@@ -124,6 +123,12 @@ def home():
 
         if len(selected_countries) > 0:
             s = s.filter("terms", Country=selected_countries)
+
+        # TEST PAGINATION
+        start = 10
+        end = 20
+        s = s[start:end]
+        # {"from": 10, "size": 10}
 
         response = s.execute()
 
@@ -173,10 +178,7 @@ def home():
     except KeyError:
         print("no search")
 
-    return render_template("main.html",
-                           content="no search..",
-                           analytics=analytics_id
-                           )
+    return render_template("main.html", content="no search..", analytics=analytics_id)
 
 
 if __name__ == "__main__":
