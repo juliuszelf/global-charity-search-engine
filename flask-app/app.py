@@ -43,6 +43,7 @@ countries_with_categories = ["AU", "SC", "GB-NIR"]
 
 # Elastic search has max results
 max_results = 10000
+results_per_page = 100
 
 
 def set_category_values(cats):
@@ -95,7 +96,7 @@ def set_use_categories(selected_categories, selected_countries, countries_with_c
     return use, message
 
 
-def page_start_end(page, per_page=100):
+def page_start_end(page, per_page=results_per_page):
     """
     Set pagination via
 
@@ -205,6 +206,7 @@ def home():
                                page=page,
                                nr_results=nr_results,
                                results=found_charities,
+                               results_per_page=results_per_page,
                                searched_for=search_value,
                                message=message,
                                countries=selected_countries,
