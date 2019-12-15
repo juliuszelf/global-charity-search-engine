@@ -38,7 +38,7 @@
     <div class="search-result {% if loop.index % 10 == 0 %}result-marked full-width{% endif %}">
         <div class="layout-container">
            {% if loop.index % 10 == 0 %}
-                <div class="result-marker">Result {{ loop.index }}</div>
+                <div class="result-marker">Result {{ loop.index + ((page * results_per_page) - results_per_page) }}</div>
            {% endif %}
            <b>{{ result.name }}</b><br />
            {{ result.city }}{% if result.state %}, {{ result.state }}{% endif %}, {{ result.country }}<br />

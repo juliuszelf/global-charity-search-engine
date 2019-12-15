@@ -5,7 +5,7 @@ Pagination:
 	- Toon pagina nr bovenaan results als >1 @done(2019-12-15)
 	- knoppen
 		- Knop kan naar page 2 @done(2019-12-15)
-		- De 'result 10' markers tellen goed door.
+		- De 'result 10' markers tellen goed door. @done(2019-12-15)
 		- Geen 'next page' als niet max results voor page getoond.
 		- Als page > 1 dan een 'previous page' link.
 		- knop 'toon 11-20', maar moet ook alle andere variabele mee nemen (category, etc)
