@@ -1,34 +1,15 @@
-Pagination:
-	- query toont result 11-20 @done(2019-12-15)
-	- page_start_end functie @done(2019-12-15)
-	- url variabele bepaald pagination @done(2019-12-15)
-	- Toon pagina nr bovenaan results als >1 @done(2019-12-15)
-	- knoppen
-		- Knop kan naar page 2 @done(2019-12-15)
-		- De 'result 10' markers tellen goed door. @done(2019-12-15)
-		- Geen 'next page' als niet max results voor page getoond.
-		- Als page > 1 dan een 'previous page' link.
-		- knop 'toon 11-20', maar moet ook alle andere variabele mee nemen (category, etc)
-			- Moet eigenlijk automatisch, dat als ik later meer toevoeg ik niet kan vergeten
-	- styling knoppen/links > bootstrap
-	- Limiet aantal pagina's om server te beschermen?
-	- Nice to have: Niet tonen als er geen resultaten meer zijn 
-		- dus telksen 1tje meer ophalen?
-		- maar alleen 10 van die pagina tonen
 
 Wat maakt versie 1.0:
-	- Paginering
 	- Toelichting pagina
-	- Analytics @done(2019-12-13)
-	- Toch NGNIX ofzo, want spam traffic moet geblokt worden @done(2019-12-14)
 	- Nice to have:
 		- Meer categoriën
 		- Dan eigen website updaten er over, evt Medium artikel
 		- Dan door met MyPictureBooks online hosting
 
 Quick:
-	- Favicon op basis van favicon
+	- Je moet ook op die offical-id kunnen zoeken
 	- ngnix config file niet hard in copy, maar via volume mapping
+	- Favicon op basis van svg
 	- Andere favicon in development dan production
 	- Toelichten readme > environmental variable via bashrc zodat sessie overleeft
 	- Toelichting readme > testen lokaal via 'localhost' (impliciet port 80)
@@ -80,10 +61,9 @@ Categorien-inhoud:
 		- Per land een category-mapping.txt oid maken
 
 Code/NR:
-	- Nut om juist die unieke code te hebben, voor wie daar op wil zoeken?
 
 Land van opereren:
-	- Invetariseren
+	- Inventariseren
 		- wat levert bronbestanden?
 		- Technische uitdagingen?
 
@@ -99,15 +79,6 @@ Mogelijke landen:
 	- Rusland
 		- https://data.gov.ru/taxonomy/term/71/datasets
 			- Niet duidelijk of daar iets nuttig is
-
-Pagineren:
-	- Nog niet functioneel
-		- uitlezen uit url 'page' variabele
-		- Bij template meegeven welke 'page' we op zijn
-		- Url maken met huidige page 'show more' link.
-	- Functioneel
-		- 'page' gebruiken om juiste resultaten te tonen
-	- Nice to have: Ajax call voor search result
 
 Safety:
 	- Research risico van dergelijke oplossing, kan je nu ES leegmaken met juiste HTML call?
@@ -141,12 +112,12 @@ Feature ideeen:
 Zoek verbeteren:
 Mogelijke feature van zoekmachine is dat je veel kunt customizen
 Dat je bijv. zelf fuzziness kunt selecteren, etc.
-	- Land filteren @done(2019-12-06)
-	- Toon bronbestand & bron datum
 	- Fuzzy
 	- AJAX
-	- Analytics
+	- Analytics op zoektermen (test)
 	- Kibana voor monitoring kan ook nuttig zijn
+	- Pagination nice to have: Niet tonen als er geen resultaten meer zijn 
+		- Limiet aantal pagina's om server te beschermen?
 
 Log:
 Moet ook wegschrijven in een .log bestand 

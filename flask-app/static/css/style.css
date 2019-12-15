@@ -216,6 +216,10 @@ input[type=search]::placeholder {
 	text-decoration: underline;
 }
 
+.result-bottom-message {
+	margin-bottom: 20px;
+}
+
 .platform-link {
 	font-size: 0.8rem;
 	color: #999;

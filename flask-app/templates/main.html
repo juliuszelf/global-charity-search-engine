@@ -28,7 +28,7 @@
 
    {% if nr_results %}
 		<div class="text-muted" style="margin-top: 5px">
-		{{ nr_results }} results</b>{% if page > 1 %}, page {{ page }}
+		{{ nr_results }}{% if has_max_results %}+{% endif %} results</b>{% if page > 1 %}, page {{ page }}
             {% endif %}
             <br />
 		</div>
@@ -92,22 +92,49 @@
     {% if loop.index % 10 != 9 and loop.index % 10 != 0 %}
         <hr>
     {% endif %}
+
+    {% if (loop.index + ((page * results_per_page) - results_per_page)) == nr_results  %}
+        <div class="text-muted result-bottom-message">No more results.</div>
+    {% endif %}
  {% endfor %}
 
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
     {% if page > 1 %}
-    <a href="{{ url_for('home',
+    <li class="page-item">
+        <a class="page-link"
+           href="{{ url_for('home',
                     search=searched_for,
                     page=page-1,
                     country=countries,
-                    category=categories) }}">previous page</a>
+                    category=categories) }}">
+            &#xab; &nbsp; Previous {{ results_per_page }}
+        </a>
+    </li>
     {% endif %}
     {% if nr_results > results_per_page and results|length > results_per_page - 1 %}
-    <a href="{{ url_for('home',
+    <li class="page-item">
+        <a class="page-link"
+           href="{{ url_for('home',
                     search=searched_for,
                     page=page+1,
                     country=countries,
-                    category=categories) }}">next page</a>
+                    category=categories) }}">
+            Next
+
+            {% set total_results_left = nr_results - (((page + 1 ) * results_per_page) - results_per_page) %}
+            {% if total_results_left > results_per_page %}
+                {{ results_per_page }}
+            {% else %}
+                {{ total_results_left }}
+            {% endif %}
+            &nbsp; &#xbb;
+        </a>
+    </li>
     {% endif %}
+  </ul>
+</nav>
 </main>
 {% include 'footer.html' %}
 </body>

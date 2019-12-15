@@ -166,8 +166,7 @@ def home():
         response = s.execute()
 
         nr_results = response['hits']['total']['value']
-        if nr_results == max_results:
-            nr_results = str(max_results) + "+"
+        has_max_results = nr_results == max_results
 
         results = response['hits']['hits']
         results_text = ""
@@ -207,6 +206,7 @@ def home():
                                nr_results=nr_results,
                                results=found_charities,
                                results_per_page=results_per_page,
+                               has_max_results=has_max_results,
                                searched_for=search_value,
                                message=message,
                                countries=selected_countries,
