@@ -1,13 +1,4 @@
-NGNIX confg:
-	- bootstrap file kleiner
-		- Of gewoon geen bootstrap, Bijna alleen buttons gebruik ik er voor.
-		- https://github.com/purifycss/purifycss
-		  is een optie, maar wel extra stap telkens om te nemen, e.d.
-		  Sass?
-	- zoek via ajax call
-
 Wat maakt versie 1.0:
-	- Eigen URL
 	- Toelichting pagina
 	- Paginering
 	- Analytics @done(2019-12-13)
