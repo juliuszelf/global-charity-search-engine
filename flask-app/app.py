@@ -41,6 +41,9 @@ else:
 # so filters don't try to filter on countries that are not categorized yet.
 countries_with_categories = ["AU", "SC", "GB-NIR"]
 
+# Elastic search has max results
+max_results = 10000
+
 
 def set_category_values(cats):
     cat_hum = "0"
@@ -92,6 +95,36 @@ def set_use_categories(selected_categories, selected_countries, countries_with_c
     return use, message
 
 
+def page_start_end(page, per_page):
+    """
+    Set pagination via
+
+    s = s[10:20]
+    # can be seen as {"from": 10, "size": 10}
+
+    Here we set 'start' value and 'end' value, so in example the 10 and 20.
+    """
+
+    if page < 1:
+        page = 1
+    offset = (per_page * page) - per_page
+
+    start = offset
+    end = offset + per_page
+    return start, end
+
+
+def page_from_dict(values_dict):
+    page = values_dict.get('page', 1)
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+    if page < 1:
+        page = 1
+    return page
+
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     message = ""
@@ -99,6 +132,8 @@ def home():
     try:
         values_dict = request.args.to_dict()
         search_value = values_dict['search']
+        page = page_from_dict(values_dict)
+
         if not search_value:
             return render_template("main.html",
                                    message="Please fill in a search word",
@@ -124,15 +159,15 @@ def home():
         if len(selected_countries) > 0:
             s = s.filter("terms", Country=selected_countries)
 
-        # TEST PAGINATION
-        start = 10
-        end = 20
+        start, end = page_start_end(page=page, per_page=10)
         s = s[start:end]
-        # {"from": 10, "size": 10}
 
         response = s.execute()
 
-        nr_results_shown = response['hits']['total']['value']
+        nr_results = response['hits']['total']['value']
+        if nr_results == max_results:
+            nr_results = str(max_results) + "+"
+
         results = response['hits']['hits']
         results_text = ""
 
@@ -167,7 +202,8 @@ def home():
             message += "No charities found for <i>" + search_value + "</i>"
 
         return render_template("main.html",
-                               nr_results=nr_results_shown,
+                               page=page,
+                               nr_results=nr_results,
                                results=found_charities,
                                searched_for=search_value,
                                message=message,

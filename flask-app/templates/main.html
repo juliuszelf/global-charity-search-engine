@@ -28,59 +28,63 @@
 
    {% if nr_results %}
 		<div class="text-muted" style="margin-top: 5px">
-		{{ nr_results }} results for <b><i>{{ searched_for }}</i></b><br />
+		{{ nr_results }} results</b>{% if page > 1 %}, page {{ page }}
+            {% endif %}
+            <br />
 		</div>
    {% endif %}
  <br />
  {% for result in results %}
-   <b>{{ result.name }}</b><br />
-   {{ result.city }}{% if result.state %}, {{ result.state }}{% endif %}, {{ result.country }}<br />
-   {% if result.website %}
-     <a href="{{ result.website }}" target="_blank">
-        {{ result.website }}
-     </a><br />
-   {% endif %}
-   {% if result.country == "USA" %}
-	<div class="platform-link">
-		<a href="https://apps.irs.gov/app/eos/allSearch.do?ein1={{ result.official_id }}&dispatchMethod=searchAll" target"_blank"> Official data on IRS.gov (tap first result)</a><br />
-		<a href="https://www.guidestar.org/profile/{{ result.official_id }}" target="_blank">Profile on GuideStar</a><br />
-		<a href="https://990finder.foundationcenter.org/990results.aspx?990_type=&fn={{ result.name }}&st={{ result.state }}" target="_blank">Search on 990 finder (submitted forms)</a><br />
-	</div>
-   {% endif %}
-   {% if result.country == "SC" %}
-	<div class="platform-link">
-		<a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number={{ result.official_id }}" target="_blank">Profile on OSCR</a><br />
-	</div>
-   {% endif %}
-   {% if result.country == "GB-NIR" %}
-	<div class="platform-link">
-		<a href="https://www.charitycommissionni.org.uk/charity-details/?regId={{ result.official_id}}" target="_blank">Profile on CharitycCommissionNI</a><br />
-	</div>
-   {% endif %}
-   {% if result.country == "NZ" %}
-     {% if result.official_id %}
-		<div class="platform-link">
-			<a href="https://register.charities.govt.nz/CharitiesRegister/Search" target="_blank">Search register.charities.govt.nz</a> Put {{ result.official_id }} in 'NZBN Number' field.<br />
-		</div>
-      {% endif %}
-   {% endif %}
-   {% if result.country == "CA" %}
-	<div class="platform-link">
-		<a href="https://apps.cra-arc.gc.ca/ebci/hacc/srch/pub/dsplyRprtngPrd?q.srchNm=steps&q.stts=0007&selectedCharityBn={{ result.official_id }}&dsrdPg=1" target="_blank">Official Canadese Government profile</a> 
-	</div>
-	
-   {% endif %}
-   {% if result.country == "AU" %}
-	<div class="platform-link">
-		<a href="https://www.acnc.gov.au/charity?name_abn[0]={{ result.official_id}}" target="_blank">Page on acnc.gov.au</a> 
-		| <a href="https://abr.business.gov.au/ABN/View/{{ result.official_id}}" target="_blank">direct to ABN</a><br />
-	</div>
-   {% endif %}
-   <div class="result-source"><a href="{{ result.source_url }}" target="_blank">Source</a> {{ result.source_date }}</div>
-   {% if result.official_id %}
-	  <div class="result-source">ID: {{ result.official_id }}</div>
-   {% endif %}
-   <hr>
+    <div class="search-result">
+       <b>{{ result.name }}</b><br />
+       {{ result.city }}{% if result.state %}, {{ result.state }}{% endif %}, {{ result.country }}<br />
+       {% if result.website %}
+         <a href="{{ result.website }}" target="_blank">
+            {{ result.website }}
+         </a><br />
+       {% endif %}
+       {% if result.country == "USA" %}
+        <div class="platform-link">
+            <a href="https://apps.irs.gov/app/eos/allSearch.do?ein1={{ result.official_id }}&dispatchMethod=searchAll" target"_blank"> Official data on IRS.gov (tap first result)</a><br />
+            <a href="https://www.guidestar.org/profile/{{ result.official_id }}" target="_blank">Profile on GuideStar</a><br />
+            <a href="https://990finder.foundationcenter.org/990results.aspx?990_type=&fn={{ result.name }}&st={{ result.state }}" target="_blank">Search on 990 finder (submitted forms)</a><br />
+        </div>
+       {% endif %}
+       {% if result.country == "SC" %}
+        <div class="platform-link">
+            <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number={{ result.official_id }}" target="_blank">Profile on OSCR</a><br />
+        </div>
+       {% endif %}
+       {% if result.country == "GB-NIR" %}
+        <div class="platform-link">
+            <a href="https://www.charitycommissionni.org.uk/charity-details/?regId={{ result.official_id}}" target="_blank">Profile on CharitycCommissionNI</a><br />
+        </div>
+       {% endif %}
+       {% if result.country == "NZ" %}
+         {% if result.official_id %}
+            <div class="platform-link">
+                <a href="https://register.charities.govt.nz/CharitiesRegister/Search" target="_blank">Search register.charities.govt.nz</a> Put {{ result.official_id }} in 'NZBN Number' field.<br />
+            </div>
+          {% endif %}
+       {% endif %}
+       {% if result.country == "CA" %}
+        <div class="platform-link">
+            <a href="https://apps.cra-arc.gc.ca/ebci/hacc/srch/pub/dsplyRprtngPrd?q.srchNm=steps&q.stts=0007&selectedCharityBn={{ result.official_id }}&dsrdPg=1" target="_blank">Official Canadese Government profile</a>
+        </div>
+
+       {% endif %}
+       {% if result.country == "AU" %}
+        <div class="platform-link">
+            <a href="https://www.acnc.gov.au/charity?name_abn[0]={{ result.official_id}}" target="_blank">Page on acnc.gov.au</a>
+            | <a href="https://abr.business.gov.au/ABN/View/{{ result.official_id}}" target="_blank">direct to ABN</a><br />
+        </div>
+       {% endif %}
+       <div class="result-source"><a href="{{ result.source_url }}" target="_blank">Source</a> {{ result.source_date }}</div>
+       {% if result.official_id %}
+          <div class="result-source">ID: {{ result.official_id }}</div>
+       {% endif %}
+    </div>
+    <hr>
  {% endfor %}
 </main>
 {% include 'footer.html' %}

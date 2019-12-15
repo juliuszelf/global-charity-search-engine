@@ -1,13 +1,19 @@
 Pagination:
-	- query toont result 11-20
-	- url variabele bepaald pagination
+	- query toont result 11-20 @done(2019-12-15)
+	- page_start_end functie @done(2019-12-15)
+	- url variabele bepaald pagination @done(2019-12-15)
+	- Toon pagina nr bovenaan results als >1 @done(2019-12-15)
 	- knoppen
-		- knop 'toon 11-20' 
-	- Limiet om server te beschermen?
+		- knop 'toon 11-20', maar moet ook alle andere variabele mee nemen (category, etc)
+			- Moet eigenlijk automatisch, dat als ik later meer toevoeg ik niet kan vergeten
+	- Limiet aantal pagina's om server te beschermen?
+	- Nice to have: Niet tonen als er geen resultaten meer zijn 
+		- dus telksen 1tje meer ophalen?
+		- maar alleen 10 van die pagina tonen
 
 Wat maakt versie 1.0:
-	- Toelichting pagina
 	- Paginering
+	- Toelichting pagina
 	- Analytics @done(2019-12-13)
 	- Toch NGNIX ofzo, want spam traffic moet geblokt worden @done(2019-12-14)
 	- Nice to have:
@@ -20,6 +26,9 @@ Quick:
 	- ngnix config file niet hard in copy, maar via volume mapping
 	- Andere favicon in development dan production
 	- Toelichten readme > environmental variable via bashrc zodat sessie overleeft
+	- Toelichting readme > testen lokaal via 'localhost' (impliciet port 80)
+		- heeft caching
+		- handiger is via poort 5000 of zelfs via 'outside'
 	- Padding boven eerste resultaat iets groter
 
 Startup query:
