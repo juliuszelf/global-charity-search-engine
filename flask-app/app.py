@@ -95,7 +95,7 @@ def set_use_categories(selected_categories, selected_countries, countries_with_c
     return use, message
 
 
-def page_start_end(page, per_page):
+def page_start_end(page, per_page=100):
     """
     Set pagination via
 
@@ -159,7 +159,7 @@ def home():
         if len(selected_countries) > 0:
             s = s.filter("terms", Country=selected_countries)
 
-        start, end = page_start_end(page=page, per_page=10)
+        start, end = page_start_end(page=page)
         s = s[start:end]
 
         response = s.execute()

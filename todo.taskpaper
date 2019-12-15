@@ -6,6 +6,7 @@ Pagination:
 	- knoppen
 		- knop 'toon 11-20', maar moet ook alle andere variabele mee nemen (category, etc)
 			- Moet eigenlijk automatisch, dat als ik later meer toevoeg ik niet kan vergeten
+	- styling knoppen/links > bootstrap
 	- Limiet aantal pagina's om server te beschermen?
 	- Nice to have: Niet tonen als er geen resultaten meer zijn 
 		- dus telksen 1tje meer ophalen?
