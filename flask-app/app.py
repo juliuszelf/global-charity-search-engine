@@ -125,6 +125,9 @@ def page_from_dict(values_dict):
         page = 1
     return page
 
+@app.route("/about", methods=["GET", "POST"])
+def about():
+    return "test about"
 
 @app.route("/", methods=["GET", "POST"])
 def home():
