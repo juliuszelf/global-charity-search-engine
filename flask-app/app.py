@@ -138,7 +138,10 @@ def home():
         if not search_value:
             return render_template("main.html",
                                    message="Please fill in a search word",
-                                   analytics=analytics_id
+                                   analytics=analytics_id,
+                                   nr_results=0,
+                                   results_per_page=results_per_page,
+                                   page=1
                                    )
 
         s = Search(using=es_client, index="chars") \
@@ -216,7 +219,13 @@ def home():
     except KeyError:
         print("no search")
 
-    return render_template("main.html", content="no search..", analytics=analytics_id)
+    return render_template("main.html", 
+            content="no search..", 
+            analytics=analytics_id, 
+            nr_results=0,
+            results_per_page=results_per_page,
+            page=1
+            )
 
 
 if __name__ == "__main__":
