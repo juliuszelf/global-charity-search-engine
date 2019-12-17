@@ -230,3 +230,12 @@ input[type=search]::placeholder {
 	text-decoration: none;
 }
 
+.about-teaser {
+	font-style: italic;
+}
+
+.about-image {
+	text-align: center;
+	width: 150px;
+	height: auto;
+}

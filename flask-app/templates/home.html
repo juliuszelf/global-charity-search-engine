@@ -1,26 +1,6 @@
-<!doctype html>
-<html>
-<head>
-{% if analytics %}
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ analytics }}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '{{ analytics }}');
-    </script>
-{% endif %}
-
-<title>{{ title }}</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-{% include 'header.html' %}
-<main>
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block main %}
  {% include 'search.html' %}
    {% if message %}
 	<div class="message">{{ message | safe }}</div>
@@ -34,6 +14,12 @@
 		</div>
    {% endif %}
  <br />
+ {% if not searched_for %}
+ <div class="about-teaser">Charitius aims to become a global search engine for charities. <br />
+	 It is based on open data, suggestions on good sources? Share with <a href="https://twitter.com/charitiusorg/">@charitiusorg</a>.<br/>  
+	 <a href="{{ url_for('about') }}">More about Charitius</a>.
+ </div>
+ {% endif %}
  {% for result in results %}
     <div class="search-result {% if loop.index % 10 == 0 %}result-marked full-width{% endif %}">
         <div class="layout-container">
@@ -140,7 +126,4 @@
     {% endif %}
   </ul>
 </nav>
-</main>
-{% include 'footer.html' %}
-</body>
-</html>
+{% endblock %}

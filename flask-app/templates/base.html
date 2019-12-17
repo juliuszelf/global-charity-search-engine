@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+{% if analytics %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ analytics }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ analytics }}');
+    </script>
+{% endif %}
+
+<title>{% block title %}{% endblock %} - Charitius.org, building a global charity search engine.</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+{% include 'header.html' %}
+<main>
+{% block main %}{% endblock %}
+</main>
+{% include 'footer.html' %}
+</body>

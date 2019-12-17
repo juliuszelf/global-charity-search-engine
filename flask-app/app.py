@@ -127,7 +127,9 @@ def page_from_dict(values_dict):
 
 @app.route("/about", methods=["GET", "POST"])
 def about():
-    return "test about"
+    return render_template("about.html",
+                            analytics=analytics_id
+                            )
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -139,8 +141,8 @@ def home():
         page = page_from_dict(values_dict)
 
         if not search_value:
-            return render_template("main.html",
-                                   message="Please fill in a search word",
+            return render_template("home.html",
+                                   message="",
                                    analytics=analytics_id,
                                    nr_results=0,
                                    results_per_page=results_per_page,
@@ -207,7 +209,7 @@ def home():
         if len(results) == 0:
             message += "No charities found for <i>" + search_value + "</i>"
 
-        return render_template("main.html",
+        return render_template("home.html",
                                page=page,
                                nr_results=nr_results,
                                results=found_charities,
@@ -222,7 +224,7 @@ def home():
     except KeyError:
         print("no search")
 
-    return render_template("main.html", 
+    return render_template("home.html", 
             content="no search..", 
             analytics=analytics_id, 
             nr_results=0,
