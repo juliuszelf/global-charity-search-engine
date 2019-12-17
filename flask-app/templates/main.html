@@ -38,6 +38,7 @@
     <div class="search-result {% if loop.index % 10 == 0 %}result-marked full-width{% endif %}">
         <div class="layout-container">
            {% if loop.index % 10 == 0 %}
+		   {# Every 10th result we highlight, to prevent user from getting lost when scrolling #}
                 <div class="result-marker">Result {{ loop.index + ((page * results_per_page) - results_per_page) }}</div>
            {% endif %}
            <b>{{ result.name }}</b><br />
@@ -90,10 +91,12 @@
         </div>
     </div>
     {% if loop.index % 10 != 9 and loop.index % 10 != 0 %}
+	{# no hr lines around our each 10th highlighting results #}
         <hr>
     {% endif %}
 
     {% if (loop.index + ((page * results_per_page) - results_per_page)) == nr_results  %}
+	{# end of last result #}
         <div class="text-muted result-bottom-message">No more results.</div>
     {% endif %}
  {% endfor %}
@@ -114,6 +117,7 @@
     </li>
     {% endif %}
     {% if nr_results > results_per_page and results|length > results_per_page - 1 %}
+	{# Results dont fit page, we show next #}
     <li class="page-item">
         <a class="page-link"
            href="{{ url_for('home',
@@ -123,6 +127,7 @@
                     category=categories) }}">
             Next
 
+			{# Show nr of results on next page #}
             {% set total_results_left = nr_results - (((page + 1 ) * results_per_page) - results_per_page) %}
             {% if total_results_left > results_per_page %}
                 {{ results_per_page }}
