@@ -187,5 +187,5 @@ def parse(input_file_path, output_file_path):
         print(lines.readline(), end='')
         print(lines.readline(), end='')
 
-        print(colored("Ended cleaning CSV file", "green")) 
+    print(colored("Ended cleaning CSV file", "green")) 
 

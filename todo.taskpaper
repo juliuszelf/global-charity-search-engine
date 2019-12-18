@@ -1,18 +1,7 @@
 Test:
-	- Folder bij 'data' voor testdata
-	- Test test
-		- uberhaubt aanroepen 
-		- Hoe stdin invullen?
-			- A. Bash aanroepen vanuit Python
-			- B. Op een of andere manier Python Stdin 'mocken'
-	- Unit test per clean.py misschien gewoon clean.test.py
+	- Andere landen ook testen
 	- In Makefile ook eerst de clean.test.py aanroepen voordat clean.py aangeroepen wordt
 
-Bug, ongerecht category 'animal':
-	"True Light Ministries International" hoort niet animal category te krijgen
-	- Probleem
-		- Ik denk dat mis gaat is dat die lijst met waardes niet gesplitst wordt op ","
-		- Die van schotland en n-ireland gaan niet goed nu
 
 Animal category:
 	-  Veld bij ES mapping @done(2019-12-18)

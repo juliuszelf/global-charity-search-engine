@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 import unittest
+import os
 # noinspection PyUnresolvedReferences
 from cleanCSV_parser import parse
 
@@ -30,4 +31,5 @@ class CleanTestCase(unittest.TestCase):
 
         self.assertEqual(content_output, expected_output)
 
-        # TODO: clean up, remove outcome
+        # cleanup
+        os.remove(output)
