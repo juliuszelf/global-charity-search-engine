@@ -1,9 +1,10 @@
+from __future__ import absolute_import
 import unittest
-from mock import patch
-import sys
+# noinspection PyUnresolvedReferences
+from cleanCSV_parser import parse
 
 
-class CleanTestCase:
+class CleanTestCase(unittest.TestCase):
 
     def setUp(self):
         print("setup")
@@ -14,19 +15,19 @@ class CleanTestCase:
         pass
 
     def test_head(self):
-	'''
-	For 'canada': python3 scripts/canada/cleanCSV.py data/canada/rawutf8.csv data/canada/clean.csv
-	'''
-        # TODO: call python script 'from the outside', let it generate outcome
-        source = 'data/n-ireland/testdata/raw.head.test.csv'
-        output = 'data/n-ireland/testoutput/clean.csv'
+        source = 'testdata/raw.head.test.csv'
+        output = 'testoutput/clean.head.csv'
+        expected = 'testdata/clean.head.expected.csv'
 
-        testargs = [source, output]
+        parse(source, output)
 
-        with patch.object(sys, 'argv', testargs):
-            setup = get_setup_file()
-            assert setup == "/home/fenton/project/setup.py"
+        # Now we should have created a file, validate it is equal to expected result.
+        with open(output) as f:
+            content_output = f.read()
 
-        # TODO: read outcome file, validate it's correct
+        with open(expected) as f:
+            expected_output = f.read()
+
+        self.assertEqual(content_output, expected_output)
+
         # TODO: clean up, remove outcome
-        self.assertEqual(response.status_code, 200)

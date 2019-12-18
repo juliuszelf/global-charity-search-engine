@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import csv
-import json
 from termcolor import colored
 
 # First clean csv, we can then re-use the csvToJSON script for all datasets.
@@ -70,22 +69,24 @@ def get_category_values(purposes):
     animal = 0 
 
     # clean purpose from quotes
-    pur = purposes.strip().replace("'", "")
+    purr = purposes.strip().replace("'", "")
 
-    # Assumption is that purpose field is mutually exclusive,
-    # so charity can only have sigle purpose
-    # TODO: check from raw data if this is correct,
-    # the fact that it's multiple purposeS is suspect.
-    if pur in human_category_list:
-        human = 1
+    # The ugly part is that te different catories are comma seperated, but each category label also can have commas.
+    # So we can't really split 'pur', so we simple test if a category label is 'in' the 'pur'.
+    for cat in human_category_list:
+        if cat in purr:
+            human = 1
 
-    if pur in nature_category_list:
-        nature = 1
+    for cat in nature_category_list:
+        if cat in purr:
+            nature = 1
 
-    if pur in animal_category_list:
-        animal = 1
-    
+    for cat in animal_category_list:
+        if cat in purr:
+            animal = 1  # Meow!
+
     return human, nature, animal
+
 
 def get_values_from_address(address):
 
