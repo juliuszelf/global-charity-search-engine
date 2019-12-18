@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+{% block main %}
+<h1>About</h1>
+<p>
+	My name is Julius (<a href="http://www.twitter.com/juliu" target="_blank">@juliu</a>) 
+	and this is the third iteration on a tool to help you <b>find charities you can trust</b>.
+</p>
+<p>
+    More about my personal motivations and other work at <a href="http://www.juliushuijnk.nl">Juliushuijnk.nl</a>.
+</p>
+<img src="{{ url_for('static', filename='img/project_logo_helpalot.gif') }}" class="about-image">
+<h3>First attempt</h3>
+<p>
+	In 2006 I created Helpalot.org. It had about 300+ accounts and over 100 charity projects. 
+	After a few years I had to pull the plug, because I couldn't find the time to do it properly.
+    <a href="http://juliushuijnk.nl/project/helpalot">More about Helpalot.org</a>.
+</p>
+<img src="{{ url_for('static', filename='img/project_logo_charitius.gif') }}" class="about-image">
+<h3>Second</h3>
+<p>
+	Ten years later, in 2016, I made a new attempt with a more clear focus; 
+	It was no longer a social network, but a search engine for all charities in the world. 
+	More and more relevant context could be added, perhaps in later stages even social.
+	After a couple of months, I ran into technical problems when my database grew and 
+	put the project on pause.
+</p>
+<img src="{{ url_for('static', filename='img/challenge_fairness_arrow.gif') }}" 
+     class="about-image"
+	 style="margin-top:15px; margin-bottom:15px">
+<h3>Third</h3>
+<p>
+	At then end of 2019 I rebooted the project and decided the platform had to run on public data, 
+	should be open source (<a href="https://github.com/juliuszelf/global-charity-search-engine">code on Github</a>), 
+	and I would automate as much as possible with scripts, 
+	allowing me to add more content and features with as little time as possible. 
+</p>
+<p>
+	Follow the progress at  <a href="https://twitter.com/charitiusorg">@charitiusorg</a>.
+</p>
+
+<h2>Core principles</h2>
+<p>
+<ol>
+	<li>
+		<b>Quick & simple to use</b><br/>
+	</li>
+	<li>
+		<b>Global</b><br/>
+		There is no need to limit your search by base country. 
+	</li>
+	<li>
+		<b>You are in control</b><br/>
+	</li>
+	<ul>
+		<li>
+			<b>No judgement</b><br/>
+			As close to the facts as possible, using official sources for the core information.
+		</li>
+		<li>
+			<b>Context from external sources</b><br/>
+			Make it easy to research charities by proving access to different perspectives.
+		</li>
+		<li>
+			<b>No conflicts of interests.</b><br/>
+			don't push a message or charity
+		</li>
+	</ul>
+</ol>
+</p>
+</div>
+<p>
+Back to the <a href="{{ url_for('home') }}">search engine</a>.
+</p>
+{% endblock %}
+
+

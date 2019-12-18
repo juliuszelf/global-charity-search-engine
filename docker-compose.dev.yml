@@ -15,6 +15,10 @@ services:
     networks:
       - elastic
 
+  flask:
+    ports:
+      - 5000:5000
+
 volumes:
   data01:
     driver: local

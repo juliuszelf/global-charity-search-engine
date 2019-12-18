@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block main %}
+ {% include 'search.html' %}
+   {% if message %}
+	<div class="message">{{ message | safe }}</div>
+   {% endif %}
+
+   {% if nr_results %}
+		<div class="text-muted" style="margin-top: 5px">
+		{{ nr_results }}{% if has_max_results %}+{% endif %} results</b>{% if page > 1 %}, page {{ page }}
+            {% endif %}
+            <br />
+		</div>
+   {% endif %}
+ <br />
+ {% if not searched_for %}
+ <div class="about-teaser">Charitius aims to become a global search engine for charities. <br />
+	 It is based on open data, suggestions on good sources? Share with <a href="https://twitter.com/charitiusorg/">@charitiusorg</a>.<br/>  
+	 <a href="{{ url_for('about') }}">More about Charitius</a>.
+ </div>
+ {% endif %}
+ {% for result in results %}
+    <div class="search-result {% if loop.index % 10 == 0 %}result-marked full-width{% endif %}">
+        <div class="layout-container">
+           {% if loop.index % 10 == 0 %}
+		   {# Every 10th result we highlight, to prevent user from getting lost when scrolling #}
+                <div class="result-marker">Result {{ loop.index + ((page * results_per_page) - results_per_page) }}</div>
+           {% endif %}
+           <b>{{ result.name }}</b><br />
+           {{ result.city }}{% if result.state %}, {{ result.state }}{% endif %}, {{ result.country }}<br />
+           {% if result.website %}
+             <a href="{{ result.website }}" target="_blank">
+                {{ result.website }}
+             </a><br />
+           {% endif %}
+           {% if result.country == "USA" %}
+            <div class="platform-link">
+                <a href="https://apps.irs.gov/app/eos/allSearch.do?ein1={{ result.official_id }}&dispatchMethod=searchAll" target"_blank"> Official data on IRS.gov (tap first result)</a><br />
+                <a href="https://www.guidestar.org/profile/{{ result.official_id }}" target="_blank">Profile on GuideStar</a><br />
+                <a href="https://990finder.foundationcenter.org/990results.aspx?990_type=&fn={{ result.name }}&st={{ result.state }}" target="_blank">Search on 990 finder (submitted forms)</a><br />
+            </div>
+           {% endif %}
+           {% if result.country == "SC" %}
+            <div class="platform-link">
+                <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number={{ result.official_id }}" target="_blank">Profile on OSCR</a><br />
+            </div>
+           {% endif %}
+           {% if result.country == "GB-NIR" %}
+            <div class="platform-link">
+                <a href="https://www.charitycommissionni.org.uk/charity-details/?regId={{ result.official_id}}" target="_blank">Profile on CharitycCommissionNI</a><br />
+            </div>
+           {% endif %}
+           {% if result.country == "NZ" %}
+             {% if result.official_id %}
+                <div class="platform-link">
+                    <a href="https://register.charities.govt.nz/CharitiesRegister/Search" target="_blank">Search register.charities.govt.nz</a> Put {{ result.official_id }} in 'NZBN Number' field.<br />
+                </div>
+              {% endif %}
+           {% endif %}
+           {% if result.country == "CA" %}
+            <div class="platform-link">
+                <a href="https://apps.cra-arc.gc.ca/ebci/hacc/srch/pub/dsplyRprtngPrd?q.srchNm=steps&q.stts=0007&selectedCharityBn={{ result.official_id }}&dsrdPg=1" target="_blank">Official Canadese Government profile</a>
+            </div>
+
+           {% endif %}
+           {% if result.country == "AU" %}
+            <div class="platform-link">
+                <a href="https://www.acnc.gov.au/charity?name_abn[0]={{ result.official_id}}" target="_blank">Page on acnc.gov.au</a>
+                | <a href="https://abr.business.gov.au/ABN/View/{{ result.official_id}}" target="_blank">direct to ABN</a><br />
+            </div>
+           {% endif %}
+           <div class="result-source"><a href="{{ result.source_url }}" target="_blank">Source</a> {{ result.source_date }}</div>
+           {% if result.official_id %}
+              <div class="result-source">ID: {{ result.official_id }}</div>
+           {% endif %}
+        </div>
+    </div>
+    {% if loop.index % 10 != 9 and loop.index % 10 != 0 %}
+	{# no hr lines around our each 10th highlighting results #}
+        <hr>
+    {% endif %}
+
+    {% if (loop.index + ((page * results_per_page) - results_per_page)) == nr_results  %}
+	{# end of last result #}
+        <div class="text-muted result-bottom-message">No more results.</div>
+    {% endif %}
+ {% endfor %}
+
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    {% if page > 1 %}
+    <li class="page-item">
+        <a class="page-link"
+           href="{{ url_for('home',
+                    search=searched_for,
+                    page=page-1,
+                    country=countries,
+                    category=categories) }}">
+            &#xab; &nbsp; Previous {{ results_per_page }}
+        </a>
+    </li>
+    {% endif %}
+    {% if nr_results > results_per_page and results|length > results_per_page - 1 %}
+	{# Results dont fit page, we show next #}
+    <li class="page-item">
+        <a class="page-link"
+           href="{{ url_for('home',
+                    search=searched_for,
+                    page=page+1,
+                    country=countries,
+                    category=categories) }}">
+            Next
+
+			{# Show nr of results on next page #}
+            {% set total_results_left = nr_results - (((page + 1 ) * results_per_page) - results_per_page) %}
+            {% if total_results_left > results_per_page %}
+                {{ results_per_page }}
+            {% else %}
+                {{ total_results_left }}
+            {% endif %}
+            &nbsp; &#xbb;
+        </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock %}

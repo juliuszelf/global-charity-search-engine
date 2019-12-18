@@ -1,9 +1,10 @@
 # flask-app/app.py
 
-import json
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
+import os
+import logging
 
 # For debugging with breakpoints it can be nice to run outside docker container.
 # First the container must be stopped via `docker stop flask01`.
@@ -11,9 +12,24 @@ from elasticsearch_dsl import Search
 # To signal starting app.py outside docker containers, you add 'outside' like this:
 # `python3 app.py outside` 
 import sys
-firstarg=sys.argv[1]
+
+firstarg = ""
+try:
+    firstarg = sys.argv[1]
+except:
+    print("no arguments passed to app.py")
 
 app = Flask(__name__)
+
+app.logger.setLevel(logging.INFO)
+
+# get analytics id
+try:
+    analytics_id = os.environ['ANALYTICS']
+    app.logger.info('analytics set')
+except:
+    analytics_id = ""
+    app.logger.info('analytics not set')
 
 if firstarg == "outside":
     es_client = Elasticsearch('http://0.0.0.0:9200')
@@ -24,6 +40,11 @@ else:
 # For now we track this by hand, 
 # so filters don't try to filter on countries that are not categorized yet.
 countries_with_categories = ["AU", "SC", "GB-NIR"]
+
+# Elastic search has max results
+max_results = 10000
+results_per_page = 100
+
 
 def set_category_values(cats):
     cat_hum = "0"
@@ -39,6 +60,7 @@ def set_category_values(cats):
         cat_nat = "1"
     return cat_hum, cat_nat
 
+
 def set_use_categories(selected_categories, selected_countries, countries_with_categories, message):
     # Decide use of category filters
 
@@ -47,7 +69,6 @@ def set_use_categories(selected_categories, selected_countries, countries_with_c
     categorized_in_selected = []
 
     if len(selected_categories) > 0:
-        
 
         if len(selected_countries) == 0:
             # Assume no country selected, means all. And at least one has category
@@ -75,24 +96,69 @@ def set_use_categories(selected_categories, selected_countries, countries_with_c
     return use, message
 
 
+def page_start_end(page, per_page=results_per_page):
+    """
+    Set pagination via
+
+    s = s[10:20]
+    # can be seen as {"from": 10, "size": 10}
+
+    Here we set 'start' value and 'end' value, so in example the 10 and 20.
+    """
+
+    if page < 1:
+        page = 1
+    offset = (per_page * page) - per_page
+
+    start = offset
+    end = offset + per_page
+    return start, end
+
+
+def page_from_dict(values_dict):
+    page = values_dict.get('page', 1)
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+    if page < 1:
+        page = 1
+    return page
+
+@app.route("/about", methods=["GET", "POST"])
+def about():
+    return render_template("about.html",
+                            analytics=analytics_id
+                            )
+
 @app.route("/", methods=["GET", "POST"])
 def home():
-    title = "Global charity search engine"
     message = ""
     print("on home()")
     try:
         values_dict = request.args.to_dict()
         search_value = values_dict['search']
+        page = page_from_dict(values_dict)
+
         if not search_value:
-            return render_template("main.html", title=title, message="Please fill in a search word")
-        
+            return render_template("home.html",
+                                   message="",
+                                   analytics=analytics_id,
+                                   nr_results=0,
+                                   results_per_page=results_per_page,
+                                   page=1
+                                   )
+
         s = Search(using=es_client, index="chars") \
-            .query("multi_match", query=search_value, fields=['Name', 'City'])   \
-            
+            .query("multi_match", query=search_value, fields=['Name', 'City'])
+
         selected_countries = request.args.getlist('country')
         selected_categories = request.args.getlist('category')
 
-        use_categories, message = set_use_categories(selected_categories, selected_countries, countries_with_categories, message)
+        use_categories, message = set_use_categories(selected_categories,
+                                                     selected_countries,
+                                                     countries_with_categories,
+                                                     message)
 
         if use_categories:
             cat_hum, cat_nat = set_category_values(selected_categories)
@@ -102,9 +168,14 @@ def home():
         if len(selected_countries) > 0:
             s = s.filter("terms", Country=selected_countries)
 
+        start, end = page_start_end(page=page)
+        s = s[start:end]
+
         response = s.execute()
 
-        nr_results_shown = response['hits']['total']['value']
+        nr_results = response['hits']['total']['value']
+        has_max_results = nr_results == max_results
+
         results = response['hits']['hits']
         results_text = ""
 
@@ -114,7 +185,7 @@ def home():
             result_official_id = result_content['OfficialID']
             result_name = result_content['Name']
             result_city = result_content['City']
-            result_state = result_content['State'] # State / Province
+            result_state = result_content['State']  # State / Province
             result_country = result_content['Country']
             result_website = result_content['Website']
             result_source_url = result_content['SourceURL']
@@ -124,35 +195,43 @@ def home():
                 # Guidestar url requires we turn an ID like: "811996576"
                 # into "81-1996576"
                 result_official_id = result_official_id[0:2] + "-" + result_official_id[2:]
-         
-            found_charities.append({ 
-                "official_id": result_official_id, 
-                "name": result_name, 
+
+            found_charities.append({
+                "official_id": result_official_id,
+                "name": result_name,
                 "city": result_city,
                 "state": result_state,
                 "country": result_country,
                 "website": result_website,
                 "source_url": result_source_url,
-                "source_date": result_source_date 
+                "source_date": result_source_date
             })
-        if len(results) == 0: 
+        if len(results) == 0:
             message += "No charities found for <i>" + search_value + "</i>"
 
-        return render_template("main.html", 
-                title=title, 
-                nr_results=nr_results_shown, 
-                results=found_charities, 
-                searched_for=search_value, 
-                message=message,
-                countries=selected_countries,
-                categories=selected_categories
-                )
+        return render_template("home.html",
+                               page=page,
+                               nr_results=nr_results,
+                               results=found_charities,
+                               results_per_page=results_per_page,
+                               has_max_results=has_max_results,
+                               searched_for=search_value,
+                               message=message,
+                               countries=selected_countries,
+                               categories=selected_categories,
+                               analytics=analytics_id
+                               )
     except KeyError:
         print("no search")
 
-    return render_template("main.html", title=title, content="no search..")
+    return render_template("home.html", 
+            content="no search..", 
+            analytics=analytics_id, 
+            nr_results=0,
+            results_per_page=results_per_page,
+            page=1
+            )
 
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
-

@@ -2,6 +2,7 @@
 .DS_Store
 
 flask-app/__pycache__/
+flask-app/logs/
 
 # On server override must be created from either docker-compose.dev.yml or docker-compose.prod.yml
 docker-compose.override.yml

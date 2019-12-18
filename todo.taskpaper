@@ -1,14 +1,19 @@
-Platform links:
-	- USA:
-		- https://charitycheck101.org/report/?id=411917226
-		- Nu gelinkt naar search result van IRS, want we hebben niet interne ID
-	- New Zealand
-		- Ander veld voor ID nodig, het NZBN nummer, is laatste veld met label:NZBNNumber 
-		- Dan url https://register.charities.govt.nz/CharitiesRegister/Search
-		  Helaas is profielpagina zelf met eigen ID's
+Wat maakt versie 1.0:
+	- Nice to have:
+		- Eigen website updaten er over, evt Medium artikel
+		- Meer categoriën, meer landen indien laag hangend fruit.
+		- Dan even switchen en door met MyPictureBooks online hosting
+
 Quick:
+	- Je moet ook op die offical-id kunnen zoeken
+	- ngnix config file niet hard in copy, maar via volume mapping
+	- Favicon op basis van svg
+	- Andere favicon in development dan production
+	- Toelichten readme > environmental variable via bashrc zodat sessie overleeft
+	- Toelichting readme > testen lokaal via 'localhost' (impliciet port 80)
+		- heeft caching
+		- handiger is via poort 5000 of zelfs via 'outside'
 	- Padding boven eerste resultaat iets groter
-	- i-frame profile pages, of inline bij search results?
 
 Startup query:
 	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
@@ -54,10 +59,9 @@ Categorien-inhoud:
 		- Per land een category-mapping.txt oid maken
 
 Code/NR:
-	- Nut om juist die unieke code te hebben, voor wie daar op wil zoeken?
 
 Land van opereren:
-	- Invetariseren
+	- Inventariseren
 		- wat levert bronbestanden?
 		- Technische uitdagingen?
 
@@ -73,15 +77,6 @@ Mogelijke landen:
 	- Rusland
 		- https://data.gov.ru/taxonomy/term/71/datasets
 			- Niet duidelijk of daar iets nuttig is
-
-Pagineren:
-	- Nog niet functioneel
-		- uitlezen uit url 'page' variabele
-		- Bij template meegeven welke 'page' we op zijn
-		- Url maken met huidige page 'show more' link.
-	- Functioneel
-		- 'page' gebruiken om juiste resultaten te tonen
-	- Nice to have: Ajax call voor search result
 
 Safety:
 	- Research risico van dergelijke oplossing, kan je nu ES leegmaken met juiste HTML call?
@@ -109,15 +104,18 @@ Digital ocean setup:
 			sysctl -w vm.max_map_count=262144
 			stond hier: https://github.com/maxyermayank/docker-compose-elasticsearch-kibana/issues/10
 
+Feature ideeen:
+- i-frame profile pages, of inline bij search results?
+
 Zoek verbeteren:
 Mogelijke feature van zoekmachine is dat je veel kunt customizen
 Dat je bijv. zelf fuzziness kunt selecteren, etc.
-	- Land filteren @done(2019-12-06)
-	- Toon bronbestand & bron datum
 	- Fuzzy
 	- AJAX
-	- Analytics
+	- Analytics op zoektermen (test)
 	- Kibana voor monitoring kan ook nuttig zijn
+	- Pagination nice to have: Niet tonen als er geen resultaten meer zijn 
+		- Limiet aantal pagina's om server te beschermen?
 
 Log:
 Moet ook wegschrijven in een .log bestand 
@@ -155,15 +153,22 @@ Bronnen taxonomy:
 	- https://taxonomy.candid.org/
 
 Bronnen:
-
-https://www.youtube.com/watch?v=b7tCjZSvOno
-Video met in beeld voorbeelden van gebruik tokenizer e.d. 
-
-https://dev.to/aligoren/using-elasticsearch-with-python-and-flask-2i0e
-
-https://blog.patricktriest.com/text-search-docker-elasticsearch/
-
-https://github.com/triestpa/guttenberg-search
+- Data global non profits
+	- https://m.wikidata.org/wiki/Q6418598
+	- https://blog.opencorporates.com/2016/08/08/charity-registers-and-corporate-data-the-missing-link/
+	  OpenCorprates contacted via mail
+- ES
+	- https://www.youtube.com/watch?v=b7tCjZSvOno
+	Video met in beeld voorbeelden van gebruik tokenizer e.d. 
+	- https://dev.to/aligoren/using-elasticsearch-with-python-and-flask-2i0e
+	- https://blog.patricktriest.com/text-search-docker-elasticsearch/
+	- https://github.com/triestpa/guttenberg-search
+- Inspiration:
+	- https://www.sqs.ch/en/certified-organisations?title=&nid=47776&field_sqs_postal_code_value=&field_sqs_city_value=&field_sqs_country_target_id=All&field_sqs_cantons_target_id=All&field_sqs_department_target_id=All&field_sqs_region_italy_target_id=All&field_sqs_certificate_id_value=&sort_by=field_sqs_organisation_value_1#block-custom-theme-views-block-certificate-search-block-1
+	- https://www.gdrc.org/ngo/ngo-for-ngos.html (accept non-certificate risks)
+	- https://forum.opendata.ch/t/smart-use-a-new-project-for-urbanists/561
+	  Olegs 'smart use' project, for urban development open data sharing
+		- https://smartuse.ch/
 
 Requirements.txt & conda:
 https://medium.com/@boscacci/why-and-how-to-make-a-requirements-txt-f329c685181e
