@@ -1,5 +1,7 @@
 Test:
 	- Andere landen ook testen
+		- dus de testdata map vullen
+		- testbestand aanmaken
 	- In Makefile ook eerst de clean.test.py aanroepen voordat clean.py aangeroepen wordt
 
 
