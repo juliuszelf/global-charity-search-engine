@@ -57,13 +57,11 @@ human_category_list = [
 
 nature_category_list = [
         "The advancement of environmental protection or improvement",
-        "The advancement of animal welfare"
         ]
-''' TODO:
+
 animal_category_list = [
         "The advancement of animal welfare"
         ]
-'''
 
 # Same function as for Scotland
 def get_category_values(purposes):
@@ -71,6 +69,7 @@ def get_category_values(purposes):
     # Because more compact in search engine (would otherwise write "True")
     human = 0 
     nature = 0 
+    animal = 0 
 
     # clean purpose from quotes
     pur = purposes.strip().replace("'", "")
@@ -84,8 +83,11 @@ def get_category_values(purposes):
 
     if pur in nature_category_list:
         nature = 1
+
+    if pur in animal_category_list:
+        animal = 1
     
-    return human, nature
+    return human, nature, animal
 
 counties = [
         'Antrim',
@@ -144,7 +146,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website","HUM", "NAT", "SourceURL", "SourceDate"]
+    fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website","HUM", "NAT", "ANI", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -166,7 +168,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
             # Adress is of form: "Supporting Communities Ni, 34-36 Henry Street, Ballymena, Co  Antrim, BT42 3AH"
             address = line["Public address"] 
             city, state = get_values_from_address(address)
-            human, nature = get_category_values(line["What the charity does"])
+            human, nature, animal = get_category_values(line["What the charity does"])
 
             output_writer.writerow({"OfficialID": line["Reg charity number"],
                                     "Name": line["Charity name"], 
@@ -176,6 +178,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
                                     "Website": line["Website"], 
                                     "HUM": human, 
                                     "NAT": nature, 
+                                    "ANI": animal, 
                                     "SourceURL": source_url, 
                                     "SourceDate": source_date})
 

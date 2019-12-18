@@ -86,16 +86,12 @@ human_category_list = [
 
 # The typo 'natual' is in source data
 nature_category_list = [
-        "preventing_or_relieving_suffering_of_animals",
-        "advancing_natual_environment"
+        "Advancing_natual_environment",
         ]
 
-''' TODO:
 animal_category_list = [
-        "preventing_or_relieving_suffering_of_animals",
+        "Preventing_or_relieving_suffering_of_animals",
         ]
-'''
-
 
 
 def get_category_values(line):
@@ -103,6 +99,7 @@ def get_category_values(line):
     # Because more compact in search engine (would otherwise write "True")
     human = 0 
     nature = 0 
+    animal = 0 
     for h_item in human_category_list:
         if line[h_item].strip() == "Y":
             human = 1
@@ -111,8 +108,12 @@ def get_category_values(line):
         if line[n_item].strip() == "Y":
             nature = 1
             break
+    for n_item in animal_category_list:
+        if line[n_item].strip() == "Y":
+            animal = 1
+            break
     
-    return human, nature
+    return human, nature, animal
 
 # For new file we are going to first rewrite the heading
 # We keep: Legal Name, City, State, Country, Website
@@ -127,7 +128,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website", "HUM", "NAT", "SourceURL", "SourceDate"]
+    fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website", "HUM", "NAT", "ANI", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -147,7 +148,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
 
         for line in input_reader:
             # Set boolean for our two categories
-            human, nature = get_category_values(line)
+            human, nature, animal = get_category_values(line)
 
             output_writer.writerow({"OfficialID": line["ABN"],
                                     "Name": line["Charity_Legal_Name"], 
@@ -157,6 +158,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
                                     "Website": line["Charity_Website"], 
                                     "HUM": human,
                                     "NAT": nature,
+                                    "ANI": animal,
                                     "SourceURL": source_url, 
                                     "SourceDate": source_date})
 

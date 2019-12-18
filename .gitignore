@@ -16,3 +16,4 @@ clean.csv
 es.json
 es.json*
 
+.~lock.*

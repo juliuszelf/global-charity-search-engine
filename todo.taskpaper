@@ -1,3 +1,9 @@
+Animal category:
+	-  Veld bij ES mapping @done(2019-12-18)
+	-  Bij clean.py van landen fix @done(2019-12-18)
+	-  Weergave in search engine @done(2019-12-18)
+	-  Opnieuw bouwen index, nu met "ANI" 
+
 Wat maakt versie 1.0:
 	- Nice to have:
 		- Eigen website updaten er over, evt Medium artikel

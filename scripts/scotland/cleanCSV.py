@@ -133,15 +133,12 @@ human_category_list = [
         ]
 
 nature_category_list = [
-	"The advancement of animal welfare",
 	"The advancement of environmental protection or improvement",
         ]
 
-''' TODO:
 animal_category_list = [
 	"The advancement of animal welfare"
         ]
-'''
 
 
 # Same function as for Australia
@@ -150,11 +147,12 @@ def get_category_values(purposes):
     # Because more compact in search engine (would otherwise write "True")
     human = 0 
     nature = 0 
+    animal = 0 
 
     # clean purpose from quotes
     pur = purposes.strip().replace("'", "")
 
-    # Assumption is that purpose field is mutually explusive,
+    # Assumption is that purpose field is mutually exclusive,
     # so charity can only have sigle purpose
     # TODO: check from raw data if this is correct,
     # the fact that it's multiple purposeS is suspect.
@@ -163,8 +161,11 @@ def get_category_values(purposes):
 
     if pur in nature_category_list:
         nature = 1
+
+    if pur in animal_category_list:
+        animal = 1
     
-    return human, nature
+    return human, nature, animal
 
 def get_values_from_address(address):
     '''
@@ -206,7 +207,7 @@ print("Opening output file..")
 with open(output_file_path, 'w+', encoding="utf-8") as output_file:
      
     print("Write header..")
-    fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website", "HUM", "NAT", "SourceURL", "SourceDate"]
+    fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website", "HUM", "NAT", "ANI", "SourceURL", "SourceDate"]
     output_writer = csv.DictWriter(output_file, 
                                     fieldnames=fieldnames, 
                                     delimiter=',', 
@@ -226,7 +227,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
 
         for line in input_reader:
             city, state = get_values_from_address(line["Principal Office/Trustees Address"])
-            human, nature = get_category_values(line["Purposes"])
+            human, nature, animal = get_category_values(line["Purposes"])
             output_writer.writerow({"OfficialID": line["Charity Number"], 
                                     "Name": line["Charity Name"], 
                                     "City": city,
@@ -235,6 +236,7 @@ with open(output_file_path, 'w+', encoding="utf-8") as output_file:
                                     "Website": line["Website"], 
                                     "HUM": human, 
                                     "NAT": nature, 
+                                    "ANI": animal, 
                                     "SourceURL": source_url, 
                                     "SourceDate": source_date})
 

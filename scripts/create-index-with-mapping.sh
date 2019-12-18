@@ -31,6 +31,9 @@ curl -X PUT "localhost:9200/chars/_mapping?pretty" -H 'Content-Type: application
     "NAT": {
       "type": "keyword"
     },
+    "ANI": {
+      "type": "keyword"
+    },
     "SourceDate": {
       "type": "keyword"
     },
