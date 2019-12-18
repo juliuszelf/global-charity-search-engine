@@ -2,6 +2,7 @@ Test:
 	- Andere landen ook testen
 		- dus de testdata map vullen
 		- testbestand aanmaken
+			- New-Zealand lijkt niet goed te werken.. o.a. official-id gaat niet goed
 	- In Makefile ook eerst de clean.test.py aanroepen voordat clean.py aangeroepen wordt
 
 
