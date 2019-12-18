@@ -118,8 +118,8 @@ def get_values_from_address(address):
                     found_state = True
             
         else:
-        city = part.strip()
-        return city, state
+            city = part.strip()
+            return city, state
     # couldn't find county, lets assume city is before last
     # We assume the city is the value before the state
     # Or the value maching any of the top 10 cities
@@ -127,9 +127,11 @@ def get_values_from_address(address):
     city = address.split(",")[-2].strip()
     return city, state
 
+
 def fix_nulls(s):
     for line in s:
         yield line.replace('\0', ' ')
+
 
 def parse(input_file_path, output_file_path):
 
