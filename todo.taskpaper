@@ -1,8 +1,21 @@
+Bug, ongerecht category 'animal':
+	"True Light Ministries International" hoort niet animal category te krijgen
+	- Probleem
+		- Ik denk dat mis gaat is dat die lijst met waardes niet gesplitst wordt op ","
+		- Die van schotland en n-ireland gaan niet goed nu
+	- Unit tests toevoegen voor category filters
+		- mogelijk kan ik direct het generieke gedeelte losbreken
+		- dus dat je een parser 'bouwt', en dan de category_filter meegeeft e.d.
+		- parser heeft standaard aanname dat het csv is 
+
 Animal category:
 	-  Veld bij ES mapping @done(2019-12-18)
 	-  Bij clean.py van landen fix @done(2019-12-18)
 	-  Weergave in search engine @done(2019-12-18)
 	-  Opnieuw bouwen index, nu met "ANI" 
+	-  Check of filter goed gaat, deze lijkt verkeerd..
+	   check op csv welke die hoort te hebben
+
 
 Wat maakt versie 1.0:
 	- Nice to have:
