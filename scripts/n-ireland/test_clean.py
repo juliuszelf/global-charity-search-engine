@@ -4,6 +4,10 @@ import os
 # noinspection PyUnresolvedReferences
 from cleanCSV_parser import parse
 
+source = 'testdata/raw.head.test.csv'
+output = 'testoutput/clean.head.csv'
+expected = 'testdata/clean.head.expected.csv'
+
 
 class CleanTestCase(unittest.TestCase):
 
@@ -13,12 +17,10 @@ class CleanTestCase(unittest.TestCase):
 
     def tearDown(self):
         print("teardown")
+        os.remove(output)
         pass
 
     def test_head(self):
-        source = 'testdata/raw.head.test.csv'
-        output = 'testoutput/clean.head.csv'
-        expected = 'testdata/clean.head.expected.csv'
 
         parse(source, output)
 
@@ -30,6 +32,3 @@ class CleanTestCase(unittest.TestCase):
             expected_output = f.read()
 
         self.assertEqual(content_output, expected_output)
-
-        # cleanup
-        os.remove(output)

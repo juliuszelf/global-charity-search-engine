@@ -84,8 +84,8 @@ def in_list(purpose, category_list):
     The ugly part is that te different catories are comma seperated, but each category label also can have commas.
     So we can't really split 'purpose', so we simple test if a category label is 'in' the 'purpose'.
     """
-    for cat in human_category_list:
-        if cat in purr:
+    for cat in category_list:
+        if cat in purpose:
             return 1
     else:
         return 0
@@ -102,7 +102,7 @@ def get_category_values(purposes):
     human = in_list(pur, human_category_list)
     nature = in_list(pur, nature_category_list)
     animal = in_list(pur, animal_category_list)
-    eduction = in_list(pur, education_category_list)
+    education = in_list(pur, education_category_list)
     health = in_list(pur, health_category_list)
     community = in_list(pur, community_category_list)
     religion = in_list(pur, religion_category_list)
