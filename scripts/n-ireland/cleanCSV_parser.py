@@ -31,16 +31,7 @@ How the charity works,
 """
 
 human_category_list = [
-        "The advancement of education",
-        "The advancement of religion",
-        "The advancement of health or the saving of lives",
-        "The advancement of citizenship or community development",
-        "The relief of those in need by reason of youth, age, ill-health, disability, financial hardship or other disadvantage",
-        "The prevention or relief of poverty",
-        "The advancement of the arts, culture, heritage or science",
-        "The advancement of human rights, conflict resolution or reconciliation or the promotion of religious or racial harmony or equality and diversity",
         "Other charitable purposes",
-        "The advancement of amateur sport"
         ]
 
 nature_category_list = [
@@ -49,6 +40,34 @@ nature_category_list = [
 
 animal_category_list = [
         "The advancement of animal welfare"
+        ]
+
+education_category_list = [
+        "The advancement of education",
+        ]
+
+health_category_list = [
+        "The advancement of health or the saving of lives",
+        ]
+
+community_category_list = [
+        "The advancement of citizenship or community development",
+        "The relief of those in need by reason of youth, age, ill-health, disability, financial hardship or other disadvantage",
+        "The prevention or relief of poverty",
+        "The advancement of human rights, conflict resolution or reconciliation or the promotion of religious or racial harmony or equality and diversity",
+        ]
+
+religion_category_list = [
+        "The advancement of religion",
+        ]
+
+culture_category_list = [
+        "The advancement of the arts, culture, heritage or science",
+
+        ]
+
+sports_category_list = [
+        "The advancement of amateur sport"
         ]
 
 counties = [
@@ -60,32 +79,37 @@ counties = [
         'Tyrone'
         ]
 
-# Same function as for Scotland
-def get_category_values(purposes):
-    # Using 0 as false, 1 as true
-    # Because more compact in search engine (would otherwise write "True")
-    human = 0 
-    nature = 0 
-    animal = 0 
-
-    # clean purpose from quotes
-    purr = purposes.strip().replace("'", "")
-
-    # The ugly part is that te different catories are comma seperated, but each category label also can have commas.
-    # So we can't really split 'pur', so we simple test if a category label is 'in' the 'pur'.
+def in_list(purpose, category_list):
+    """
+    The ugly part is that te different catories are comma seperated, but each category label also can have commas.
+    So we can't really split 'purpose', so we simple test if a category label is 'in' the 'purpose'.
+    """
     for cat in human_category_list:
         if cat in purr:
-            human = 1
+            return 1
+    else:
+        return 0
 
-    for cat in nature_category_list:
-        if cat in purr:
-            nature = 1
 
-    for cat in animal_category_list:
-        if cat in purr:
-            animal = 1  # Meow!
+# Same function as for Scotland
+def get_category_values(purposes):
 
-    return human, nature, animal
+    # clean purpose from quotes
+    pur = purposes.strip().replace("'", "")
+
+    # Receives value 0 as false, 1 as true
+    # Because more compact in search engine (would otherwise write "True")
+    human = in_list(pur, human_category_list)
+    nature = in_list(pur, nature_category_list)
+    animal = in_list(pur, animal_category_list)
+    eduction = in_list(pur, education_category_list)
+    health = in_list(pur, health_category_list)
+    community = in_list(pur, community_category_list)
+    religion = in_list(pur, religion_category_list)
+    culture = in_list(pur, culture_category_list)
+    sports = in_list(pur, sports_category_list)
+
+    return human, nature, animal, education, health, community, religion, culture, sports
 
 
 def get_values_from_address(address):
@@ -145,7 +169,25 @@ def parse(input_file_path, output_file_path):
     with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         
         print("Write header..")
-        fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website","HUM", "NAT", "ANI", "SourceURL", "SourceDate"]
+        fieldnames = [
+                "OfficialID", 
+                "Name", 
+                "City", 
+                "State", 
+                "Country", 
+                "Website",
+                "HUM", 
+                "NAT", 
+                "ANI", 
+                "EDU", 
+                "HEA", 
+                "COM", 
+                "REL", 
+                "CUL", 
+                "SPO", 
+                "SourceURL", 
+                "SourceDate"
+                ]
         output_writer = csv.DictWriter(output_file, 
                                         fieldnames=fieldnames, 
                                         delimiter=',', 
@@ -164,7 +206,7 @@ def parse(input_file_path, output_file_path):
                 # Adress is of form: "Supporting Communities Ni, 34-36 Henry Street, Ballymena, Co  Antrim, BT42 3AH"
                 address = line["Public address"] 
                 city, state = get_values_from_address(address)
-                human, nature, animal = get_category_values(line["What the charity does"])
+                human, nature, animal, education, health, community, religion, culture, sports = get_category_values(line["What the charity does"])
 
                 output_writer.writerow({"OfficialID": line["Reg charity number"],
                                         "Name": line["Charity name"], 
@@ -175,6 +217,12 @@ def parse(input_file_path, output_file_path):
                                         "HUM": human, 
                                         "NAT": nature, 
                                         "ANI": animal, 
+                                        "EDU": education, 
+                                        "HEA": health, 
+                                        "COM": community, 
+                                        "REL": religion, 
+                                        "CUL": culture, 
+                                        "SPO": sports, 
                                         "SourceURL": source_url, 
                                         "SourceDate": source_date})
 

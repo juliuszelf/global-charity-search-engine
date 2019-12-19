@@ -46,22 +46,32 @@ Backup:
 
 Categorien-inhoud:
 	- Vooralsnog, categorien van n-Ireland en Scotland aanhouden
-		- Environment @done(2019-12-19)
-		- Animals @done(2019-12-19)
-		- Education
-		- Health
-		- Community
+		- NAT
+			- Environment @done(2019-12-19)
+		- ANI
+			- Animals @done(2019-12-19)
+		- HUM
+			- 'other'
+			- Other.. hoeft geen categorie te zijn lijkt mij.
+		- EDU
+			- Education
+		- HEA
+			- Health
+		- COM
+			- Community
         "The advancement of citizenship or community development",
 			- Relief (samen met community?)
 				"The relief of those in need by reason of youth, age, ill-health, disability, financial hardship or other disadvantage",
 				"The prevention or relief of poverty",
 				"The advancement of human rights, conflict resolution or reconciliation or the promotion of religious or racial harmony or equality and diversity",
-		- Religion
-		- Culture & science
-        "The advancement of the arts, culture, heritage or science",
-		- Sport
-			"The advancement of amateur sport"
-		- Other.. hoeft geen categorie te zijn lijkt mij.
+		- REL
+			- Religion
+		- CUL
+			- Culture & science
+			"The advancement of the arts, culture, heritage or science",
+		- SPO
+			- Sport
+				"The advancement of amateur sport"
 	- En een 'alt tekst' voor meer toelichting' per categorie
 	- Canada
 		- Er zijn meerdere CSV bestanden te downloaden
