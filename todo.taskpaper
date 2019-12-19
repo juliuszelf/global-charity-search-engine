@@ -1,23 +1,21 @@
 Test:
-	- In Makefile ook eerst de clean.test.py aanroepen voordat clean.py aangeroepen wordt
-	- Merge master
-	- Live zetten
-
-
-Animal category:
-	-  Veld bij ES mapping @done(2019-12-18)
-	-  Bij clean.py van landen fix @done(2019-12-18)
-	-  Weergave in search engine @done(2019-12-18)
-	-  Opnieuw bouwen index, nu met "ANI" 
-	-  Check of filter goed gaat, deze lijkt verkeerd..
-	   check op csv welke die hoort te hebben
+	- Merge master @done(2019-12-19)
+	- Live zetten @done(2019-12-19)
+	- README.md notities maken rond testen
 
 
 Wat maakt versie 1.0:
+	- Varnish container 
+	- Categorien er bij
+	- Die 'revoked' charities er uit, of apart filterbaar.
 	- Nice to have:
-		- Eigen website updaten er over, evt Medium artikel
+		- fail2ban
+		- Medium artikel?
 		- Meer categoriën, meer landen indien laag hangend fruit.
 		- Dan even switchen en door met MyPictureBooks online hosting
+
+Testen:
+	- In Makefile ook eerst de clean.test.py aanroepen voordat clean.py aangeroepen wordt
 
 Quick:
 	- Je moet ook op die offical-id kunnen zoeken
@@ -47,13 +45,28 @@ Backup:
 		- Eventueel script maken die dit voor je doet.
 
 Categorien-inhoud:
-	- Die lijsten categorien enzo bij source.md plaatsen
-	- Inventariseren
-		- wat levert bronbestanden?
-		- Canada
-			- Er zijn meerdere CSV bestanden te downloaden
-			- Vergt research om uit te zoeken welk bestand juiste info bevat
-			- Dan moet ik vermoedelijk op basis van een charity ID data koppelen
+	- Vooralsnog, categorien van n-Ireland en Scotland aanhouden
+		- Environment @done(2019-12-19)
+		- Animals @done(2019-12-19)
+		- Education
+		- Health
+		- Community
+        "The advancement of citizenship or community development",
+			- Relief (samen met community?)
+				"The relief of those in need by reason of youth, age, ill-health, disability, financial hardship or other disadvantage",
+				"The prevention or relief of poverty",
+				"The advancement of human rights, conflict resolution or reconciliation or the promotion of religious or racial harmony or equality and diversity",
+		- Religion
+		- Culture & science
+        "The advancement of the arts, culture, heritage or science",
+		- Sport
+			"The advancement of amateur sport"
+		- Other.. hoeft geen categorie te zijn lijkt mij.
+	- En een 'alt tekst' voor meer toelichting' per categorie
+	- Canada
+		- Er zijn meerdere CSV bestanden te downloaden
+		- Vergt research om uit te zoeken welk bestand juiste info bevat
+		- Dan moet ik vermoedelijk op basis van een charity ID data koppelen
 	- New-Zealand
 		-  Uit raw.csv wordt niet direct duidelijk, nr staat voor categorie ergens?
 		-  Mogelijk is er een betere API call te maken, waarbij de category ('activity'?) meekomt.
@@ -70,8 +83,6 @@ Categorien-inhoud:
 		- https://www.irs.gov/pub/irs-soi/eo_info.pdf
 		- Ik kan die codes ook gebruiken om 'tax excempt'
 			te filteren op alleen iets van non-profit, en niet 'credit union' e.d.
-	- Technische uitdagingen?
-		- Per land een category-mapping.txt oid maken
 
 Code/NR:
 
