@@ -1,21 +1,8 @@
 #!/usr/bin/env python3
 from xlsx2csv import Xlsx2csv
-import sys
 import csv
-import json
 from termcolor import colored
 import os
-
-# first rename (copy) to a .xlsx so the convertion library understands this
-# resumes script called from root
-xlsx_file_path = "data/australia/australia_temp_raw.xlsx"
-temp_file_path = "data/australia/australia_temp_raw.csv"
-os.rename(input_file_path,xlsx_file_path)
-
-Xlsx2csv(xlsx_file_path, outputencoding="utf-8").convert(temp_file_path)
-
-# after the conversion the temp file will be the imputfile for creating json
-input_file_path = temp_file_path
 
 source_url = "https://data.gov.au/dataset/ds-dga-b050b242-4487-4306-abf5-07ca073e5594/details?q=acnc"
 source_date =  "01/12/2019"  # Better would be to dynamically get this 
@@ -117,6 +104,18 @@ def fix_nulls(s):
         yield line.replace('\0', ' ')
 
 def parse(input_file_path, output_file_path):
+
+    # first rename (copy) to a .xlsx so the convertion library understands this
+    # resumes script called from root
+    xlsx_file_path = "data/australia/australia_temp_raw.xlsx"
+    temp_file_path = "data/australia/australia_temp_raw.csv"
+    os.rename(input_file_path,xlsx_file_path)
+
+    Xlsx2csv(xlsx_file_path, outputencoding="utf-8").convert(temp_file_path)
+
+    # after the conversion the temp file will be the imputfile for creating json
+    input_file_path = temp_file_path
+
     # For new file we are going to first rewrite the heading
     # We keep: Legal Name, City, State, Country, Website
     # We add: Source URL, Source date

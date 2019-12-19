@@ -57,9 +57,6 @@ def parse(input_file_path, output_file_path):
 
             input_reader = csv.DictReader(fix_nulls(input_file))
 
-            # skip reading the first line with headers
-            next(input_reader)
-
             for line in input_reader:
                 output_writer.writerow({"OfficialID": line["NZBNNumber"], 
                                         "Name": line["Name"], 

@@ -160,9 +160,6 @@ def parse(input_file_path, output_file_path):
 
             input_reader = csv.DictReader(fix_nulls(input_file))
 
-            # skip reading the first line with headers
-            next(input_reader)
-
             for line in input_reader:
                 # Adress is of form: "Supporting Communities Ni, 34-36 Henry Street, Ballymena, Co  Antrim, BT42 3AH"
                 address = line["Public address"] 

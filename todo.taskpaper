@@ -2,7 +2,9 @@ Test:
 	- Andere landen ook testen
 		- dus de testdata map vullen
 		- testbestand aanmaken
-			- New-Zealand lijkt niet goed te werken.. o.a. official-id gaat niet goed
+	- Test faalt op 1e regel
+	- Scotland test
+		- waar is 00001 gebleven?
 	- In Makefile ook eerst de clean.test.py aanroepen voordat clean.py aangeroepen wordt
 
 

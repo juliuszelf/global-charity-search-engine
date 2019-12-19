@@ -96,7 +96,7 @@ animal_category_list = [
         ]
 
 
-# Same function as for Australia
+# Same function as for N-Ireland
 def get_category_values(purposes):
     # Using 0 as false, 1 as true
     # Because more compact in search engine (would otherwise write "True")
@@ -105,21 +105,20 @@ def get_category_values(purposes):
     animal = 0 
 
     # clean purpose from quotes
-    pur = purposes.strip().replace("'", "")
+    purr = purposes.strip().replace("'", "")
 
-    # Assumption is that purpose field is mutually exclusive,
-    # so charity can only have sigle purpose
-    # TODO: check from raw data if this is correct,
-    # the fact that it's multiple purposeS is suspect.
-    if pur in human_category_list:
-        human = 1
+    for cat in human_category_list:
+        if cat in purr:
+            human = 1
 
-    if pur in nature_category_list:
-        nature = 1
+    for cat in nature_category_list:
+        if cat in purr:
+            nature = 1
 
-    if pur in animal_category_list:
-        animal = 1
-    
+    for cat in animal_category_list:
+        if cat in purr:
+            animal = 1  # Meow!
+
     return human, nature, animal
 
 
@@ -224,9 +223,6 @@ def parse(input_file_path, output_file_path):
         with open(input_file_path, 'r') as input_file:
 
             input_reader = csv.DictReader(fix_nulls(input_file))
-
-            # skip reading the first line with headers
-            next(input_reader)
 
             for line in input_reader:
                 city, state = get_values_from_address(line["Principal Office/Trustees Address"])
