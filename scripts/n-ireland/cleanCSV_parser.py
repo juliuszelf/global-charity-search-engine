@@ -91,7 +91,6 @@ def in_list(purpose, category_list):
         return 0
 
 
-# Same function as for Scotland
 def get_category_values(purposes):
 
     # clean purpose from quotes

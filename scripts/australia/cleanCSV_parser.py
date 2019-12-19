@@ -36,36 +36,7 @@ Women,Youth
 
 
 human_category_list = [
-        "Advancing_Culture",
-        "Advancing_Education",
-        "Advancing_Health",
-        "Promote_or_oppose_a_change_to_law__government_poll_or_prac",
-        "Promoting_or_protecting_human_rights",
         "Purposes_beneficial_to_ther_general_public_and_other_analogous",
-        "Promoting_reconciliation__mutual_respect_and_tolerance",
-        "Advancing_Religion",
-        "Advancing_social_or_public_welfare",
-        "Advancing_security_or_safety_of_Australia_or_Australian_public",
-        "Another_purpose_beneficial_to_the_community"	,
-        "Aboriginal_or_TSI"	,
-        "Aged_Persons",
-        "Children",
-        "Communities_Overseas",
-        "Ethnic_Groups",
-        "Gay_Lesbian_Bisexual",
-        "General_Community_in_Australia",
-        "Men",
-        "Migrants_Refugees_or_Asylum_Seekers",
-        "Pre_Post_Release_Offenders",
-        "People_with_Chronic_Illness",
-        "People_with_Disabilities",
-        "People_at_risk_of_homelessness",
-        "Unemployed_Person",
-        "Veterans_or_their_families",
-        "Victims_of_crime",
-        "Victims_of_Disasters",
-        "Women",
-        "Youth",
         ]
 
 # The typo 'natual' is in source data
@@ -77,27 +48,76 @@ animal_category_list = [
         "Preventing_or_relieving_suffering_of_animals",
         ]
 
+education_category_list = [
+        "Advancing_Education",
+        ]
+
+health_category_list = [
+        "Advancing_Health",
+        "People_with_Chronic_Illness",
+        "People_with_Disabilities",
+        ]
+
+community_category_list = [
+        "General_Community_in_Australia",
+        "Another_purpose_beneficial_to_the_community",
+        "Promoting_reconciliation__mutual_respect_and_tolerance",
+        "People_at_risk_of_homelessness",
+        "Unemployed_Person",
+        "Veterans_or_their_families",
+        "Victims_of_crime",
+        "Victims_of_Disasters",
+        "Women",
+        "Youth",
+        "Promote_or_oppose_a_change_to_law__government_poll_or_prac",
+        "Promoting_or_protecting_human_rights",
+        "Advancing_social_or_public_welfare",
+        "Advancing_security_or_safety_of_Australia_or_Australian_public",
+        "Aboriginal_or_TSI",
+        "Aged_Persons",
+        "Children",
+        "Communities_Overseas",
+        "Ethnic_Groups",
+        "Gay_Lesbian_Bisexual",
+        "Men",
+        "Migrants_Refugees_or_Asylum_Seekers",
+        "Pre_Post_Release_Offenders",
+        ]
+
+religion_category_list = [
+        "Advancing_Religion",
+        ]
+
+culture_category_list = [
+        "Advancing_Culture",
+        ]
+
+sports_category_list = [
+        ]
+
+def in_list(line, category_list):
+    for category in human_category_list:
+        if line[category].strip() == "Y":
+            return 1
+    else:
+        return 0
+
 
 def get_category_values(line):
     # Using 0 as false, 1 as true
     # Because more compact in search engine (would otherwise write "True")
-    human = 0 
-    nature = 0 
-    animal = 0 
-    for h_item in human_category_list:
-        if line[h_item].strip() == "Y":
-            human = 1
-            break
-    for n_item in nature_category_list:
-        if line[n_item].strip() == "Y":
-            nature = 1
-            break
-    for n_item in animal_category_list:
-        if line[n_item].strip() == "Y":
-            animal = 1
-            break
+
+    human = in_list(line, human_category_list)
+    nature = in_list(line, nature_category_list)
+    animal = in_list(line, animal_category_list)
+    education = in_list(line, education_category_list)
+    health = in_list(line, health_category_list)
+    community = in_list(line, community_category_list)
+    religion = in_list(line, religion_category_list)
+    culture = in_list(line, culture_category_list)
+    sports = in_list(line, sports_category_list)
     
-    return human, nature, animal
+    return human, nature, animal, education, health, community, religion, culture, sports
 
 def fix_nulls(s):
     for line in s:
@@ -125,7 +145,25 @@ def parse(input_file_path, output_file_path):
     with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         
         print("Write header..")
-        fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website", "HUM", "NAT", "ANI", "SourceURL", "SourceDate"]
+        fieldnames = [
+                "OfficialID", 
+                "Name", 
+                "City", 
+                "State", 
+                "Country", 
+                "Website",
+                "HUM", 
+                "NAT", 
+                "ANI", 
+                "EDU", 
+                "HEA", 
+                "COM", 
+                "REL", 
+                "CUL", 
+                "SPO", 
+                "SourceURL", 
+                "SourceDate"
+                ]
         output_writer = csv.DictWriter(output_file, 
                                         fieldnames=fieldnames, 
                                         delimiter=',', 
@@ -145,7 +183,7 @@ def parse(input_file_path, output_file_path):
 
             for line in input_reader:
                 # Set boolean for our two categories
-                human, nature, animal = get_category_values(line)
+                human, nature, animal, education, health, community, religion, culture, sports = get_category_values(line)
 
                 output_writer.writerow({"OfficialID": line["ABN"],
                                         "Name": line["Charity_Legal_Name"], 
@@ -156,6 +194,12 @@ def parse(input_file_path, output_file_path):
                                         "HUM": human,
                                         "NAT": nature,
                                         "ANI": animal,
+                                        "EDU": education, 
+                                        "HEA": health, 
+                                        "COM": community, 
+                                        "REL": religion, 
+                                        "CUL": culture, 
+                                        "SPO": sports, 
                                         "SourceURL": source_url, 
                                         "SourceDate": source_date})
 

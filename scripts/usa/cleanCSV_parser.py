@@ -31,7 +31,25 @@ def parse(input_file_path, output_file_path):
     with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         
         print("Write header..")
-        fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website", "HUM", "NAT", "ANI", "SourceURL", "SourceDate"]
+        fieldnames = [
+                "OfficialID", 
+                "Name", 
+                "City", 
+                "State", 
+                "Country", 
+                "Website",
+                "HUM", 
+                "NAT", 
+                "ANI", 
+                "EDU", 
+                "HEA", 
+                "COM", 
+                "REL", 
+                "CUL", 
+                "SPO", 
+                "SourceURL", 
+                "SourceDate"
+                ]
         output_writer = csv.DictWriter(output_file, 
                                         fieldnames=fieldnames, 
                                         delimiter=',', 
@@ -56,6 +74,12 @@ def parse(input_file_path, output_file_path):
                                         "HUM": "",
                                         "NAT": "",
                                         "ANI": "",
+                                        "EDU": "",
+                                        "HEA": "", 
+                                        "COM": "", 
+                                        "REL": "", 
+                                        "CUL": "", 
+                                        "SPO": "", 
                                         "SourceURL": source_url, 
                                         "SourceDate": source_date})
 

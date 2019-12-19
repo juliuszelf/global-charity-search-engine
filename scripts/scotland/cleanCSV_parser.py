@@ -72,19 +72,6 @@ counties = [
 # Categories from the 'purpose' field that have these values 
 # will be placed in the generic category 'human'.
 human_category_list = [
-        "The prevention or relief of poverty",
-        "The advancement of education",
-        "The advancement of religion",
-        "The advancement of health",
-        "The saving of lives",
-        "The advancement of citizenship or community development",
-        "The advancement of the arts, heritage, culture or science",
-        "The advancement of public participation in sport",
-        "The provision of recreational facilities, or the organisation of recreational activities, with the object of improving the conditions of life for the persons for whom the facilities or activities are primarily intended",
-        "The advancement of human rights, conflict resolution or reconciliation",
-        "The promotion of religious or racial harmony",
-        "The promotion of equality and diversity",
-        "The relief of those in need by reason of age, ill health, disability, financial hardship or other disadvantage",
         ]
 
 nature_category_list = [
@@ -95,31 +82,63 @@ animal_category_list = [
         "The advancement of animal welfare"
         ]
 
+education_category_list = [
+        "The advancement of education",
+        ]
 
-# Same function as for N-Ireland
+health_category_list = [
+        "The advancement of health",
+        ]
+
+community_category_list = [
+        "The advancement of citizenship or community development",
+        "The prevention or relief of poverty",
+        "The saving of lives",
+        "The provision of recreational facilities, or the organisation of recreational activities, with the object of improving the conditions of life for the persons for whom the facilities or activities are primarily intended",
+        "The advancement of human rights, conflict resolution or reconciliation",
+        "The promotion of religious or racial harmony",
+        "The promotion of equality and diversity",
+        "The relief of those in need by reason of age, ill health, disability, financial hardship or other disadvantage",
+        ]
+
+religion_category_list = [
+        "The advancement of religion",
+        ]
+
+culture_category_list = [
+        "The advancement of the arts, heritage, culture or science",
+        ]
+
+sports_category_list = [
+        "The advancement of public participation in sport",
+        ]
+
+
+def in_list(purpose, category_list):
+    for cat in human_category_list:
+        if cat in purr:
+            return  1
+    return 0
+
+
 def get_category_values(purposes):
     # Using 0 as false, 1 as true
     # Because more compact in search engine (would otherwise write "True")
-    human = 0 
-    nature = 0 
-    animal = 0 
 
     # clean purpose from quotes
-    purr = purposes.strip().replace("'", "")
+    pur = purposes.strip().replace("'", "")
 
-    for cat in human_category_list:
-        if cat in purr:
-            human = 1
+    human = in_list(pur, human_category_list)
+    nature = in_list(pur, nature_category_list)
+    animal = in_list(pur, animal_category_list)
+    education = in_list(pur, education_category_list)
+    health = in_list(pur, health_category_list)
+    community = in_list(pur, community_category_list)
+    religion = in_list(pur, religion_category_list)
+    culture = in_list(pur, culture_category_list)
+    sports = in_list(pur, sports_category_list)
 
-    for cat in nature_category_list:
-        if cat in purr:
-            nature = 1
-
-    for cat in animal_category_list:
-        if cat in purr:
-            animal = 1  # Meow!
-
-    return human, nature, animal
+    return human, nature, animal, education, health, community, religion, culture, sports
 
 
 def get_values_from_address(address):
@@ -209,7 +228,25 @@ def parse(input_file_path, output_file_path):
     with open(output_file_path, 'w+', encoding="utf-8") as output_file:
         
         print("Write header..")
-        fieldnames = ["OfficialID", "Name", "City", "State", "Country", "Website", "HUM", "NAT", "ANI", "SourceURL", "SourceDate"]
+        fieldnames = [
+                "OfficialID", 
+                "Name", 
+                "City", 
+                "State", 
+                "Country", 
+                "Website",
+                "HUM", 
+                "NAT", 
+                "ANI", 
+                "EDU", 
+                "HEA", 
+                "COM", 
+                "REL", 
+                "CUL", 
+                "SPO", 
+                "SourceURL", 
+                "SourceDate"
+                ]
         output_writer = csv.DictWriter(output_file, 
                                         fieldnames=fieldnames, 
                                         delimiter=',', 
@@ -226,7 +263,8 @@ def parse(input_file_path, output_file_path):
 
             for line in input_reader:
                 city, state = get_values_from_address(line["Principal Office/Trustees Address"])
-                human, nature, animal = get_category_values(line["Purposes"])
+                human, nature, animal, education, health, community, religion, culture, sports = get_category_values(line["Purposes"])
+
                 output_writer.writerow({"OfficialID": line["Charity Number"], 
                                         "Name": line["Charity Name"], 
                                         "City": city,
@@ -236,6 +274,12 @@ def parse(input_file_path, output_file_path):
                                         "HUM": human, 
                                         "NAT": nature, 
                                         "ANI": animal, 
+                                        "EDU": education, 
+                                        "HEA": health, 
+                                        "COM": community, 
+                                        "REL": religion, 
+                                        "CUL": culture, 
+                                        "SPO": sports, 
                                         "SourceURL": source_url, 
                                         "SourceDate": source_date})
 
