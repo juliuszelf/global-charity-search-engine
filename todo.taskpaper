@@ -1,11 +1,7 @@
 Test:
-	- Andere landen ook testen
-		- dus de testdata map vullen
-		- testbestand aanmaken
-	- Test faalt op 1e regel
-	- Scotland test
-		- waar is 00001 gebleven?
 	- In Makefile ook eerst de clean.test.py aanroepen voordat clean.py aangeroepen wordt
+	- Merge master
+	- Live zetten
 
 
 Animal category:
