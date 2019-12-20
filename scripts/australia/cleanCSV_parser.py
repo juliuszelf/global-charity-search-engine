@@ -34,11 +34,6 @@ Veterans_or_their_families,Victims_of_crime,Victims_of_Disasters,
 Women,Youth
 """
 
-
-human_category_list = [
-        "Purposes_beneficial_to_ther_general_public_and_other_analogous",
-        ]
-
 # The typo 'natual' is in source data
 nature_category_list = [
         "Advancing_natual_environment",
@@ -59,6 +54,7 @@ health_category_list = [
         ]
 
 community_category_list = [
+        "Purposes_beneficial_to_ther_general_public_and_other_analogous",
         "General_Community_in_Australia",
         "Another_purpose_beneficial_to_the_community",
         "Promoting_reconciliation__mutual_respect_and_tolerance",
@@ -108,7 +104,6 @@ def get_category_values(line):
     # Using 0 as false, 1 as true
     # Because more compact in search engine (would otherwise write "True")
 
-    human = in_list(line, human_category_list)
     nature = in_list(line, nature_category_list)
     animal = in_list(line, animal_category_list)
     education = in_list(line, education_category_list)
@@ -118,7 +113,7 @@ def get_category_values(line):
     culture = in_list(line, culture_category_list)
     sports = in_list(line, sports_category_list)
     
-    return human, nature, animal, education, health, community, religion, culture, sports
+    return nature, animal, education, health, community, religion, culture, sports
 
 def fix_nulls(s):
     for line in s:
@@ -153,7 +148,6 @@ def parse(input_file_path, output_file_path):
                 "State", 
                 "Country", 
                 "Website",
-                "HUM", 
                 "NAT", 
                 "ANI", 
                 "EDU", 
@@ -184,7 +178,7 @@ def parse(input_file_path, output_file_path):
 
             for line in input_reader:
                 # Set boolean for our two categories
-                human, nature, animal, education, health, community, religion, culture, sports = get_category_values(line)
+                nature, animal, education, health, community, religion, culture, sports = get_category_values(line)
 
                 output_writer.writerow({"OfficialID": line["ABN"],
                                         "Name": line["Charity_Legal_Name"], 
@@ -192,7 +186,6 @@ def parse(input_file_path, output_file_path):
                                         "State": line["State"], 
                                         "Country": "AU", 
                                         "Website": line["Charity_Website"], 
-                                        "HUM": human,
                                         "NAT": nature,
                                         "ANI": animal,
                                         "EDU": education, 

@@ -9,15 +9,14 @@ echo "Index created"
 # Update both mappings
 
 # categories:
-# HUM = human, .. will use as 'other' perhaps.
-# NAT = nature, 
-# ANI = animal, 
-# EDU = education, 
-# HEA = health, 
-# COM = community, 
-# REL = religion, 
-# CUL = culture, 
-# SPO = sports, 
+# NAT = nature
+# ANI = animal
+# EDU = education
+# HEA = health
+# COM = community
+# REL = religion
+# CUL = culture
+# SPO = sports
 
 curl -X PUT "localhost:9200/chars/_mapping?pretty" -H 'Content-Type: application/json' -d'
 {
@@ -35,9 +34,6 @@ curl -X PUT "localhost:9200/chars/_mapping?pretty" -H 'Content-Type: application
       "type": "keyword"
     },
     "Website": {
-      "type": "keyword"
-    },
-    "HUM": {
       "type": "keyword"
     },
     "NAT": {

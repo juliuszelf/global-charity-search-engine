@@ -1,9 +1,9 @@
-OfficialID,Name,City,State,Country,Website,HUM,NAT,ANI,SourceURL,SourceDate
-100021252RR0001,COLLEGE LAURENTIEN INC.,VAL-MORIN,QC,CA,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
-100040781RR0001,ACTION COMMUNAUTAIRE BENEVOLE DE SAINT-JEAN-BAPTISTE INC.,DRUMMONDVILLE,QC,CA,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
-100042373RR0001,Action santé de Pointe St-Charles,MONTREAL,QC,CA,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
-100042670RR0001,Action Travail des femmes du Québec Inc.,MONTREAL,QC,CA,WWW.ATFQUEBEC.CA,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
-100044452RR0001,MANITOBA THEATRE FOR YOUNG PEOPLE INC.,WINNIPEG,MB,CA,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
-100048800RR0001,ADAS ISRAEL CONGREGATION OF HAMILTON,HAMILTON,ON,CA,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
-100071927RR0001,A.F.S. INTERCULTURE CANADA,MONTREAL,QC,CA,WWW.AFSCANADA.ORG,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
-100072586RR0001,AGA KHAN FOUNDATION CANADA / FONDATION AGA KHAN CANADA,OTTAWA,ON,CA,WWW.AKFC.CA,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
+OfficialID,Name,City,State,Country,Website,NAT,ANI,EDU,HEA,COM,REL,CUL,SPO,SourceURL,SourceDate
+100021252RR0001,COLLEGE LAURENTIEN INC.,VAL-MORIN,QC,CA,,,,,,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
+100040781RR0001,ACTION COMMUNAUTAIRE BENEVOLE DE SAINT-JEAN-BAPTISTE INC.,DRUMMONDVILLE,QC,CA,,,,,,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
+100042373RR0001,Action santé de Pointe St-Charles,MONTREAL,QC,CA,,,,,,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
+100042670RR0001,Action Travail des femmes du Québec Inc.,MONTREAL,QC,CA,WWW.ATFQUEBEC.CA,,,,,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
+100044452RR0001,MANITOBA THEATRE FOR YOUNG PEOPLE INC.,WINNIPEG,MB,CA,,,,,,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
+100048800RR0001,ADAS ISRAEL CONGREGATION OF HAMILTON,HAMILTON,ON,CA,,,,,,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
+100071927RR0001,A.F.S. INTERCULTURE CANADA,MONTREAL,QC,CA,WWW.AFSCANADA.ORG,,,,,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016
+100072586RR0001,AGA KHAN FOUNDATION CANADA / FONDATION AGA KHAN CANADA,OTTAWA,ON,CA,WWW.AKFC.CA,,,,,,,,,https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49,2016

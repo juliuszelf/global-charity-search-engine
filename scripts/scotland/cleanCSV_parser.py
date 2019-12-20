@@ -71,9 +71,6 @@ counties = [
 
 # Categories from the 'purpose' field that have these values 
 # will be placed in the generic category 'human'.
-human_category_list = [
-        ]
-
 nature_category_list = [
         "The advancement of environmental protection or improvement",
         ]
@@ -128,7 +125,6 @@ def get_category_values(purposes):
     # clean purpose from quotes
     pur = purposes.strip().replace("'", "")
 
-    human = in_list(pur, human_category_list)
     nature = in_list(pur, nature_category_list)
     animal = in_list(pur, animal_category_list)
     education = in_list(pur, education_category_list)
@@ -138,7 +134,7 @@ def get_category_values(purposes):
     culture = in_list(pur, culture_category_list)
     sports = in_list(pur, sports_category_list)
 
-    return human, nature, animal, education, health, community, religion, culture, sports
+    return nature, animal, education, health, community, religion, culture, sports
 
 
 def get_values_from_address(address):
@@ -235,7 +231,6 @@ def parse(input_file_path, output_file_path):
                 "State", 
                 "Country", 
                 "Website",
-                "HUM", 
                 "NAT", 
                 "ANI", 
                 "EDU", 
@@ -263,7 +258,7 @@ def parse(input_file_path, output_file_path):
 
             for line in input_reader:
                 city, state = get_values_from_address(line["Principal Office/Trustees Address"])
-                human, nature, animal, education, health, community, religion, culture, sports = get_category_values(line["Purposes"])
+                nature, animal, education, health, community, religion, culture, sports = get_category_values(line["Purposes"])
 
                 output_writer.writerow({"OfficialID": line["Charity Number"], 
                                         "Name": line["Charity Name"], 
@@ -271,7 +266,6 @@ def parse(input_file_path, output_file_path):
                                         "State": state, 
                                         "Country": "SC", 
                                         "Website": line["Website"], 
-                                        "HUM": human, 
                                         "NAT": nature, 
                                         "ANI": animal, 
                                         "EDU": education, 

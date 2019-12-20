@@ -1,5 +1,5 @@
 More categories:
-	- Schotland code & test fix
+	- Schotland code & test fix @done(2019-12-20)
 	- 'human' category weg halen, vervangen door 'other'
 	- template aanpassen, zodat filters gegegeneerd uit list
 	- Live zetten
@@ -22,6 +22,7 @@ Testen:
 	- In Makefile ook eerst de clean.test.py aanroepen voordat clean.py aangeroepen wordt
 
 Quick:
+	- Indien filters, dan niet verplicht om zoekwoord te hebben voor results
 	- Je moet ook op die offical-id kunnen zoeken
 	- ngnix config file niet hard in copy, maar via volume mapping
 	- Favicon op basis van svg
@@ -50,9 +51,8 @@ Backup:
 		- Eventueel script maken die dit voor je doet.
 
 Categorien-inhoud:
-	- 'Human' en 'Community' zijn nu beide eigenlijk 'other'. 
-		- Ik haal 'human' weg, en stop alles in community.
-		- Community noem ik ('community & other') in search engine.
+	- Misschien 'Sports & recreation'
+	- Community noem ik ('community & other') in search engine.
 	- En een 'alt tekst' voor meer toelichting' per categorie
 	- Canada
 		- Er zijn meerdere CSV bestanden te downloaden

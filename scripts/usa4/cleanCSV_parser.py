@@ -40,7 +40,6 @@ def parse(input_file_path, output_file_path):
                 "State", 
                 "Country", 
                 "Website",
-                "HUM", 
                 "NAT", 
                 "ANI", 
                 "EDU", 
@@ -73,7 +72,6 @@ def parse(input_file_path, output_file_path):
                                         "State": line["STATE"], 
                                         "Country": "USA", 
                                         "Website": "",  # Not part of the source
-                                        "HUM": "",
                                         "NAT": "",
                                         "ANI": "",
                                         "EDU": "", 

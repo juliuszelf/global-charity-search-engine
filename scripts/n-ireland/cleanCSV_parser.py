@@ -30,10 +30,6 @@ Who the charity helps,
 How the charity works,
 """
 
-human_category_list = [
-        "Other charitable purposes",
-        ]
-
 nature_category_list = [
         "The advancement of environmental protection or improvement",
         ]
@@ -51,6 +47,7 @@ health_category_list = [
         ]
 
 community_category_list = [
+        "Other charitable purposes",
         "The advancement of citizenship or community development",
         "The relief of those in need by reason of youth, age, ill-health, disability, financial hardship or other disadvantage",
         "The prevention or relief of poverty",
@@ -99,7 +96,6 @@ def get_category_values(purposes):
 
     # Receives value 0 as false, 1 as true
     # Because more compact in search engine (would otherwise write "True")
-    human = in_list(pur, human_category_list)
     nature = in_list(pur, nature_category_list)
     animal = in_list(pur, animal_category_list)
     education = in_list(pur, education_category_list)
@@ -109,7 +105,7 @@ def get_category_values(purposes):
     culture = in_list(pur, culture_category_list)
     sports = in_list(pur, sports_category_list)
 
-    return human, nature, animal, education, health, community, religion, culture, sports
+    return nature, animal, education, health, community, religion, culture, sports
 
 
 def get_values_from_address(address):
@@ -176,7 +172,6 @@ def parse(input_file_path, output_file_path):
                 "State", 
                 "Country", 
                 "Website",
-                "HUM", 
                 "NAT", 
                 "ANI", 
                 "EDU", 
@@ -206,7 +201,7 @@ def parse(input_file_path, output_file_path):
                 # Adress is of form: "Supporting Communities Ni, 34-36 Henry Street, Ballymena, Co  Antrim, BT42 3AH"
                 address = line["Public address"] 
                 city, state = get_values_from_address(address)
-                human, nature, animal, education, health, community, religion, culture, sports = get_category_values(line["What the charity does"])
+                nature, animal, education, health, community, religion, culture, sports = get_category_values(line["What the charity does"])
 
                 output_writer.writerow({"OfficialID": line["Reg charity number"],
                                         "Name": line["Charity name"], 
@@ -214,7 +209,6 @@ def parse(input_file_path, output_file_path):
                                         "State": state, 
                                         "Country": "GB-NIR", 
                                         "Website": line["Website"], 
-                                        "HUM": human, 
                                         "NAT": nature, 
                                         "ANI": animal, 
                                         "EDU": education, 
