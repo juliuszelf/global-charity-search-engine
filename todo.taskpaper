@@ -1,6 +1,6 @@
 More categories:
 	- Schotland code & test fix @done(2019-12-20)
-	- 'human' category weg halen, vervangen door 'other'
+	- 'human' category weg halen, vervangen door 'other' @done(2019-12-20)
 	- template aanpassen, zodat filters gegegeneerd uit list
 	- Live zetten
 
@@ -8,7 +8,6 @@ Test:
 	- Merge master @done(2019-12-19)
 	- Live zetten @done(2019-12-19)
 	- README.md notities maken rond testen
-
 
 Wat maakt versie 1.0:
 	- Categorien er bij
@@ -52,7 +51,6 @@ Backup:
 
 Categorien-inhoud:
 	- Misschien 'Sports & recreation'
-	- Community noem ik ('community & other') in search engine.
 	- En een 'alt tekst' voor meer toelichting' per categorie
 	- Canada
 		- Er zijn meerdere CSV bestanden te downloaden
