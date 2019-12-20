@@ -79,6 +79,7 @@ counties = [
         'Tyrone'
         ]
 
+
 def in_list(purpose, category_list):
     """
     The ugly part is that te different catories are comma seperated, but each category label also can have commas.

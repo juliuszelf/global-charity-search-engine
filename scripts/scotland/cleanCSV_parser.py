@@ -115,9 +115,9 @@ sports_category_list = [
 
 
 def in_list(purpose, category_list):
-    for cat in human_category_list:
-        if cat in purr:
-            return  1
+    for cat in category_list:
+        if cat in purpose:
+            return 1
     return 0
 
 

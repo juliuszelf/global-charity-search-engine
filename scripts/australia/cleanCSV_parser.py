@@ -95,8 +95,9 @@ culture_category_list = [
 sports_category_list = [
         ]
 
+
 def in_list(line, category_list):
-    for category in human_category_list:
+    for category in category_list:
         if line[category].strip() == "Y":
             return 1
     else:

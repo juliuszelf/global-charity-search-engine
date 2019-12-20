@@ -31,4 +31,4 @@ class CleanTestCase(unittest.TestCase):
         with open(expected) as f:
             expected_output = f.read()
 
-        self.assertEqual(content_output, expected_output)
+        self.assertEqual(expected_output, content_output)

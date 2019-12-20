@@ -9,9 +9,11 @@ from termcolor import colored
 source_url = "http://www.odata.charities.govt.nz/Organisations?$format=csv&$returnall=true&$filter=deregistrationdate%20eq%20null"
 source_date = "2019"  # Not super sure about source date
 
+
 def fix_nulls(s):
     for line in s:
         yield line.replace('\0', ' ')
+
 
 def parse(input_file_path, output_file_path):
     # we assume it data has heading like this:
@@ -77,4 +79,3 @@ def parse(input_file_path, output_file_path):
         print(lines.readline(), end='')
 
     print(colored("Ended cleaning CSV file", "green")) 
-

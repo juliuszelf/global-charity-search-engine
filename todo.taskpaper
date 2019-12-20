@@ -1,3 +1,9 @@
+More categories:
+	- Schotland code & test fix
+	- 'human' category weg halen, vervangen door 'other'
+	- template aanpassen, zodat filters gegegeneerd uit list
+	- Live zetten
+
 Test:
 	- Merge master @done(2019-12-19)
 	- Live zetten @done(2019-12-19)
@@ -5,9 +11,7 @@ Test:
 
 
 Wat maakt versie 1.0:
-	- Varnish container 
 	- Categorien er bij
-	- Die 'revoked' charities er uit, of apart filterbaar.
 	- Nice to have:
 		- fail2ban
 		- Medium artikel?
@@ -27,6 +31,7 @@ Quick:
 		- heeft caching
 		- handiger is via poort 5000 of zelfs via 'outside'
 	- Padding boven eerste resultaat iets groter
+	- Die 'revoked' charities er uit, of apart filterbaar.
 
 Startup query:
 	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
@@ -45,33 +50,9 @@ Backup:
 		- Eventueel script maken die dit voor je doet.
 
 Categorien-inhoud:
-	- Vooralsnog, categorien van n-Ireland en Scotland aanhouden
-		- NAT
-			- Environment @done(2019-12-19)
-		- ANI
-			- Animals @done(2019-12-19)
-		- HUM
-			- 'other'
-			- Other.. hoeft geen categorie te zijn lijkt mij.
-		- EDU
-			- Education
-		- HEA
-			- Health
-		- COM
-			- Community
-        "The advancement of citizenship or community development",
-			- Relief (samen met community?)
-				"The relief of those in need by reason of youth, age, ill-health, disability, financial hardship or other disadvantage",
-				"The prevention or relief of poverty",
-				"The advancement of human rights, conflict resolution or reconciliation or the promotion of religious or racial harmony or equality and diversity",
-		- REL
-			- Religion
-		- CUL
-			- Culture & science
-			"The advancement of the arts, culture, heritage or science",
-		- SPO
-			- Sport
-				"The advancement of amateur sport"
+	- 'Human' en 'Community' zijn nu beide eigenlijk 'other'. 
+		- Ik haal 'human' weg, en stop alles in community.
+		- Community noem ik ('community & other') in search engine.
 	- En een 'alt tekst' voor meer toelichting' per categorie
 	- Canada
 		- Er zijn meerdere CSV bestanden te downloaden
