@@ -154,14 +154,30 @@ def home():
                                                      message)
 
         if use_categories:
-            s = s.filter("term", NAT=has_cats("NAT", selected_categories))
-            s = s.filter("term", ANI=has_cats("ANI", selected_categories))
-            s = s.filter("term", EDU=has_cats("EDU", selected_categories))
-            s = s.filter("term", HEA=has_cats("HEA", selected_categories))
-            s = s.filter("term", COM=has_cats("COM", selected_categories))
-            s = s.filter("term", REL=has_cats("REL", selected_categories))
-            s = s.filter("term", CUL=has_cats("CUL", selected_categories))
-            s = s.filter("term", SPO=has_cats("SPO", selected_categories))
+            # only set a filter is value is "1"
+            if has_cats("NAT", selected_categories) == "1":
+                s = s.filter("term", NAT="1")
+
+            if has_cats("ANI", selected_categories) == "1":
+                s = s.filter("term", ANI="1")
+
+            if has_cats("EDU", selected_categories) == "1":
+                s = s.filter("term", EDU="1")
+
+            if has_cats("HEA", selected_categories) == "1":
+                s = s.filter("term", HEA="1")
+
+            if has_cats("COM", selected_categories) == "1":
+                s = s.filter("term", COM="1")
+
+            if has_cats("REL", selected_categories) == "1":
+                s = s.filter("term", REL="1")
+
+            if has_cats("CUL", selected_categories) == "1":
+                s = s.filter("term", CUL="1")
+
+            if has_cats("SPO", selected_categories) == "1":
+                s = s.filter("term", SPO="1")
 
         if len(selected_countries) > 0:
             s = s.filter("terms", Country=selected_countries)
