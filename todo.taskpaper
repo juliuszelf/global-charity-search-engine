@@ -1,6 +1,20 @@
+Canada categories:
+	- Vindt juiste CSV om te downloaden
+	- Script om bestand te downloaden en in Makefile
+	- Code om categorien achter CSV te plaatsen van raw.csv
+		- Letterlijk er achter plaatsen
+			- Via bash script, 
+				- 1e regel (header letterlijk op 1 regel zetten)
+				- over elke regel en dan grep van andere bestand
+				- Wat terugkomt direct in stream door plaatsen
+		- Ik denk alle headers van adere bestad 
+	- Dan kan het clean.csv gewoon verder op basis van raw.csv
+
+
 Wat maakt versie 1.0:
 	- Categorien er bij @done(2019-12-21)
 	- Categorien voor meer landen ?
+		- Canada
 	- Nice to have:
 		- fail2ban
 		- Medium artikel?
