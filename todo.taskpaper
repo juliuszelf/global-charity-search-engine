@@ -1,26 +1,6 @@
-More categories:
-	- Schotland code & test fix @done(2019-12-20)
-	- 'human' category weg halen, vervangen door 'other' @done(2019-12-20)
-	- template aanpassen, zodat filters gegegeneerd uit list @done(2019-12-20)
-	- Bugfix:
-		- Zoekend op 'art' komt 'Art Aid' voor met categorieen "EDU HEA COM CUL SPO"
-		- Maar als ik dan zoek op 'art' en filter op 'SPO' dan zijn er geen resultaten.
-		- Check
-			- ES toont dat labels voor categorien kloppen
-			- Dus het gaat mis bij filteren op SPO daar had resultaat moeten terugkomen
-	- Test of wel goed gaat, nu 'art' zoekterm met 'animals' categorie geeft resultaat. check via link of klopt.
-		- Bij vandemeer art, lastig want revoked. Dat revoked zie ik niet terug in CSV..
-			- Zoeken naar meer bronnen
-	- Catgorien tags ook tonen bij resultaat, met de korte 3 letter akortingen en leganda bij checkboxes
-	- Live zetten
-
-Test:
-	- Merge master @done(2019-12-19)
-	- Live zetten @done(2019-12-19)
-	- README.md notities maken rond testen
-
 Wat maakt versie 1.0:
-	- Categorien er bij
+	- Categorien er bij @done(2019-12-21)
+	- Categorien voor meer landen ?
 	- Nice to have:
 		- fail2ban
 		- Medium artikel?
@@ -42,6 +22,7 @@ Quick:
 		- handiger is via poort 5000 of zelfs via 'outside'
 	- Padding boven eerste resultaat iets groter
 	- Die 'revoked' charities er uit, of apart filterbaar.
+	- README.md notities maken rond testen
 
 Startup query:
 	- Bij start van flask server kan ik eenmalig bepaalde zaken oproepen
