@@ -74,6 +74,31 @@
            {% if result.official_id %}
               <div class="result-source">ID: {{ result.official_id }}</div>
            {% endif %}
+		   
+            {% if result.NAT == "1" %}
+				<div class="badge badge-secondary badge-pill">NAT</div>
+            {% endif %}
+            {% if result.ANI == "1" %}
+				<div class="badge badge-secondary badge-pill">ANI</div>
+            {% endif %}
+            {% if result.EDU == "1" %}
+				<div class="badge badge-secondary badge-pill">EDU</div>
+            {% endif %}
+            {% if result.HEA == "1" %}
+				<div class="badge badge-secondary badge-pill">HEA</div>
+            {% endif %}
+            {% if result.COM == "1" %}
+				<div class="badge badge-secondary badge-pill">COM</div>
+            {% endif %}
+            {% if result.REL == "1" %}
+				<div class="badge badge-secondary badge-pill">REL</div>
+            {% endif %}
+            {% if result.CUL == "1" %}
+				<div class="badge badge-secondary badge-pill">CUL</div>
+            {% endif %}
+            {% if result.SPO == "1" %}
+				<div class="badge badge-secondary badge-pill">SPO</div>
+            {% endif %}
         </div>
     </div>
     {% if loop.index % 10 != 9 and loop.index % 10 != 0 %}
@@ -97,7 +122,7 @@
                     search=searched_for,
                     page=page-1,
                     country=countries,
-                    category=categories) }}">
+                    selected_category=selected_categories) }}">
             &#xab; &nbsp; Previous {{ results_per_page }}
         </a>
     </li>
@@ -110,7 +135,7 @@
                     search=searched_for,
                     page=page+1,
                     country=countries,
-                    category=categories) }}">
+                    selected_category=selected_categories) }}">
             Next
 
 			{# Show nr of results on next page #}

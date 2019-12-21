@@ -1,6 +1,5 @@
 <form id="searchform">
 	<div class="search-bar-button form-group">
-
 		<div class="input-group col-md-8" style="padding-left: 0; padding-right: 0">
 			<input class="form-control form-control-lg" 
 				type="search" 
@@ -42,13 +41,17 @@
 		  </div>
 		  <div class="checkboxes">
 			  <div>
-				  <div class="check"><label><input type="checkbox" name="category" value="HUM" {% if "HUM" in categories %}checked{% endif %}> Human</label></div>
+				  <div class="check"><label><input type="checkbox" name="category" value="ANI" {% if "ANI" in selected_categories %}checked{% endif %}><div class="badge badge-secondary badge-pill">ANI</div>Animals</label></div>
+				  <div class="check"><label><input type="checkbox" name="category" value="CUL" {% if "CUL" in selected_categories %}checked{% endif %}><div class="badge badge-secondary badge-pill">CUL</div> Culture</label></div>
+				  <div class="check"><label><input type="checkbox" name="category" value="COM" {% if "COM" in selected_categories %}checked{% endif %}><div class="badge badge-secondary badge-pill">COM</div> Community & other</label></div>
 			  </div>
 			  <div>
-				  <div class="check"><label><input type="checkbox" name="category" value="NAT" {% if "NAT" in categories %}checked{% endif %}> Environment</label></div>
+				  <div class="check"><label><input type="checkbox" name="category" value="EDU" {% if "EDU" in selected_categories %}checked{% endif %}><div class="badge badge-secondary badge-pill">EDU</div> Education</label></div>
+				  <div class="check"><label><input type="checkbox" name="category" value="NAT" {% if "NAT" in selected_categories %}checked{% endif %}><div class="badge badge-secondary badge-pill">NAT</div> Nature</label></div>
 			  </div>
 			  <div>
-				  <div class="check"><label><input type="checkbox" name="category" value="ANI" {% if "ANI" in categories %}checked{% endif %}> Animals</label></div>
+				  <div class="check"><label><input type="checkbox" name="category" value="REL" {% if "REL" in selected_categories %}checked{% endif %}><div class="badge badge-secondary badge-pill">REL</div> Religion</label></div>
+				  <div class="check"><label><input type="checkbox" name="category" value="SPO" {% if "SPO" in selected_categories %}checked{% endif %}><div class="badge badge-secondary badge-pill">SPO</div> Sports</label></div>
 			  </div>
 		  </div>
 	  </div>

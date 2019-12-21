@@ -9,9 +9,11 @@ from termcolor import colored
 source_url = "https://open.canada.ca/data/en/dataset/7ef067c4-07a8-4882-ade3-643d00fd6c49"
 source_date = "2016"
 
+
 def fix_nulls(s):
     for line in s:
         yield line.replace('\0', ' ')
+
 
 def parse(input_file_path, output_file_path):
     # we assume it data has heading like this:

@@ -46,19 +46,11 @@ max_results = 10000
 results_per_page = 100
 
 
-def set_category_values(cats):
-    cat_hum = "0"
-    cat_nat = "0"
-    if "HUM" in cats:
-        cat_hum = "1"
-    if "NAT" in cats:
-        cat_nat = "1"
-
-    if len(cats) == 0:
-        # No categories provided
-        cat_hum = "1"
-        cat_nat = "1"
-    return cat_hum, cat_nat
+def has_cats(cat, cats):
+    if cat in cats:
+        return "1"
+    else:
+        return "0"
 
 
 def set_use_categories(selected_categories, selected_countries, countries_with_categories, message):
@@ -125,11 +117,12 @@ def page_from_dict(values_dict):
         page = 1
     return page
 
+
 @app.route("/about", methods=["GET", "POST"])
 def about():
     return render_template("about.html",
-                            analytics=analytics_id
-                            )
+                            analytics=analytics_id)
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -161,9 +154,14 @@ def home():
                                                      message)
 
         if use_categories:
-            cat_hum, cat_nat = set_category_values(selected_categories)
-            s = s.filter("term", HUM=cat_hum)
-            s = s.filter("term", NAT=cat_nat)
+            s = s.filter("term", NAT=has_cats("NAT", selected_categories))
+            s = s.filter("term", ANI=has_cats("ANI", selected_categories))
+            s = s.filter("term", EDU=has_cats("EDU", selected_categories))
+            s = s.filter("term", HEA=has_cats("HEA", selected_categories))
+            s = s.filter("term", COM=has_cats("COM", selected_categories))
+            s = s.filter("term", REL=has_cats("REL", selected_categories))
+            s = s.filter("term", CUL=has_cats("CUL", selected_categories))
+            s = s.filter("term", SPO=has_cats("SPO", selected_categories))
 
         if len(selected_countries) > 0:
             s = s.filter("terms", Country=selected_countries)
@@ -182,14 +180,9 @@ def home():
         found_charities = []
         for result in results:
             result_content = result['_source']
-            result_official_id = result_content['OfficialID']
-            result_name = result_content['Name']
-            result_city = result_content['City']
-            result_state = result_content['State']  # State / Province
+
             result_country = result_content['Country']
-            result_website = result_content['Website']
-            result_source_url = result_content['SourceURL']
-            result_source_date = result_content['SourceDate']
+            result_official_id = result_content['OfficialID']
 
             if result_country == "USA" and len(result_official_id) > 2:
                 # Guidestar url requires we turn an ID like: "811996576"
@@ -198,13 +191,21 @@ def home():
 
             found_charities.append({
                 "official_id": result_official_id,
-                "name": result_name,
-                "city": result_city,
-                "state": result_state,
+                "name": result_content['Name'],
+                "city": result_content['City'],
+                "state": result_content['State'],
                 "country": result_country,
-                "website": result_website,
-                "source_url": result_source_url,
-                "source_date": result_source_date
+                "website": result_content['Website'],
+                "NAT": result_content['NAT'],
+                "ANI": result_content['ANI'],
+                "EDU": result_content['EDU'],
+                "HEA": result_content['HEA'],
+                "COM": result_content['COM'],
+                "REL": result_content['REL'],
+                "CUL": result_content['CUL'],
+                "SPO": result_content['SPO'],
+                "source_url": result_content['SourceURL'],
+                "source_date": result_content['SourceDate']
             })
         if len(results) == 0:
             message += "No charities found for <i>" + search_value + "</i>"
@@ -218,19 +219,19 @@ def home():
                                searched_for=search_value,
                                message=message,
                                countries=selected_countries,
-                               categories=selected_categories,
+                               selected_categories=selected_categories,
                                analytics=analytics_id
                                )
     except KeyError:
         print("no search")
 
-    return render_template("home.html", 
-            content="no search..", 
-            analytics=analytics_id, 
-            nr_results=0,
-            results_per_page=results_per_page,
-            page=1
-            )
+    return render_template("home.html",
+                           content="no search..",
+                           analytics=analytics_id,
+                           nr_results=0,
+                           results_per_page=results_per_page,
+                           page=1
+                           )
 
 
 if __name__ == "__main__":

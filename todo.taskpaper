@@ -1,7 +1,11 @@
 More categories:
 	- Schotland code & test fix @done(2019-12-20)
 	- 'human' category weg halen, vervangen door 'other' @done(2019-12-20)
-	- template aanpassen, zodat filters gegegeneerd uit list
+	- template aanpassen, zodat filters gegegeneerd uit list @done(2019-12-20)
+	- Test of wel goed gaat, nu 'art' zoekterm met 'animals' categorie geeft resultaat. check via link of klopt.
+		- Bij vandemeer art, lastig want revoked. Dat revoked zie ik niet terug in CSV..
+			- Zoeken naar meer bronnen
+	- Catgorien tags ook tonen bij resultaat, met de korte 3 letter akortingen en leganda bij checkboxes
 	- Live zetten
 
 Test:
