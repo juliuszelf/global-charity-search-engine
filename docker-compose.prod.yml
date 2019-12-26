@@ -2,7 +2,19 @@
 version: '3.0'
 
 services:
+
   flask:
     environment:
       - ANALYTICS
       - FLASK_ENV=production
+
+  ngnix:
+    build: nginx/
+    container_name: ngnix01
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - elastic
+    volumes:
+      - ./flask-app/static:/static

@@ -38,17 +38,6 @@ services:
     networks:
       - elastic
 
-  ngnix:
-    build: nginx/
-    container_name: ngnix01
-    restart: always
-    ports:
-      - "80:80"
-    networks:
-      - elastic
-    volumes:
-      - ./flask-app/static:/static
-
 volumes:
   data01:
     driver: local
