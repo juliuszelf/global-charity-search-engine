@@ -8,9 +8,9 @@ services:
       - ANALYTICS
       - FLASK_ENV=production
 
-  ngnix:
+  nginx:
     build: nginx/
-    container_name: ngnix01
+    container_name: nginx01
     restart: always
     ports:
       - "80:80"
