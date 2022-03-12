@@ -30,7 +30,7 @@
            <b>{{ result.name }}</b><br />
            {{ result.city }}{% if result.state %}, {{ result.state }}{% endif %}, {{ result.country }}<br />
            {% if result.website %}
-             <a href="{{ result.website }}" target="_blank">
+             <a href="https://{{ result.website }}" target="_blank">
                 {{ result.website }}
              </a><br />
            {% endif %}
