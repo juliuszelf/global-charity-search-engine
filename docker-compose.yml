@@ -18,8 +18,8 @@ services:
     restart: always
     volumes:
       - data01:/usr/share/elasticsearch/data
-    ports:
-        - 127.0.0.1:9200:9200
+#    ports:
+#        - 127.0.0.1:9200:9200
     expose:
         - 9200
     networks:
